@@ -225,6 +225,51 @@
   footer b{ color:var(--muted); font-weight:640; }
   :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 
+  /* ── planejador ── */
+  .sim{ background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .sim-hd{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; padding:14px 22px;
+    background:var(--panel-2); border-bottom:1px solid var(--line); }
+  .sim-hd .l{ font-family:var(--mono); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); margin-right:4px; }
+  .pbtn{ font-family:var(--mono); font-size:.67rem; letter-spacing:.07em; text-transform:uppercase;
+    padding:6px 13px; border-radius:16px; border:1px solid var(--line); background:var(--panel);
+    color:var(--cream-2); cursor:pointer; transition:.15s; font-weight:600; }
+  .pbtn:hover{ border-color:var(--gold); color:var(--cream); }
+  .pbtn.on{ background:var(--gold); color:var(--void); border-color:var(--gold); }
+  .sim-body{ display:grid; grid-template-columns:1fr 1fr; gap:30px; padding:24px 22px; }
+  .ctrls{ display:flex; flex-direction:column; gap:16px; }
+  .ctrl .top{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:7px; }
+  .ctrl .k{ font-size:.83rem; color:var(--cream-2); }
+  .ctrl .k small{ color:var(--faint); font-size:.72rem; }
+  .ctrl .v{ font-family:var(--mono); font-size:.9rem; color:var(--gold); font-weight:600;
+    font-variant-numeric:tabular-nums; white-space:nowrap; }
+  input[type=range]{ width:100%; -webkit-appearance:none; appearance:none; height:5px; border-radius:5px;
+    background:var(--line); outline:none; }
+  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; height:18px; border-radius:50%;
+    background:var(--gold); cursor:pointer; border:3px solid var(--panel); box-shadow:0 1px 6px rgba(242,178,28,.45); }
+  input[type=range]::-moz-range-thumb{ width:18px; height:18px; border-radius:50%; background:var(--gold);
+    cursor:pointer; border:3px solid var(--panel); }
+  .outs{ display:flex; flex-direction:column; gap:13px; }
+  .obig{ background:var(--panel-2); border:1px solid var(--line); border-radius:12px; padding:17px 19px; }
+  .obig.hi{ border-color:var(--gold); }
+  .obig .ol{ font-family:var(--mono); font-size:.61rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); display:block; margin-bottom:8px; }
+  .obig .ov{ font-family:var(--mono); font-size:1.8rem; font-weight:600; letter-spacing:-.035em;
+    display:block; line-height:1; color:var(--gold); }
+  .obig .on{ font-size:.78rem; color:var(--muted); display:block; margin-top:8px; }
+  .ogrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:11px; }
+  .osm{ background:var(--panel-2); border:1px solid var(--line); border-radius:10px; padding:13px 15px; }
+  .osm .ol{ font-family:var(--mono); font-size:.59rem; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--muted); display:block; margin-bottom:6px; }
+  .osm .ov{ font-family:var(--mono); font-size:1.12rem; font-weight:600; display:block; letter-spacing:-.02em; }
+  .mbar .trk{ height:20px; background:var(--panel-2); border:1px solid var(--line);
+    border-radius:7px; overflow:hidden; }
+  .mbar .fil{ height:100%; background:var(--good); border-radius:6px; min-width:2px;
+    transition:width .35s cubic-bezier(.2,.6,.2,1); }
+  .mbar .sc{ display:flex; justify-content:space-between; margin-top:7px;
+    font-family:var(--mono); font-size:.69rem; color:var(--muted); }
+
+  @media (max-width:760px){ .sim-body{ grid-template-columns:1fr; } }
   @media (max-width:640px){
     body{ padding:0 15px 60px; }
     header{ padding-top:44px; }
@@ -320,6 +365,64 @@
     </div>
     <p class="note">Ticket médio de R$88,11, o de agosto. <b>Esses 12% são o teto realista da mídia paga nesta verba</b> — os outros 88% saem de salão, iFood, orgânico e recorrência. Se a expectativa for que o tráfego cubra a diferença até os R$160 mil, ou a verba muda ou a meta muda.</p>
   </div>
+</section>
+
+<!-- PLANEJADOR -->
+<section class="reveal">
+  <p class="sec-title">Planejador de verba e alcance — mexa e veja</p>
+  <div class="sim">
+    <div class="sim-hd">
+      <span class="l">Cenário</span>
+      <button class="pbtn on" data-vb="1500" onclick="pset(this,1500)">Hoje · R$ 1.500</button>
+      <button class="pbtn" data-vb="3000" onclick="pset(this,3000)">Dobrar · R$ 3.000</button>
+      <button class="pbtn" data-vb="4800" onclick="pset(this,4800)">3% da meta · R$ 4.800</button>
+      <button class="pbtn" data-vb="9600" onclick="pset(this,9600)">6% da meta · R$ 9.600</button>
+    </div>
+    <div class="sim-body">
+      <div class="ctrls">
+        <div class="ctrl"><div class="top"><span class="k">Verba mensal</span><span class="v" id="v-vb">R$ 1.500</span></div>
+          <input type="range" id="p-vb" min="500" max="10000" step="100" value="1500" oninput="pcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">CPM <small>custo por mil impressões</small></span><span class="v" id="v-cpm">R$ 15,00</span></div>
+          <input type="range" id="p-cpm" min="8" max="35" step="0.5" value="15" oninput="pcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Frequência <small>vezes que cada um vê</small></span><span class="v" id="v-fq">3,0</span></div>
+          <input type="range" id="p-fq" min="1.5" max="6" step="0.1" value="3" oninput="pcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Fatia na base <small>campanha 02</small></span><span class="v" id="v-bs">50%</span></div>
+          <input type="range" id="p-bs" min="30" max="70" step="5" value="50" oninput="pcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Custo por pedido — base</span><span class="v" id="v-cb">R$ 5,00</span></div>
+          <input type="range" id="p-cb" min="3" max="15" step="0.5" value="5" oninput="pcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Custo por pedido — aquisição</span><span class="v" id="v-ca">R$ 12,00</span></div>
+          <input type="range" id="p-ca" min="8" max="30" step="1" value="12" oninput="pcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Ticket médio</span><span class="v" id="v-tk">R$ 88,11</span></div>
+          <input type="range" id="p-tk" min="60" max="140" step="1" value="88" oninput="pcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Público no raio <small>conferir no Gerenciador</small></span><span class="v" id="v-pb">55.000</span></div>
+          <input type="range" id="p-pb" min="20000" max="120000" step="5000" value="55000" oninput="pcalc()"></div>
+      </div>
+
+      <div class="outs">
+        <div class="obig hi">
+          <span class="ol">Pessoas impactadas por mês</span>
+          <span class="ov" id="o-alc">33.333</span>
+          <span class="on" id="o-alcn">61% do público estimado no raio · 100.000 impressões</span>
+        </div>
+        <div class="obig">
+          <span class="ol">Faturamento gerado pelo tráfego</span>
+          <span class="ov" id="o-fat" style="color:var(--good)">R$ 17.071</span>
+          <span class="on" id="o-fatn">194 pedidos · 6,5 por dia</span>
+        </div>
+        <div class="ogrid">
+          <div class="osm"><span class="ol">Pedidos — base</span><span class="ov" id="o-pb">150</span></div>
+          <div class="osm"><span class="ol">Pedidos — aquisição</span><span class="ov" id="o-pa">44</span></div>
+          <div class="osm"><span class="ol">Custo por pedido médio</span><span class="ov" id="o-cpa">R$ 7,73</span></div>
+          <div class="osm"><span class="ol">Retorno sobre a mídia</span><span class="ov" id="o-roas" style="color:var(--good)">11,4x</span></div>
+        </div>
+        <div class="mbar">
+          <div class="trk"><div class="fil" id="o-fil" style="width:10.7%"></div></div>
+          <div class="sc"><span>quanto da meta de R$160 mil o tráfego cobre</span><span id="o-pct">10,7%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="note"><b>Leia com esta ressalva:</b> custo por pedido não fica parado quando a verba sobe. Ao escalar, o público satura e o custo tende a subir — então os cenários de R$4.800 e R$9.600 são o <b>teto otimista</b>, não a previsão. A régua honesta é a coluna da esquerda: mexa o custo por pedido para cima e veja o que acontece.</p>
 </section>
 
 <section>
@@ -507,6 +610,50 @@
         '<div class="ccode">'+s.code+'</div>'+
       '</div></div>';
   }).join('');
+
+  /* ---------- planejador ---------- */
+  var $=function(id){ return document.getElementById(id); };
+  var N0=function(n){ return Math.round(n).toLocaleString('pt-BR'); };
+  var BRL=function(n){ return 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); };
+  var BRL0=function(n){ return 'R$ '+Math.round(n).toLocaleString('pt-BR'); };
+  var DEC=function(n,d){ return n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d}); };
+  var META_MES=160000, DATAS=15;
+
+  window.pcalc=function(){
+    var vb=+$('p-vb').value, cpm=+$('p-cpm').value, fq=+$('p-fq').value, bs=+$('p-bs').value,
+        cb=+$('p-cb').value, ca=+$('p-ca').value, tk=+$('p-tk').value, pb=+$('p-pb').value;
+    var aq = 100 - DATAS - bs;
+
+    $('v-vb').textContent=BRL0(vb);   $('v-cpm').textContent=BRL(cpm);
+    $('v-fq').textContent=DEC(fq,1);  $('v-bs').textContent=bs+'%';
+    $('v-cb').textContent=BRL(cb);    $('v-ca').textContent=BRL(ca);
+    $('v-tk').textContent=BRL(tk);    $('v-pb').textContent=N0(pb);
+
+    var impr = vb/cpm*1000;
+    var alc  = impr/fq;
+    var pedB = (vb*bs/100)/cb;
+    var pedA = (vb*aq/100)/ca;
+    var ped  = pedB+pedA;
+    var fat  = ped*tk;
+    var pct  = fat/META_MES*100;
+
+    $('o-alc').textContent = N0(alc);
+    $('o-alcn').textContent = Math.min(999,Math.round(alc/pb*100))+'% do público estimado no raio · '+N0(impr)+' impressões';
+    $('o-fat').textContent = BRL0(fat);
+    $('o-fatn').textContent = N0(ped)+' pedidos · '+DEC(ped/30,1)+' por dia · aquisição fica com '+aq+'% da verba';
+    $('o-pb').textContent  = N0(pedB);
+    $('o-pa').textContent  = N0(pedA);
+    $('o-cpa').textContent = BRL(vb/ped);
+    $('o-roas').textContent= DEC(fat/vb,1)+'x';
+    $('o-fil').style.width = Math.min(100,pct).toFixed(1)+'%';
+    $('o-pct').textContent = DEC(pct,1)+'%';
+  };
+  window.pset=function(btn,v){
+    document.querySelectorAll('.pbtn').forEach(function(b){ b.classList.remove('on'); });
+    btn.classList.add('on');
+    $('p-vb').value=v; pcalc();
+  };
+  if($('p-vb')) pcalc();
 
   /* ---------- ações ---------- */
   var A=[
