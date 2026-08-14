@@ -367,62 +367,94 @@
   </div>
 </section>
 
-<!-- PLANEJADOR -->
+<!-- SIMULADOR 1 · VENDAS -->
 <section class="reveal">
-  <p class="sec-title">Planejador de verba e alcance — mexa e veja</p>
+  <p class="sec-title">Simulador 1 — quanto vamos vender</p>
   <div class="sim">
     <div class="sim-hd">
       <span class="l">Cenário</span>
-      <button class="pbtn on" data-vb="1500" onclick="pset(this,1500)">Hoje · R$ 1.500</button>
-      <button class="pbtn" data-vb="3000" onclick="pset(this,3000)">Dobrar · R$ 3.000</button>
-      <button class="pbtn" data-vb="4800" onclick="pset(this,4800)">3% da meta · R$ 4.800</button>
-      <button class="pbtn" data-vb="9600" onclick="pset(this,9600)">6% da meta · R$ 9.600</button>
+      <button class="pbtn on" onclick="sset(this,1500)">Hoje · R$ 1.500</button>
+      <button class="pbtn" onclick="sset(this,3000)">Dobrar · R$ 3.000</button>
+      <button class="pbtn" onclick="sset(this,4800)">3% da meta · R$ 4.800</button>
+      <button class="pbtn" onclick="sset(this,9600)">6% da meta · R$ 9.600</button>
     </div>
     <div class="sim-body">
       <div class="ctrls">
-        <div class="ctrl"><div class="top"><span class="k">Verba mensal</span><span class="v" id="v-vb">R$ 1.500</span></div>
-          <input type="range" id="p-vb" min="500" max="10000" step="100" value="1500" oninput="pcalc()"></div>
-        <div class="ctrl"><div class="top"><span class="k">CPM <small>custo por mil impressões</small></span><span class="v" id="v-cpm">R$ 15,00</span></div>
-          <input type="range" id="p-cpm" min="8" max="35" step="0.5" value="15" oninput="pcalc()"></div>
-        <div class="ctrl"><div class="top"><span class="k">Frequência <small>vezes que cada um vê</small></span><span class="v" id="v-fq">3,0</span></div>
-          <input type="range" id="p-fq" min="1.5" max="6" step="0.1" value="3" oninput="pcalc()"></div>
-        <div class="ctrl"><div class="top"><span class="k">Fatia na base <small>campanha 02</small></span><span class="v" id="v-bs">50%</span></div>
-          <input type="range" id="p-bs" min="30" max="70" step="5" value="50" oninput="pcalc()"></div>
-        <div class="ctrl"><div class="top"><span class="k">Custo por pedido — base</span><span class="v" id="v-cb">R$ 5,00</span></div>
-          <input type="range" id="p-cb" min="3" max="15" step="0.5" value="5" oninput="pcalc()"></div>
-        <div class="ctrl"><div class="top"><span class="k">Custo por pedido — aquisição</span><span class="v" id="v-ca">R$ 12,00</span></div>
-          <input type="range" id="p-ca" min="8" max="30" step="1" value="12" oninput="pcalc()"></div>
-        <div class="ctrl"><div class="top"><span class="k">Ticket médio</span><span class="v" id="v-tk">R$ 88,11</span></div>
-          <input type="range" id="p-tk" min="60" max="140" step="1" value="88" oninput="pcalc()"></div>
-        <div class="ctrl"><div class="top"><span class="k">Público no raio <small>conferir no Gerenciador</small></span><span class="v" id="v-pb">55.000</span></div>
-          <input type="range" id="p-pb" min="20000" max="120000" step="5000" value="55000" oninput="pcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Verba mensal</span><span class="v" id="vs-vb">R$ 1.500</span></div>
+          <input type="range" id="s-vb" min="500" max="10000" step="100" value="1500" oninput="scalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Fatia na base <small>campanha 02</small></span><span class="v" id="vs-bs">50%</span></div>
+          <input type="range" id="s-bs" min="30" max="70" step="5" value="50" oninput="scalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Custo por pedido — base</span><span class="v" id="vs-cb">R$ 5,00</span></div>
+          <input type="range" id="s-cb" min="3" max="15" step="0.5" value="5" oninput="scalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Custo por pedido — aquisição</span><span class="v" id="vs-ca">R$ 12,00</span></div>
+          <input type="range" id="s-ca" min="8" max="30" step="1" value="12" oninput="scalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Ticket médio <small>real: R$ 88,11</small></span><span class="v" id="vs-tk">R$ 88,11</span></div>
+          <input type="range" id="s-tk" min="60" max="140" step="1" value="88" oninput="scalc()"></div>
       </div>
-
       <div class="outs">
         <div class="obig hi">
-          <span class="ol">Pessoas impactadas por mês</span>
-          <span class="ov" id="o-alc">33.333</span>
-          <span class="on" id="o-alcn">61% do público estimado no raio · 100.000 impressões</span>
-        </div>
-        <div class="obig">
           <span class="ol">Faturamento gerado pelo tráfego</span>
-          <span class="ov" id="o-fat" style="color:var(--good)">R$ 17.071</span>
-          <span class="on" id="o-fatn">194 pedidos · 6,5 por dia</span>
+          <span class="ov" id="os-fat" style="color:var(--good)">R$ 17.071</span>
+          <span class="on" id="os-fatn">194 pedidos por mês · 6,5 por dia</span>
         </div>
         <div class="ogrid">
-          <div class="osm"><span class="ol">Pedidos — base</span><span class="ov" id="o-pb">150</span></div>
-          <div class="osm"><span class="ol">Pedidos — aquisição</span><span class="ov" id="o-pa">44</span></div>
-          <div class="osm"><span class="ol">Custo por pedido médio</span><span class="ov" id="o-cpa">R$ 7,73</span></div>
-          <div class="osm"><span class="ol">Retorno sobre a mídia</span><span class="ov" id="o-roas" style="color:var(--good)">11,4x</span></div>
+          <div class="osm"><span class="ol">Pedidos — base</span><span class="ov" id="os-pb">150</span></div>
+          <div class="osm"><span class="ol">Pedidos — aquisição</span><span class="ov" id="os-pa">44</span></div>
+          <div class="osm"><span class="ol">Custo por pedido médio</span><span class="ov" id="os-cpa">R$ 7,73</span></div>
+          <div class="osm"><span class="ol">Retorno sobre a mídia</span><span class="ov" id="os-roas" style="color:var(--good)">11,4x</span></div>
         </div>
         <div class="mbar">
-          <div class="trk"><div class="fil" id="o-fil" style="width:10.7%"></div></div>
-          <div class="sc"><span>quanto da meta de R$160 mil o tráfego cobre</span><span id="o-pct">10,7%</span></div>
+          <div class="trk"><div class="fil" id="os-fil" style="width:10.7%"></div></div>
+          <div class="sc"><span>quanto da meta de R$160 mil o tráfego cobre</span><span id="os-pct">10,7%</span></div>
         </div>
       </div>
     </div>
   </div>
-  <p class="note"><b>Leia com esta ressalva:</b> custo por pedido não fica parado quando a verba sobe. Ao escalar, o público satura e o custo tende a subir — então os cenários de R$4.800 e R$9.600 são o <b>teto otimista</b>, não a previsão. A régua honesta é a coluna da esquerda: mexa o custo por pedido para cima e veja o que acontece.</p>
+  <p class="note"><b>Ressalva:</b> custo por pedido não fica parado quando a verba sobe — o público satura e o custo tende a subir. Os cenários de R$4.800 e R$9.600 são <b>teto otimista</b>, não previsão. Para ver o número realista ao escalar, arraste os dois custos por pedido para cima junto com a verba.</p>
+</section>
+
+<!-- SIMULADOR 2 · ALCANCE -->
+<section class="reveal">
+  <p class="sec-title">Simulador 2 — quantas pessoas vamos impactar</p>
+  <div class="sim">
+    <div class="sim-hd">
+      <span class="l">Cenário</span>
+      <button class="pbtn on" onclick="rset(this,1500)">Hoje · R$ 1.500</button>
+      <button class="pbtn" onclick="rset(this,3000)">Dobrar · R$ 3.000</button>
+      <button class="pbtn" onclick="rset(this,4800)">3% da meta · R$ 4.800</button>
+      <button class="pbtn" onclick="rset(this,9600)">6% da meta · R$ 9.600</button>
+    </div>
+    <div class="sim-body">
+      <div class="ctrls">
+        <div class="ctrl"><div class="top"><span class="k">Verba mensal</span><span class="v" id="vr-vb">R$ 1.500</span></div>
+          <input type="range" id="r-vb" min="500" max="10000" step="100" value="1500" oninput="rcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">CPM <small>custo por mil impressões</small></span><span class="v" id="vr-cpm">R$ 15,00</span></div>
+          <input type="range" id="r-cpm" min="8" max="35" step="0.5" value="15" oninput="rcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Frequência <small>vezes que cada pessoa vê</small></span><span class="v" id="vr-fq">3,0</span></div>
+          <input type="range" id="r-fq" min="1.5" max="6" step="0.1" value="3" oninput="rcalc()"></div>
+        <div class="ctrl"><div class="top"><span class="k">Público no raio <small>conferir no Gerenciador</small></span><span class="v" id="vr-pb">55.000</span></div>
+          <input type="range" id="r-pb" min="20000" max="120000" step="5000" value="55000" oninput="rcalc()"></div>
+      </div>
+      <div class="outs">
+        <div class="obig hi">
+          <span class="ol">Pessoas impactadas por mês</span>
+          <span class="ov" id="or-alc">33.333</span>
+          <span class="on">pessoas diferentes alcançadas dentro do raio da loja</span>
+        </div>
+        <div class="ogrid">
+          <div class="osm"><span class="ol">Impressões</span><span class="ov" id="or-imp">100.000</span></div>
+          <div class="osm"><span class="ol">Custo por mil alcançados</span><span class="ov" id="or-cma">R$ 45,00</span></div>
+          <div class="osm"><span class="ol">Alcance por dia</span><span class="ov" id="or-dia">1.111</span></div>
+          <div class="osm"><span class="ol">Frequência</span><span class="ov" id="or-fq">3,0x</span></div>
+        </div>
+        <div class="mbar">
+          <div class="trk"><div class="fil" id="or-fil" style="width:60.6%;background:var(--gold)"></div></div>
+          <div class="sc"><span>fatia do público do raio que vê o Goodii</span><span id="or-pct">60,6%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="note"><b>Frequência é o botão escondido.</b> Ela não muda quanto se gasta — muda se o dinheiro vira <b>muita gente vendo pouco</b> ou <b>pouca gente vendo muito</b>. Abaixo de 2 a marca não fixa; acima de 4 começa a cansar e o custo sobe. Entre 2 e 4 é onde se deve ficar.</p>
 </section>
 
 <section>
@@ -611,49 +643,56 @@
       '</div></div>';
   }).join('');
 
-  /* ---------- planejador ---------- */
+  /* ---------- simuladores ---------- */
   var $=function(id){ return document.getElementById(id); };
   var N0=function(n){ return Math.round(n).toLocaleString('pt-BR'); };
   var BRL=function(n){ return 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); };
   var BRL0=function(n){ return 'R$ '+Math.round(n).toLocaleString('pt-BR'); };
   var DEC=function(n,d){ return n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d}); };
-  var META_MES=160000, DATAS=15;
+  var META_MES=160000, FATIA_DATAS=15;
 
-  window.pcalc=function(){
-    var vb=+$('p-vb').value, cpm=+$('p-cpm').value, fq=+$('p-fq').value, bs=+$('p-bs').value,
-        cb=+$('p-cb').value, ca=+$('p-ca').value, tk=+$('p-tk').value, pb=+$('p-pb').value;
-    var aq = 100 - DATAS - bs;
-
-    $('v-vb').textContent=BRL0(vb);   $('v-cpm').textContent=BRL(cpm);
-    $('v-fq').textContent=DEC(fq,1);  $('v-bs').textContent=bs+'%';
-    $('v-cb').textContent=BRL(cb);    $('v-ca').textContent=BRL(ca);
-    $('v-tk').textContent=BRL(tk);    $('v-pb').textContent=N0(pb);
-
-    var impr = vb/cpm*1000;
-    var alc  = impr/fq;
-    var pedB = (vb*bs/100)/cb;
-    var pedA = (vb*aq/100)/ca;
-    var ped  = pedB+pedA;
-    var fat  = ped*tk;
-    var pct  = fat/META_MES*100;
-
-    $('o-alc').textContent = N0(alc);
-    $('o-alcn').textContent = Math.min(999,Math.round(alc/pb*100))+'% do público estimado no raio · '+N0(impr)+' impressões';
-    $('o-fat').textContent = BRL0(fat);
-    $('o-fatn').textContent = N0(ped)+' pedidos · '+DEC(ped/30,1)+' por dia · aquisição fica com '+aq+'% da verba';
-    $('o-pb').textContent  = N0(pedB);
-    $('o-pa').textContent  = N0(pedA);
-    $('o-cpa').textContent = BRL(vb/ped);
-    $('o-roas').textContent= DEC(fat/vb,1)+'x';
-    $('o-fil').style.width = Math.min(100,pct).toFixed(1)+'%';
-    $('o-pct').textContent = DEC(pct,1)+'%';
+  window.scalc=function(){
+    var vb=+$('s-vb').value, bs=+$('s-bs').value, cb=+$('s-cb').value,
+        ca=+$('s-ca').value, tk=+$('s-tk').value;
+    var aq = 100 - FATIA_DATAS - bs;
+    $('vs-vb').textContent=BRL0(vb); $('vs-bs').textContent=bs+'%';
+    $('vs-cb').textContent=BRL(cb);  $('vs-ca').textContent=BRL(ca);
+    $('vs-tk').textContent=BRL(tk);
+    var pB=(vb*bs/100)/cb, pA=(vb*aq/100)/ca, ped=pB+pA, fat=ped*tk, pct=fat/META_MES*100;
+    $('os-fat').textContent=BRL0(fat);
+    $('os-fatn').textContent=N0(ped)+' pedidos por mês · '+DEC(ped/30,1)+' por dia · aquisição com '+aq+'% da verba';
+    $('os-pb').textContent=N0(pB);
+    $('os-pa').textContent=N0(pA);
+    $('os-cpa').textContent=BRL(vb/ped);
+    $('os-roas').textContent=DEC(fat/vb,1)+'x';
+    $('os-fil').style.width=Math.min(100,pct).toFixed(1)+'%';
+    $('os-pct').textContent=DEC(pct,1)+'%';
   };
-  window.pset=function(btn,v){
-    document.querySelectorAll('.pbtn').forEach(function(b){ b.classList.remove('on'); });
-    btn.classList.add('on');
-    $('p-vb').value=v; pcalc();
+  window.sset=function(btn,v){
+    btn.parentNode.querySelectorAll('.pbtn').forEach(function(b){ b.classList.remove('on'); });
+    btn.classList.add('on'); $('s-vb').value=v; scalc();
   };
-  if($('p-vb')) pcalc();
+
+  window.rcalc=function(){
+    var vb=+$('r-vb').value, cpm=+$('r-cpm').value, fq=+$('r-fq').value, pb=+$('r-pb').value;
+    $('vr-vb').textContent=BRL0(vb); $('vr-cpm').textContent=BRL(cpm);
+    $('vr-fq').textContent=DEC(fq,1); $('vr-pb').textContent=N0(pb);
+    var imp=vb/cpm*1000, alc=imp/fq, pct=alc/pb*100;
+    $('or-alc').textContent=N0(alc);
+    $('or-imp').textContent=N0(imp);
+    $('or-cma').textContent=BRL(vb/alc*1000);
+    $('or-dia').textContent=N0(alc/30);
+    $('or-fq').textContent=DEC(fq,1)+'x';
+    $('or-fil').style.width=Math.min(100,pct).toFixed(1)+'%';
+    $('or-pct').textContent=(pct>=100?'100+':DEC(pct,1))+'%';
+  };
+  window.rset=function(btn,v){
+    btn.parentNode.querySelectorAll('.pbtn').forEach(function(b){ b.classList.remove('on'); });
+    btn.classList.add('on'); $('r-vb').value=v; rcalc();
+  };
+
+  if($('s-vb')) scalc();
+  if($('r-vb')) rcalc();
 
   /* ---------- ações ---------- */
   var A=[
