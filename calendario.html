@@ -36,9 +36,9 @@
   }
 
   *{ box-sizing:border-box; }
-  html{ -webkit-text-size-adjust:100%; }
+  html{ -webkit-text-size-adjust:100%; font-size:130%; }
   body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
-    font-size:15px; line-height:1.6; padding:0 24px 90px; -webkit-font-smoothing:antialiased; }
+    font-size:0.9375rem; line-height:1.6; padding:0 24px 90px; -webkit-font-smoothing:antialiased; }
   .wrap{ max-width:1040px; margin:0 auto; }
 
   header{ display:flex; flex-wrap:wrap; gap:14px 24px; align-items:center; justify-content:space-between;
@@ -51,7 +51,7 @@
   .badge{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2); background:var(--panel-2);
     border:1px solid var(--line); padding:6px 12px; border-radius:999px; white-space:nowrap; }
 
-  .sec-title{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+  .sec-title{ font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
     color:var(--muted); margin:0 0 14px; }
   section{ margin-bottom:42px; }
   .card{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 22px; }
@@ -88,10 +88,10 @@
   .mon-h h2{ margin:0; font-size:1rem; font-weight:650; letter-spacing:-.01em; }
   .mon-h span{ font-size:.79rem; color:var(--muted); }
   .dow{ display:grid; grid-template-columns:repeat(7,1fr); border-bottom:1px solid var(--line); }
-  .dow span{ padding:7px 6px; text-align:center; font-size:10px; font-weight:700; text-transform:uppercase;
+  .dow span{ padding:7px 6px; text-align:center; font-size:0.625rem; font-weight:700; text-transform:uppercase;
     letter-spacing:1px; color:var(--muted); }
   .days{ display:grid; grid-template-columns:repeat(7,1fr); }
-  .cell{ min-height:76px; border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
+  .cell{ min-height:98px; border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
     padding:6px 7px; display:flex; flex-direction:column; gap:3px; }
   .cell:nth-child(7n){ border-right:none; }
   .cell.empty{ background:var(--panel-2); }
@@ -99,7 +99,7 @@
   .cell .n{ font-family:var(--mono); font-size:.78rem; color:var(--ink-2); font-variant-numeric:tabular-nums; }
   .cell.today .n{ color:#fff; background:var(--hoje); border-radius:4px; padding:0 5px; align-self:flex-start; font-weight:600; }
   .cell.wknd .n{ color:var(--faint); }
-  .tag{ font-size:9.5px; line-height:1.3; padding:2px 4px; border-radius:3px; font-weight:600;
+  .tag{ font-size:0.5938rem; line-height:1.3; padding:2px 4px; border-radius:3px; font-weight:600;
     overflow:hidden; display:block; }
   .tag.data{ background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent-line); }
   .tag.ritual{ background:var(--ritual-soft); color:var(--ritual); }
@@ -109,7 +109,7 @@
   /* tabela produção */
   .scroll{ overflow-x:auto; }
   table{ border-collapse:collapse; width:100%; min-width:840px; font-size:.86rem; }
-  thead th{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.1px; color:var(--muted);
+  thead th{ font-size:0.625rem; font-weight:700; text-transform:uppercase; letter-spacing:1.1px; color:var(--muted);
     text-align:left; padding:9px 13px; background:var(--panel-2); border-bottom:1px solid var(--line); white-space:nowrap; }
   tbody td{ padding:12px 13px; border-bottom:1px solid var(--hair); color:var(--ink-2); vertical-align:top; }
   tbody tr:last-child td{ border-bottom:none; }
@@ -136,7 +136,7 @@
   .stars{ font-size:.78rem; letter-spacing:1px; color:var(--accent); }
   .stars s{ color:var(--faint); text-decoration:none; }
   .sug dl{ margin:0; display:flex; flex-direction:column; gap:9px; }
-  .sug dt{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.1px; margin-bottom:3px; }
+  .sug dt{ font-size:0.625rem; font-weight:700; text-transform:uppercase; letter-spacing:1.1px; margin-bottom:3px; }
   .sug dd{ margin:0; font-size:.86rem; color:var(--ink-2); }
   .sug .por dt{ color:var(--muted); }
   .sug .faz dt{ color:var(--live); }
@@ -151,8 +151,8 @@
   :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
   @media (max-width:700px){
     body{ padding:0 12px 60px; }
-    .cell{ min-height:56px; padding:4px 4px; }
-    .tag{ font-size:8px; padding:1px 3px; }
+    .cell{ min-height:72px; padding:4px 4px; }
+    .tag{ font-size:0.5rem; padding:1px 3px; }
     .rstep{ padding:12px 0 0; border-left:none; border-top:2px solid var(--line); margin-top:12px; }
     .rstep:first-child{ margin-top:0; }
   }
