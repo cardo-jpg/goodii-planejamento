@@ -1,0 +1,474 @@
+<title>Goodii — Diagnóstico Agosto</title>
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --panel:#FFFFFF;
+    --panel-2:#F7F7F8;
+    --line:#E4E4E7;
+    --hair:#EFEFF1;
+    --ink:#15151A;
+    --ink-2:#4A4A54;
+    --muted:#76767F;
+    --faint:#A2A2AC;
+
+    --accent:#2E4A63;
+    --accent-2:#9DA5AE;
+    --accent-soft:#EEF1F4;
+
+    --up:#1E6B45;
+    --down:#A32A1E;
+    --up-soft:#EBF3EE;
+    --down-soft:#F9EDEB;
+    --warn:#8A6410;
+    --warn-soft:#FAF2DE;
+
+    --sans:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Menlo,Consolas,monospace;
+  }
+
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#101013;
+      --panel:#17171B;
+      --panel-2:#1E1E23;
+      --line:#2C2C33;
+      --hair:#232329;
+      --ink:#F2F2F5;
+      --ink-2:#C7C7D0;
+      --muted:#8E8E99;
+      --faint:#63636D;
+
+      --accent:#7FA8CC;
+      --accent-2:#5C6570;
+      --accent-soft:#1A222B;
+
+      --up:#5CB489;
+      --down:#E07A6C;
+      --up-soft:#152521;
+      --down-soft:#2A1917;
+      --warn:#D0A340;
+      --warn-soft:#2A2415;
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --bg:#101013;
+    --panel:#17171B;
+    --panel-2:#1E1E23;
+    --line:#2C2C33;
+    --hair:#232329;
+    --ink:#F2F2F5;
+    --ink-2:#C7C7D0;
+    --muted:#8E8E99;
+    --faint:#63636D;
+
+    --accent:#7FA8CC;
+    --accent-2:#5C6570;
+    --accent-soft:#1A222B;
+
+    --up:#5CB489;
+    --down:#E07A6C;
+    --up-soft:#152521;
+    --down-soft:#2A1917;
+    --warn:#D0A340;
+    --warn-soft:#2A2415;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-size:15px; line-height:1.6;
+    padding:0 24px 90px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1060px; margin:0 auto; }
+
+  /* header */
+  header{ display:flex; flex-wrap:wrap; gap:16px 24px; align-items:center;
+    justify-content:space-between; padding:40px 0 22px; border-bottom:1px solid var(--line); margin-bottom:34px; }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .tile{ width:42px; height:42px; border-radius:11px; background:var(--accent-soft);
+    border:1px solid var(--line); display:grid; place-items:center; font-size:1.25rem; flex:none; }
+  h1{ font-size:1.28rem; font-weight:650; letter-spacing:-.02em; margin:0; }
+  .brand p{ margin:2px 0 0; font-size:.82rem; color:var(--muted); }
+  .badge{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2);
+    background:var(--panel-2); border:1px solid var(--line); padding:6px 12px; border-radius:999px; white-space:nowrap; }
+
+  .sec-title{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--muted); margin:0 0 14px; }
+  section{ margin-bottom:44px; }
+
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 22px; }
+  .card.t{ border-top:2px solid var(--accent); }
+  .card.tw{ border-top:2px solid var(--warn); }
+  .card.td{ border-top:2px solid var(--down); }
+
+  /* verdict */
+  .verdict{ background:var(--down-soft); border:1px solid var(--line); border-left:3px solid var(--down);
+    border-radius:11px; padding:20px 24px; margin-bottom:32px; }
+  .verdict h2{ font-size:1.02rem; font-weight:680; margin:0 0 8px; color:var(--down); letter-spacing:-.01em; }
+  .verdict p{ margin:0 0 10px; font-size:.94rem; color:var(--ink-2); max-width:80ch; }
+  .verdict p:last-child{ margin-bottom:0; }
+  .verdict b{ color:var(--ink); font-weight:660; }
+
+  /* kpis */
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; }
+  .kpi{ background:var(--panel); border:1px solid var(--line); border-top:2px solid var(--accent);
+    border-radius:11px; padding:16px 18px; }
+  .kpi.d{ border-top-color:var(--down); }
+  .kpi.w{ border-top-color:var(--warn); }
+  .kpi .k{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); display:block; margin-bottom:9px; }
+  .kpi .v{ font-family:var(--mono); font-size:1.5rem; font-weight:600; letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums; display:block; line-height:1.05; }
+  .kpi .n{ font-size:.79rem; color:var(--muted); display:block; margin-top:8px; }
+  .up{ color:var(--up); } .down{ color:var(--down); } .warn{ color:var(--warn); }
+
+  /* meta bar */
+  .meter{ margin-top:6px; }
+  .meter .track{ height:26px; background:var(--panel-2); border:1px solid var(--line);
+    border-radius:6px; overflow:hidden; position:relative; }
+  .meter .fill{ height:100%; background:var(--accent); }
+  .meter .proj{ position:absolute; top:0; height:100%; background:repeating-linear-gradient(135deg,var(--accent-2) 0 6px,transparent 6px 12px); }
+  .meter .tick{ position:absolute; top:-4px; bottom:-4px; width:2px; background:var(--down); }
+  .meter .scale{ display:flex; justify-content:space-between; margin-top:8px;
+    font-family:var(--mono); font-size:.72rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .mlegend{ display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:14px; font-size:.82rem; color:var(--ink-2); }
+  .mlegend i{ display:inline-flex; align-items:center; gap:7px; font-style:normal; }
+  .mlegend .sw{ width:12px; height:12px; border-radius:3px; flex:none; }
+
+  /* tables */
+  .scroll{ overflow-x:auto; }
+  table{ border-collapse:collapse; width:100%; min-width:560px; font-size:.88rem; }
+  thead th{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.1px;
+    color:var(--muted); text-align:left; padding:9px 14px; background:var(--panel-2);
+    border-bottom:1px solid var(--line); white-space:nowrap; }
+  thead th:first-child{ border-radius:6px 0 0 0; }
+  thead th:last-child{ border-radius:0 6px 0 0; }
+  thead th.r{ text-align:right; }
+  tbody td{ padding:11px 14px; border-bottom:1px solid var(--hair); color:var(--ink-2); vertical-align:middle; }
+  tbody td.r{ text-align:right; }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.k{ color:var(--ink); font-weight:620; white-space:nowrap; }
+  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink); }
+  tr.tot td{ border-top:1px solid var(--line); font-weight:700; color:var(--ink); background:var(--panel-2); }
+  .pill{ font-family:var(--mono); font-size:.76rem; padding:2px 7px; border-radius:4px; white-space:nowrap; }
+  .pill.d{ background:var(--down-soft); color:var(--down); }
+  .pill.u{ background:var(--up-soft); color:var(--up); }
+  .pill.n{ background:var(--panel-2); color:var(--muted); }
+
+  /* barra inline */
+  .ib{ display:flex; align-items:center; gap:10px; justify-content:flex-end; }
+  .ib .t{ width:100px; height:6px; background:var(--hair); border-radius:3px; overflow:hidden; flex:none; }
+  .ib .f{ height:100%; background:var(--accent); border-radius:3px; }
+  .ib .p{ font-family:var(--mono); font-size:.8rem; font-variant-numeric:tabular-nums; width:56px; text-align:right; color:var(--ink); }
+
+  /* funil */
+  .fn{ display:flex; flex-direction:column; gap:2px; }
+  .fnr{ display:grid; grid-template-columns:118px 1fr; gap:14px; align-items:center; }
+  .fnr .nm{ font-size:.85rem; color:var(--ink-2); font-weight:560; }
+  .fnr .tk{ display:flex; align-items:center; gap:11px; }
+  .fnr .br{ height:28px; background:var(--accent); border-radius:0 4px 4px 0; min-width:44px;
+    display:flex; align-items:center; padding:0 10px; }
+  .fnr .br b{ font-family:var(--mono); font-size:.82rem; color:#fff; font-weight:600; }
+  :root[data-theme="dark"] .fnr .br b{ color:#101013; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .fnr .br b{ color:#101013; } }
+  .fnr .pc{ font-family:var(--mono); font-size:.78rem; color:var(--muted); white-space:nowrap; }
+  .fstep{ display:grid; grid-template-columns:118px 1fr; gap:14px; padding:1px 0 3px; }
+  .fstep .s{ font-size:.79rem; color:var(--muted); display:flex; gap:9px; flex-wrap:wrap; align-items:center; }
+
+  .grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:14px; }
+  .note{ font-size:.85rem; color:var(--muted); margin:14px 0 0; max-width:82ch; }
+  .note b{ color:var(--ink-2); font-weight:620; }
+
+  ul.act{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  ul.act li{ padding:13px 0; border-bottom:1px solid var(--hair); display:grid;
+    grid-template-columns:26px 1fr; gap:12px; align-items:baseline; }
+  ul.act li:last-child{ border-bottom:none; }
+  ul.act .i{ font-family:var(--mono); font-size:.76rem; color:var(--faint); }
+  ul.act .t{ font-size:.92rem; color:var(--ink); }
+  ul.act .t em{ display:block; font-style:normal; font-size:.84rem; color:var(--muted); margin-top:3px; }
+
+  footer{ margin-top:52px; padding-top:18px; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); }
+  footer p{ margin:0 0 7px; max-width:88ch; }
+  footer b{ color:var(--ink-2); font-weight:620; }
+
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media (max-width:640px){
+    body{ padding:0 16px 60px; }
+    .fnr,.fstep{ grid-template-columns:88px 1fr; gap:9px; }
+  }
+
+  .topnav{ display:flex; flex-wrap:wrap; gap:8px; padding:18px 0 0; }
+  .topnav a{ font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); border:1px solid var(--line); background:var(--panel);
+    padding:8px 15px; border-radius:20px; transition:.15s; }
+  .topnav a:hover{ border-color:var(--accent); color:var(--ink); }
+  .topnav a.on{ background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700; }
+</style>
+
+<div class="wrap">
+
+<nav class="topnav"><a href="index.html">Plano de Campanhas</a><a href="calendario.html">Calendário</a><a href="diagnostico.html" class="on">Diagnóstico</a></nav>
+
+<header>
+  <div class="brand">
+    <div class="tile">🍔</div>
+    <div>
+      <h1>Goodii Burger — Diagnóstico</h1>
+      <p>Julho e agosto de 2026 · dados do Cardápio Web</p>
+    </div>
+  </div>
+  <span class="badge">Atualizado 13/08/2026</span>
+</header>
+
+<div class="verdict">
+  <h2>A meta de R$160 mil não é alcançável no ritmo atual</h2>
+  <p>Faltam <b>R$114.535</b> em <b>19 dias</b>, o que exige <b>R$6.028 por dia</b>. A operação está rodando a <b>R$3.789 por dia</b> — seria preciso subir o ritmo em <b>59%</b> enquanto a curva vem caindo há quatro períodos seguidos.</p>
+  <p>E a meta nunca teve base histórica: <b>julho, o melhor mês recente, fechou R$141.963</b>. R$160 mil é 12,7% acima disso — sendo cobrado de uma verba de mídia de R$2.000, que é 1,25% do faturamento pretendido.</p>
+</div>
+
+<!-- META -->
+<section>
+  <p class="sec-title">Onde estamos na meta</p>
+  <div class="card t">
+    <div class="meter">
+      <div class="track">
+        <div class="proj" id="mProj" title="Projeção no ritmo atual"></div>
+        <div class="fill" id="mFill" title="Realizado até 12/08"></div>
+        <div class="tick" id="mTick" title="Onde deveríamos estar em 12/08"></div>
+      </div>
+      <div class="scale"><span>R$ 0</span><span>R$ 80.000</span><span>R$ 160.000</span></div>
+      <div class="mlegend">
+        <i><span class="sw" style="background:var(--accent)"></span>Realizado — R$ 45.464 (28,4%)</i>
+        <i><span class="sw" style="background:repeating-linear-gradient(135deg,var(--accent-2) 0 4px,transparent 4px 8px);border:1px solid var(--line)"></span>Projeção — R$ 117.449 (73,4%)</i>
+        <i><span class="sw" style="background:var(--down)"></span>Ritmo necessário em 12/08 — R$ 61.935</i>
+      </div>
+    </div>
+    <p class="note"><b>38,7% do mês passou e 28,4% da meta foi feita.</b> O atraso acumulado até 12/08 já é de R$16.471. A projeção assume que o ritmo atual se mantém — em julho a segunda quinzena veio mais fraca que a primeira, então o número real tende a ficar abaixo disso.</p>
+  </div>
+</section>
+
+<!-- KPIs -->
+<section>
+  <p class="sec-title">Agosto · 1 a 12</p>
+  <div class="kpis">
+    <div class="kpi"><span class="k">Faturamento</span><span class="v">R$ 45.464</span><span class="n"><b class="down">−25,5%</b> vs. 1–12/jul</span></div>
+    <div class="kpi d"><span class="k">Pedidos</span><span class="v">516</span><span class="n"><b class="down">−26,8%</b> · 189 pedidos a menos</span></div>
+    <div class="kpi"><span class="k">Ticket médio</span><span class="v">R$ 88,11</span><span class="n"><b class="up">+1,8%</b> vs. 1–12/jul</span></div>
+    <div class="kpi w"><span class="k">Necessário por dia</span><span class="v">R$ 6.028</span><span class="n">contra R$ 3.789 de hoje</span></div>
+  </div>
+  <p class="note"><b>O ticket subiu, quem sumiu foi o cliente.</b> Não é problema de preço nem de oferta — são 189 pedidos que não aconteceram.</p>
+</section>
+
+<!-- TENDÊNCIA -->
+<section>
+  <p class="sec-title">A queda começou em julho, não em agosto</p>
+  <div class="card">
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Período</th><th class="r">Faturamento/dia</th><th class="r">Índice</th><th>Leitura</th></tr></thead>
+        <tbody>
+          <tr><td class="k">19–30/06</td><td class="num r">R$ 4.841</td><td class="num r">95</td><td>Base</td></tr>
+          <tr><td class="k">01–12/07</td><td class="num r">R$ 5.084</td><td class="num r">100</td><td><span class="pill n">pico do período</span></td></tr>
+          <tr><td class="k">20–31/07</td><td class="num r">R$ 4.177</td><td class="num r">82</td><td>Primeira queda</td></tr>
+          <tr><td class="k">01–12/08</td><td class="num r">R$ 3.789</td><td class="num r">75</td><td><span class="pill d">−25% do pico</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">A inflexão acontece na <b>segunda quinzena de julho</b> — exatamente quando terminam as férias escolares. Atibaia é estância turística e recebe fluxo de São Paulo nesse período. É a explicação mais provável, mas <b>ainda não é fato comprovado</b>: sem Cardápio Web em 2025, não há comparação ano a ano dentro desta base.</p>
+  </div>
+</section>
+
+<!-- CANAIS -->
+<section>
+  <p class="sec-title">Para onde foram os 189 pedidos</p>
+  <div class="card">
+    <div class="scroll">
+      <table>
+        <thead><tr>
+          <th>Canal de pagamento</th><th class="r">Ped. jul</th><th class="r">Ped. ago</th>
+          <th class="r">Variação</th><th class="r">Ticket ago</th>
+        </tr></thead>
+        <tbody id="canais"></tbody>
+      </table>
+    </div>
+    <p class="note"><b>O iFood foi o canal que menos caiu — de longe.</b> Todos os canais próprios recuaram entre 20% e 61%; o iFood segurou em −10%. Com isso, a fatia dele subiu de <b>32,3% para 38,5% do faturamento</b> e de 36% para 44% dos pedidos. A operação está encolhendo e, ao encolher, ficando mais dependente do canal de pior ticket e que ainda paga comissão — perda de margem somada à perda de volume.</p>
+  </div>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card">
+      <p class="sec-title" style="margin-bottom:10px">Presencial · débito + crédito + dinheiro</p>
+      <span class="v" style="font-family:var(--mono);font-size:1.35rem;font-weight:600">352 → 240 pedidos</span>
+      <p class="note" style="margin-top:8px">Queda de <b class="down">31,8%</b>. O movimento de salão caiu quase um terço.</p>
+    </div>
+    <div class="card">
+      <p class="sec-title" style="margin-bottom:10px">Digital próprio · Pix + Pix automático</p>
+      <span class="v" style="font-family:var(--mono);font-size:1.35rem;font-weight:600">103 → 46 pedidos</span>
+      <p class="note" style="margin-top:8px">Queda de <b class="down">55,3%</b>. É o canal que mais caiu — e o único que o tráfego pago alimenta diretamente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BAIRROS -->
+<section>
+  <p class="sec-title">Delivery por bairro · julho completo</p>
+  <div class="kpis" style="margin-bottom:14px">
+    <div class="kpi"><span class="k">Pedidos delivery</span><span class="v">957</span><span class="n">60,6% dos pedidos do mês</span></div>
+    <div class="kpi"><span class="k">Faturamento delivery</span><span class="v">R$ 81.779</span><span class="n">57,6% do faturamento</span></div>
+    <div class="kpi"><span class="k">Ticket delivery</span><span class="v">R$ 85,45</span><span class="n">salão e retirada: <b>R$ 96,76</b></span></div>
+    <div class="kpi"><span class="k">Bairros atendidos</span><span class="v">113</span><span class="n">10 bairros = 50% da receita</span></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card t">
+      <p class="sec-title">Onde reforçar verba — paga bem e tem escala</p>
+      <div class="scroll">
+        <table style="min-width:340px">
+          <thead><tr><th>Bairro</th><th class="r">Ped.</th><th class="r">Ticket</th></tr></thead>
+          <tbody id="alvo"></tbody>
+        </table>
+      </div>
+      <p class="note">Ticket acima de R$95 com pelo menos 8 pedidos. <b>Jardim Alvinópolis lidera</b>: 47 pedidos a R$106,05, contra R$71,03 do bairro vizinho de maior volume.</p>
+    </div>
+
+    <div class="card tw">
+      <p class="sec-title">Volume alto e ticket baixo — alvo de combo</p>
+      <div class="scroll">
+        <table style="min-width:340px">
+          <thead><tr><th>Bairro</th><th class="r">Ped.</th><th class="r">Ticket</th></tr></thead>
+          <tbody id="baixo"></tbody>
+        </table>
+      </div>
+      <p class="note">Os cinco maiores em volume têm ticket <b>abaixo da média do delivery</b>. São bairros de proximidade, pedido pequeno e frequente — exatamente o caso em que combo resolve.</p>
+    </div>
+  </div>
+
+  <div class="card td" style="margin-top:14px">
+    <p class="sec-title">Custo de entrega que come a margem</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Bairro</th><th class="r">Taxa por pedido</th><th class="r">Ticket</th><th class="r">Pedidos</th><th class="r">Taxa ÷ ticket</th></tr></thead>
+        <tbody id="caro"></tbody>
+      </table>
+    </div>
+    <p class="note">A taxa média do delivery é <b>R$3,02 por pedido</b> (3,54% do faturamento). Nestes bairros ela passa de R$5 e chega a R$17,90. Onde o ticket é alto isso ainda fecha — <b>Jardim Estância Brasil paga R$124,64 de ticket</b> e sustenta a taxa. Onde não é o caso, cada pedido entrega menos margem do que parece.</p>
+  </div>
+
+  <p class="note"><b>Cauda longa:</b> 47 dos 113 bairros tiveram no máximo 2 pedidos no mês inteiro — juntos, 61 pedidos e 6,8% da receita. Não vale mídia neles. A verba de aquisição deve ficar concentrada nos 10 bairros que fazem metade do faturamento.</p>
+</section>
+
+<!-- FUNIL -->
+<section>
+  <p class="sec-title">Funil do site próprio · 1 a 12 de agosto</p>
+  <div class="card">
+    <div class="fn" id="fn"></div>
+    <p class="note"><b>57% de quem entra no site sai sem ver um único item</b> — 194 pessoas. Da visualização em diante o funil é excelente. Se a primeira etapa voltasse aos 50% do período anterior, seriam <b>97 pedidos em vez de 84</b>, sem gastar um real a mais. Ressalva de tamanho: o site é só <b>16% dos pedidos</b> da casa, então consertar isso ajuda mas não fecha o buraco de R$114 mil.</p>
+  </div>
+</section>
+
+<!-- AÇÕES -->
+<section>
+  <p class="sec-title">O que precisa ser decidido</p>
+  <div class="card">
+    <ul class="act">
+      <li><span class="i">01</span><span class="t">Rever a meta de agosto ou a verba de mídia<em>R$160 mil é 12,7% acima do melhor mês recente. Com R$2.000 de mídia (1,25% do faturamento, contra 3–6% de referência do setor), não há alavanca que cubra a diferença.</em></span></li>
+      <li><span class="i">02</span><span class="t">Puxar o histórico de 2025 no portal do iFood<em>É o único caminho que sobrou para provar a sazonalidade, já que o Cardápio Web não existia lá. O relatório de pedidos do iFood tem histórico próprio.</em></span></li>
+      <li><span class="i">03</span><span class="t">Levantar a comissão do iFood no contrato<em>São 38,5% do faturamento passando por lá. Sem o percentual, a margem por canal é incalculável e a comparação entre canais fica enganosa.</em></span></li>
+      <li><span class="i">04</span><span class="t">Instalar Pixel e API de Conversões no Cardápio Web<em>Configurações → Integrações → Facebook Pixel. Config de 10 minutos que hoje bloqueia toda a otimização por compra.</em></span></li>
+      <li><span class="i">05</span><span class="t">Conferir o gráfico de vendas por hora<em>A loja abre 18h e o site fica no ar 24h. Se houver visita concentrada em horário de loja fechada, achamos parte dos 57% e o conserto é grátis.</em></span></li>
+      <li><span class="i">06</span><span class="t">Concentrar a verba de aquisição em 10 bairros<em>Metade da receita de delivery sai deles. Os 47 bairros de cauda longa somam 6,8% e não sustentam mídia.</em></span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p><b>Fonte:</b> Cardápio Web — Análise das Vendas e Site Analytics (Beta). Julho: 01–31/07/2026. Agosto: 01–12/08/2026. Bairros: julho completo.</p>
+  <p><b>Conferência:</b> o detalhamento do faturamento e a soma por forma de pagamento fecham no centavo nos dois meses. Os pedidos por forma de pagamento somam mais que o total (523 contra 516 em agosto, 719 contra 705 em julho) — são pagamentos divididos. Nenhuma meta foi calculada sobre esse recorte.</p>
+  <p><b>Limites:</b> não há comparação com 2025 porque a loja não usava Cardápio Web no período. A hipótese de sazonalidade é consistente com os dados, mas não está comprovada. A projeção de agosto assume ritmo constante e tende a ser otimista.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var BRL=function(n){return "R$ "+n.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});};
+  var INT=function(n){return n.toLocaleString("pt-BR");};
+  var PCT=function(n){return n.toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1})+"%";};
+
+  /* ---- meta ---- */
+  var META=160000, FEITO=45464.34, PROJ=117449.64, PACE=META*12/31;
+  document.getElementById("mFill").style.width=(FEITO/META*100).toFixed(2)+"%";
+  document.getElementById("mProj").style.width=(PROJ/META*100).toFixed(2)+"%";
+  document.getElementById("mTick").style.left=(PACE/META*100).toFixed(2)+"%";
+
+  /* ---- canais ---- */
+  var C=[
+    {n:"Cartão de débito", j:191, a:119, t:99.83},
+    {n:"Pix",              j:64,  a:25,  t:89.48},
+    {n:"iFood",            j:258, a:232, t:75.39},
+    {n:"Cartão de crédito",j:115, a:92,  t:99.05},
+    {n:"Pix automático",   j:39,  a:21,  t:109.42},
+    {n:"Dinheiro",         j:46,  a:29,  t:70.32},
+    {n:"Vale refeição",    j:5,   a:5,   t:81.68}
+  ];
+  document.getElementById("canais").innerHTML = C.map(function(x){
+    var d=x.a-x.j, p=d/x.j*100;
+    var cls = d<0 ? "d" : (d>0 ? "u" : "n");
+    var txt = d===0 ? "estável" : (d>0?"+":"")+d+" · "+PCT(p);
+    return '<tr><td class="k">'+x.n+'</td>'+
+      '<td class="num r">'+x.j+'</td><td class="num r">'+x.a+'</td>'+
+      '<td class="r"><span class="pill '+cls+'">'+txt+'</span></td>'+
+      '<td class="num r">'+BRL(x.t)+'</td></tr>';
+  }).join("") +
+  '<tr class="tot"><td>Total</td><td class="num r">718</td><td class="num r">523</td>'+
+  '<td class="r"><span class="pill d">−195 · −27,2%</span></td><td class="num r">R$ 88,11</td></tr>';
+
+  /* ---- bairros ---- */
+  var ALVO=[
+    ["Jardim Alvinópolis",47,106.05],["Nova Cerejeira",32,107.36],["Vila Santista",24,100.48],
+    ["Lot. Loanda",13,124.87],["Vila Petrópolis",12,109.40],["Jd. do Alvinópolis II",11,98.25],
+    ["Ressaca",8,140.52],["Jardim Estância Brasil",8,124.64]
+  ];
+  var BAIXO=[
+    ["Jardim Do Alvinópolis",91,71.03],["Alvinópolis",64,76.78],["Jardim Paulista",59,80.39],
+    ["Centro",57,64.27],["Atibaia Jardim",46,77.64]
+  ];
+  var linha=function(a){ return '<tr><td class="k">'+a[0]+'</td><td class="num r">'+a[1]+'</td><td class="num r">'+BRL(a[2])+'</td></tr>'; };
+  document.getElementById("alvo").innerHTML  = ALVO.map(linha).join("");
+  document.getElementById("baixo").innerHTML = BAIXO.map(linha).join("");
+
+  var CARO=[
+    ["Jardim dos Pinheiros",17.90,107.31,6],["Belvedere",16.90,93.26,5],
+    ["Jardim Estância Brasil",15.91,124.64,8],["Lot. Jardim Morumbi",12.00,73.12,6],
+    ["Ressaca",10.29,140.52,8],["Lot. Loanda",9.99,124.87,13],
+    ["Jardim São Felipe",9.68,83.82,8],["Jardim Imperial",7.01,86.70,34],
+    ["Chácaras Maringá",6.44,92.66,20],["Nova Cerejeira",6.20,107.36,32]
+  ];
+  document.getElementById("caro").innerHTML = CARO.map(function(a){
+    var r=a[1]/a[2]*100;
+    return '<tr><td class="k">'+a[0]+'</td><td class="num r">'+BRL(a[1])+'</td>'+
+      '<td class="num r">'+BRL(a[2])+'</td><td class="num r">'+a[3]+'</td>'+
+      '<td class="r"><span class="ib"><span class="t"><span class="f" style="width:'+Math.min(r*4,100).toFixed(1)+'%"></span></span>'+
+      '<span class="p">'+PCT(r)+'</span></span></td></tr>';
+  }).join("");
+
+  /* ---- funil ---- */
+  var F=[{n:"Visitas",v:341,a:100},{n:"Visualizações",v:147,a:50},
+         {n:"Sacola",v:108,a:36},{n:"Checkout",v:105,a:31},{n:"Pedidos",v:84,a:28}];
+  var base=F[0].v, h="";
+  F.forEach(function(e,i){
+    var w=e.v/base*100;
+    h+='<div class="fnr"><span class="nm">'+e.n+'</span><div class="tk">'+
+       '<div class="br" style="width:'+w.toFixed(2)+'%" title="'+e.n+': '+e.v+' pessoas"><b>'+e.v+'</b></div>'+
+       '<span class="pc">'+PCT(w)+' · era '+e.a+'%</span></div></div>';
+    if(i<F.length-1){
+      var nx=F[i+1], tx=nx.v/e.v*100;
+      h+='<div class="fstep"><span></span><span class="s">'+
+         '<span class="pill '+(tx>=70?"u":"d")+'">'+PCT(tx)+'</span>'+
+         '<span>seguem para '+nx.n.toLowerCase()+'</span>'+
+         '<span style="color:var(--down)">− '+(e.v-nx.v)+' pessoas</span></span></div>';
+    }
+  });
+  document.getElementById("fn").innerHTML=h;
+})();
+</script>

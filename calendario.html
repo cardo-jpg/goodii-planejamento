@@ -1,0 +1,475 @@
+<title>Calendário Goodii · Ago–Dez</title>
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#FFFFFF; --panel-2:#F7F7F8;
+    --line:#E4E4E7; --hair:#EFEFF1;
+    --ink:#15151A; --ink-2:#4A4A54; --muted:#76767F; --faint:#A2A2AC;
+    --accent:#2E4A63; --accent-soft:#EDF1F5; --accent-line:#C5D2DD;
+    --ritual:#6B5B95; --ritual-soft:#F0EDF5;
+    --prazo:#8A6410; --prazo-soft:#FAF3E0;
+    --live:#1E6B45; --live-soft:#E9F3ED;
+    --hoje:#A32A1E;
+    --sans:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#101013; --panel:#17171B; --panel-2:#1E1E23;
+      --line:#2C2C33; --hair:#232329;
+      --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+      --accent:#7FA8CC; --accent-soft:#1A222B; --accent-line:#2F4152;
+      --ritual:#A897CE; --ritual-soft:#221E2C;
+      --prazo:#D0A340; --prazo-soft:#2A2415;
+      --live:#5CB489; --live-soft:#152521;
+      --hoje:#E07A6C;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101013; --panel:#17171B; --panel-2:#1E1E23;
+    --line:#2C2C33; --hair:#232329;
+    --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+    --accent:#7FA8CC; --accent-soft:#1A222B; --accent-line:#2F4152;
+    --ritual:#A897CE; --ritual-soft:#221E2C;
+    --prazo:#D0A340; --prazo-soft:#2A2415;
+    --live:#5CB489; --live-soft:#152521;
+    --hoje:#E07A6C;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+    font-size:15px; line-height:1.6; padding:0 24px 90px; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1040px; margin:0 auto; }
+
+  header{ display:flex; flex-wrap:wrap; gap:14px 24px; align-items:center; justify-content:space-between;
+    padding:40px 0 22px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .tile{ width:42px; height:42px; border-radius:11px; background:var(--accent-soft);
+    border:1px solid var(--line); display:grid; place-items:center; font-size:1.25rem; flex:none; }
+  h1{ font-size:1.28rem; font-weight:650; letter-spacing:-.02em; margin:0; }
+  .brand p{ margin:2px 0 0; font-size:.82rem; color:var(--muted); }
+  .badge{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2); background:var(--panel-2);
+    border:1px solid var(--line); padding:6px 12px; border-radius:999px; white-space:nowrap; }
+
+  .sec-title{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--muted); margin:0 0 14px; }
+  section{ margin-bottom:42px; }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 22px; }
+
+  /* regra */
+  .rule{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0; }
+  .rstep{ padding:0 20px; border-left:2px solid var(--line); }
+  .rstep:first-child{ padding-left:0; border-left:none; }
+  .rstep.p{ border-left-color:var(--prazo); }
+  .rstep.l{ border-left-color:var(--live); }
+  .rstep.d{ border-left-color:var(--accent); }
+  .rstep .w{ font-family:var(--mono); font-size:1.15rem; font-weight:600; display:block; letter-spacing:-.02em; }
+  .rstep .t{ font-size:.86rem; color:var(--ink-2); display:block; margin-top:5px; }
+  .rstep.p .w{ color:var(--prazo); } .rstep.l .w{ color:var(--live); } .rstep.d .w{ color:var(--accent); }
+
+  /* ritual */
+  .ritual{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
+  .rc{ border:1px solid var(--line); border-top:2px solid var(--ritual); border-radius:10px; padding:15px 17px; }
+  .rc .d{ font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ritual); font-weight:600; display:block; margin-bottom:7px; }
+  .rc h3{ margin:0 0 6px; font-size:.98rem; font-weight:650; letter-spacing:-.01em; }
+  .rc p{ margin:0; font-size:.85rem; color:var(--muted); }
+
+  /* legenda */
+  .leg{ display:flex; flex-wrap:wrap; gap:9px 20px; margin-bottom:18px; }
+  .leg i{ display:inline-flex; align-items:center; gap:8px; font-style:normal; font-size:.82rem; color:var(--ink-2); }
+  .leg .sw{ width:11px; height:11px; border-radius:3px; flex:none; border:1px solid var(--line); }
+
+  /* calendário */
+  .months{ display:flex; flex-direction:column; gap:26px; }
+  .mon{ border:1px solid var(--line); border-radius:11px; overflow:hidden; background:var(--panel); }
+  .mon-h{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    padding:13px 18px; background:var(--panel-2); border-bottom:1px solid var(--line); }
+  .mon-h h2{ margin:0; font-size:1rem; font-weight:650; letter-spacing:-.01em; }
+  .mon-h span{ font-size:.79rem; color:var(--muted); }
+  .dow{ display:grid; grid-template-columns:repeat(7,1fr); border-bottom:1px solid var(--line); }
+  .dow span{ padding:7px 6px; text-align:center; font-size:10px; font-weight:700; text-transform:uppercase;
+    letter-spacing:1px; color:var(--muted); }
+  .days{ display:grid; grid-template-columns:repeat(7,1fr); }
+  .cell{ min-height:76px; border-right:1px solid var(--hair); border-bottom:1px solid var(--hair);
+    padding:6px 7px; display:flex; flex-direction:column; gap:3px; }
+  .cell:nth-child(7n){ border-right:none; }
+  .cell.empty{ background:var(--panel-2); }
+  .cell.past{ opacity:.42; }
+  .cell .n{ font-family:var(--mono); font-size:.78rem; color:var(--ink-2); font-variant-numeric:tabular-nums; }
+  .cell.today .n{ color:#fff; background:var(--hoje); border-radius:4px; padding:0 5px; align-self:flex-start; font-weight:600; }
+  .cell.wknd .n{ color:var(--faint); }
+  .tag{ font-size:9.5px; line-height:1.3; padding:2px 4px; border-radius:3px; font-weight:600;
+    overflow:hidden; display:block; }
+  .tag.data{ background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent-line); }
+  .tag.ritual{ background:var(--ritual-soft); color:var(--ritual); }
+  .tag.prazo{ background:var(--prazo-soft); color:var(--prazo); }
+  .tag.live{ background:var(--live-soft); color:var(--live); }
+
+  /* tabela produção */
+  .scroll{ overflow-x:auto; }
+  table{ border-collapse:collapse; width:100%; min-width:840px; font-size:.86rem; }
+  thead th{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.1px; color:var(--muted);
+    text-align:left; padding:9px 13px; background:var(--panel-2); border-bottom:1px solid var(--line); white-space:nowrap; }
+  tbody td{ padding:12px 13px; border-bottom:1px solid var(--hair); color:var(--ink-2); vertical-align:top; }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.dt{ font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink); font-weight:600; }
+  td.dt small{ display:block; font-family:var(--sans); font-size:.74rem; color:var(--muted); font-weight:400; margin-top:2px; }
+  td.k{ color:var(--ink); font-weight:620; }
+  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .chip{ display:inline-block; font-family:var(--mono); font-size:.68rem; letter-spacing:.06em;
+    text-transform:uppercase; padding:2px 7px; border-radius:3px; font-weight:600; white-space:nowrap; }
+  .chip.cardo{ background:var(--accent-soft); color:var(--accent); }
+  .chip.cli{ background:var(--live-soft); color:var(--live); }
+  .chip.amb{ background:var(--prazo-soft); color:var(--prazo); }
+
+  .note{ font-size:.85rem; color:var(--muted); margin:14px 0 0; max-width:84ch; }
+  .note b{ color:var(--ink-2); font-weight:620; }
+
+  /* sugestões */
+  .sugs{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:14px; }
+  .sug{ background:var(--panel); border:1px solid var(--line); border-top:2px solid var(--accent);
+    border-radius:11px; padding:18px 20px; display:flex; flex-direction:column; gap:11px; }
+  .sug-h{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .sug-h h3{ margin:0; font-size:1rem; font-weight:650; letter-spacing:-.01em; }
+  .sug-h .when{ font-family:var(--mono); font-size:.74rem; color:var(--muted); white-space:nowrap; }
+  .stars{ font-size:.78rem; letter-spacing:1px; color:var(--accent); }
+  .stars s{ color:var(--faint); text-decoration:none; }
+  .sug dl{ margin:0; display:flex; flex-direction:column; gap:9px; }
+  .sug dt{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.1px; margin-bottom:3px; }
+  .sug dd{ margin:0; font-size:.86rem; color:var(--ink-2); }
+  .sug .por dt{ color:var(--muted); }
+  .sug .faz dt{ color:var(--live); }
+  .sug .nao dt{ color:var(--hoje); }
+  .sug .alerta{ font-size:.82rem; color:var(--muted); border-top:1px dashed var(--line); padding-top:10px; }
+  .sug .alerta b{ color:var(--ink-2); font-weight:620; }
+
+  footer{ margin-top:50px; padding-top:18px; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); }
+  footer p{ margin:0 0 7px; max-width:88ch; }
+  footer b{ color:var(--ink-2); font-weight:620; }
+
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media (max-width:700px){
+    body{ padding:0 12px 60px; }
+    .cell{ min-height:56px; padding:4px 4px; }
+    .tag{ font-size:8px; padding:1px 3px; }
+    .rstep{ padding:12px 0 0; border-left:none; border-top:2px solid var(--line); margin-top:12px; }
+    .rstep:first-child{ margin-top:0; }
+  }
+
+  .topnav{ display:flex; flex-wrap:wrap; gap:8px; padding:18px 0 0; }
+  .topnav a{ font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); border:1px solid var(--line); background:var(--panel);
+    padding:8px 15px; border-radius:20px; transition:.15s; }
+  .topnav a:hover{ border-color:var(--accent); color:var(--ink); }
+  .topnav a.on{ background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700; }
+</style>
+
+<div class="wrap">
+
+<nav class="topnav"><a href="index.html">Plano de Campanhas</a><a href="calendario.html" class="on">Calendário</a><a href="diagnostico.html">Diagnóstico</a></nav>
+
+<header>
+  <div class="brand">
+    <div class="tile">📅</div>
+    <div>
+      <h1>Calendário Goodii · Agosto a Dezembro</h1>
+      <p>Datas, rituais semanais, prazo de peça e subida de campanha</p>
+    </div>
+  </div>
+  <span class="badge">v1 · 13/08/2026</span>
+</header>
+
+<!-- REGRA -->
+<section>
+  <p class="sec-title">A regra que faz o calendário funcionar</p>
+  <div class="card">
+    <div class="rule">
+      <div class="rstep p">
+        <span class="w">D − 7</span>
+        <span class="t"><b>Peça pronta.</b> Foto e vídeo do combo entregues, aprovados e na mão da Cardô.</span>
+      </div>
+      <div class="rstep l">
+        <span class="w">D − 3</span>
+        <span class="t"><b>Campanha no ar.</b> Anúncio rodando, com a base avisada antes do público frio.</span>
+      </div>
+      <div class="rstep d">
+        <span class="w">D</span>
+        <span class="t"><b>A data.</b> Cozinha e estoque combinados para o volume previsto.</span>
+      </div>
+    </div>
+    <p class="note">Campanha montada na véspera não sai da fase de aprendizado: entrega caro e vende menos. <b>Se a peça não chegar no D−7, a data é cancelada e a verba vai para o ritual da semana</b> — não sobe nada às pressas.</p>
+  </div>
+</section>
+
+<!-- RITUAL -->
+<section>
+  <p class="sec-title">O que acontece toda semana, sem exceção</p>
+  <div class="ritual">
+    <div class="rc">
+      <span class="d">Toda segunda</span>
+      <h3>Combo Dupla</h3>
+      <p>Dois lanches e duas bebidas com preço fechado. Segunda é o pior dia da semana.</p>
+    </div>
+    <div class="rc">
+      <span class="d">Toda terça</span>
+      <h3>Dia do Cheddar</h3>
+      <p>O Goodii Cheddar já existe no cardápio. Vira ritual fixo — é o que cria hábito.</p>
+    </div>
+    <div class="rc">
+      <span class="d">Toda quarta</span>
+      <h3>Combo Refil Salad</h3>
+      <p>O Goodii Salad converte 66,7% de quem vê. É o produto mais subexplorado da casa.</p>
+    </div>
+  </div>
+  <p class="note">O ritual não entra no calendário como evento — ele é o <b>piso</b>. As datas comemorativas são o que se soma a ele. Nas grades abaixo, segunda, terça e quarta aparecem marcadas o mês inteiro.</p>
+</section>
+
+<!-- CALENDÁRIO -->
+<section>
+  <p class="sec-title">As grades</p>
+  <div class="leg">
+    <i><span class="sw" style="background:var(--accent-soft);border-color:var(--accent-line)"></span>Data comemorativa</i>
+    <i><span class="sw" style="background:var(--ritual-soft);border-color:var(--ritual-soft)"></span>Ritual semanal</i>
+    <i><span class="sw" style="background:var(--prazo-soft);border-color:var(--prazo-soft)"></span>Prazo da peça (D−7)</i>
+    <i><span class="sw" style="background:var(--live-soft);border-color:var(--live-soft)"></span>Campanha no ar (D−3)</i>
+  </div>
+  <div class="months" id="cal"></div>
+</section>
+
+<!-- PRODUÇÃO -->
+<section>
+  <p class="sec-title">O que cada data exige</p>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="scroll">
+      <table>
+        <thead><tr>
+          <th>Data</th><th>Ação</th><th>Oferta</th><th>Peça necessária</th>
+          <th>Peça pronta</th><th>No ar</th><th>Verba</th><th>Dono</th>
+        </tr></thead>
+        <tbody id="prod"></tbody>
+      </table>
+    </div>
+  </div>
+  <p class="note"><b>Verba total das datas: R$1.040 entre agosto e dezembro</b>, dentro da fatia de ativações do plano. As duas maiores fatias vão para o <b>Dia do Cliente</b> (R$200) e para a <b>temporada de confraternização</b> (R$250) — as duas datas de maior retorno esperado do período.</p>
+</section>
+
+<!-- ANTECEDÊNCIA -->
+<section>
+  <p class="sec-title">O que precisa ser resolvido antes de cada bloco</p>
+  <div class="card">
+    <div class="scroll">
+      <table style="min-width:600px">
+        <thead><tr><th>Até</th><th>O quê</th><th>Por quê</th><th>Dono</th></tr></thead>
+        <tbody>
+          <tr><td class="dt">17/08</td><td class="k">Fotos e vídeos dos 4 combos</td><td>Sem peça não há campanha. É o insumo que trava tudo o resto do semestre.</td><td><span class="chip cli">Cliente</span></td></tr>
+          <tr><td class="dt">31/08</td><td class="k">Definir a oferta do Dia do Cliente</td><td>É a maior data de relacionamento do ano e exige cupom nominal para a base.</td><td><span class="chip amb">Ambos</span></td></tr>
+          <tr><td class="dt">30/09</td><td class="k">Fechar o combo família de outubro</td><td>Dia das Crianças cai numa segunda com feriado — dia fraco virando dia forte.</td><td><span class="chip cli">Cliente</span></td></tr>
+          <tr><td class="dt">10/11</td><td class="k">Fechar o combo de confraternização</td><td>Quem organiza festa de empresa escolhe o local em novembro. Falar em dezembro é tarde.</td><td><span class="chip amb">Ambos</span></td></tr>
+          <tr><td class="dt">30/11</td><td class="k">Confirmar funcionamento no Natal e Réveillon</td><td>Se a loja não abre, a verba dessas datas é remanejada em vez de queimada.</td><td><span class="chip cli">Cliente</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SUGESTÕES -->
+<section>
+  <p class="sec-title">Sugestão para cada data — o que fazer e o que evitar</p>
+  <div class="sugs" id="sugs"></div>
+</section>
+
+<!-- DATA PRÓPRIA -->
+<section>
+  <p class="sec-title">A melhor data não está no calendário</p>
+  <div class="card" style="border-top:2px solid var(--ritual)">
+    <h3 style="margin:0 0 8px;font-size:1.02rem;font-weight:650">Aniversário do Goodii</h3>
+    <p class="note" style="margin-top:0">A bio deles diz <b>“fazendo bons burgers desde 2022”</b>. Se existe um mês de fundação, essa é a data mais valiosa do semestre — e ninguém disputa ela com vocês.</p>
+    <p class="note">Data comemorativa nacional é leilão: no Dia das Crianças toda hamburgueria de Atibaia anuncia ao mesmo tempo e o CPM sobe. <b>Aniversário de casa é exclusivo.</b> Rende conteúdo de bastidor, agradecimento à base de 20,4 mil seguidores, e justifica uma oferta forte sem parecer desespero por venda.</p>
+    <p class="note"><b>Preciso saber:</b> em que mês o Goodii abriu. Se cair entre setembro e dezembro, entra no calendário como a data principal do período.</p>
+  </div>
+</section>
+
+<!-- FORA -->
+<section>
+  <p class="sec-title">Datas que deixamos de fora de propósito</p>
+  <div class="card">
+    <div class="scroll">
+      <table style="min-width:560px">
+        <thead><tr><th>Data</th><th>Por que não entra</th></tr></thead>
+        <tbody>
+          <tr><td class="dt">Black Friday<small>27/11 — sexta</small></td><td>Data de varejo e e-commerce, não de comida. Cai numa <b>sexta, que já é dia forte da casa</b> — o desconto incidiria em cima de venda que aconteceria de qualquer jeito, destruindo margem sem criar receita nova. Com verba de R$2.000 não há espaço para essa aposta.</td></tr>
+          <tr><td class="dt">Dia dos Pais<small>09/08 — já passou</small></td><td>Passou antes deste plano existir. Fica marcada para 2027, é data forte de salão.</td></tr>
+          <tr><td class="dt">Dia do Hambúrguer<small>28/05</small></td><td>Fora do período. Guardar para maio de 2027 — é a data mais natural da casa depois do aniversário.</td></tr>
+          <tr><td class="dt">Dia do Bacon<small>setembro, informal</small></td><td>Quase ninguém no Brasil conhece a data. Mas o <b>Double Bacon é o produto mais visto do site</b> — vale criar uma “Semana do Bacon” própria em vez de importar a data.</td></tr>
+          <tr><td class="dt">Primavera<small>22/09</small></td><td>Não move hambúrguer. Entraria só como enfeite de post.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><b>Como usar:</b> a grade é o combinado. Toda segunda, na reunião de 30 minutos, confere-se o que vem nas próximas duas semanas e confirma-se quem entrega o quê.</p>
+  <p><b>Datas de 2026 conferidas</b> uma a uma contra o calendário. Dia das Crianças e Independência caem em segunda-feira — os dois melhores presentes do semestre, porque transformam o pior dia da semana em feriado.</p>
+  <p><b>Fora do calendário:</b> ação com influenciador não tem data fixa aqui porque depende de negociação do cliente. Quando fechar, encaixa na semana e a Cardô impulsiona o conteúdo.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var MESES=[
+    {nome:"Agosto 2026",   m:8,  dias:31, inicio:6, nota:"Restam 7 dias fracos e a estreia dos dois rituais"},
+    {nome:"Setembro 2026", m:9,  dias:30, inicio:2, nota:"Dia do Cliente é a maior data de relacionamento do ano"},
+    {nome:"Outubro 2026",  m:10, dias:31, inicio:4, nota:"Dia das Crianças cai numa segunda com feriado"},
+    {nome:"Novembro 2026", m:11, dias:30, inicio:0, nota:"Mês de preparar dezembro — confraternização se vende agora"},
+    {nome:"Dezembro 2026", m:12, dias:31, inicio:2, nota:"Confraternizações e pedido de grupo"}
+  ];
+  var DOW=["dom","seg","ter","qua","qui","sex","sáb"];
+
+  // eventos pontuais: "m-d" -> [{c:classe, t:texto}]
+  var EV={
+    "8-18":[{c:"data",t:"1ª ed. Cheddar"}],
+    "8-19":[{c:"data",t:"Estreia Refil"}],
+    "9-7":[{c:"data",t:"Independência"}],
+    "9-8":[{c:"prazo",t:"Peça D. Cliente"}],
+    "9-12":[{c:"live",t:"Campanha no ar"}],
+    "9-15":[{c:"data",t:"Dia do Cliente"}],
+    "10-5":[{c:"prazo",t:"Peça Crianças"}],
+    "10-9":[{c:"live",t:"Campanha no ar"}],
+    "10-12":[{c:"data",t:"Dia das Crianças"}],
+    "10-15":[{c:"data",t:"Dia do Professor"}],
+    "10-24":[{c:"prazo",t:"Peça Halloween"}],
+    "10-28":[{c:"live",t:"Campanha no ar"}],
+    "10-31":[{c:"data",t:"Halloween"}],
+    "11-15":[{c:"data",t:"Proclamação"}],
+    "11-20":[{c:"data",t:"Consc. Negra"}],
+    "11-24":[{c:"prazo",t:"Peça confrat."}],
+    "11-28":[{c:"live",t:"Confrat. no ar"}],
+    "12-1":[{c:"data",t:"Confraternizações"}],
+    "12-18":[{c:"prazo",t:"Peça Natal"}],
+    "12-22":[{c:"live",t:"Campanha no ar"}],
+    "12-25":[{c:"data",t:"Natal"}],
+    "12-31":[{c:"data",t:"Réveillon"}]
+  };
+  var RITUAL={1:"Dupla",2:"Cheddar",3:"Refil"};
+  var HOJE={m:8,d:13};
+
+  var out="";
+  MESES.forEach(function(M){
+    out+='<div class="mon"><div class="mon-h"><h2>'+M.nome+'</h2><span>'+M.nota+'</span></div>';
+    out+='<div class="dow">'+DOW.map(function(d){return "<span>"+d+"</span>";}).join("")+'</div><div class="days">';
+
+    for(var i=0;i<M.inicio;i++) out+='<div class="cell empty"></div>';
+
+    for(var d=1; d<=M.dias; d++){
+      var dow=(M.inicio+d-1)%7;
+      var cls="cell";
+      if(dow===0||dow===6) cls+=" wknd";
+      if(M.m===8 && d<HOJE.d) cls+=" past";
+      if(M.m===HOJE.m && d===HOJE.d) cls+=" today";
+
+      var tags="";
+      if(RITUAL[dow] && !(M.m===8 && d<18)) tags+='<span class="tag ritual">'+RITUAL[dow]+'</span>';
+      var e=EV[M.m+"-"+d];
+      if(e) e.forEach(function(x){ tags+='<span class="tag '+x.c+'">'+x.t+'</span>'; });
+
+      out+='<div class="'+cls+'"><span class="n">'+d+'</span>'+tags+'</div>';
+    }
+
+    var resto=(M.inicio+M.dias)%7;
+    if(resto) for(var j=resto;j<7;j++) out+='<div class="cell empty"></div>';
+    out+='</div></div>';
+  });
+  document.getElementById("cal").innerHTML=out;
+
+  /* ---- tabela de produção ---- */
+  var P=[
+    ["18/08","ter","1ª edição do Dia do Cheddar","Goodii Cheddar com adicional sem custo","1 vídeo do cheddar derretendo + 1 estático com preço","hoje","17/08","R$ 60","amb"],
+    ["19/08","qua","Estreia do Combo Refil Salad","Goodii Salad + refil de salada","1 vídeo curto mostrando o refil","hoje","18/08","R$ 40","amb"],
+    ["07/09","seg","Independência","Combo Dupla reforçado — feriado em segunda","Adaptação da peça do Combo Dupla","31/08","04/09","R$ 60","amb"],
+    ["15/09","ter","Dia do Cliente","Cupom nominal só para a base, dentro do Dia do Cheddar","1 vídeo + 1 estático com o nome do cliente na chamada","08/09","12/09","R$ 200","amb"],
+    ["12/10","seg","Dia das Crianças","Combo família — feriado em segunda, foco em salão","1 vídeo do combo família","05/10","09/10","R$ 120","amb"],
+    ["15/10","qui","Dia do Professor","Desconto mediante identificação, sem mídia paga","Story orgânico e cartaz na loja","12/10","—","R$ 0","cli"],
+    ["31/10","sáb","Halloween","Lanche temático de edição limitada","1 vídeo do lanche temático — rende orgânico sozinho","24/10","28/10","R$ 150","amb"],
+    ["15/11","dom","Proclamação da República","Reforço de verba no fim de semana","Sem peça nova — escala a vencedora do mês","—","13/11","R$ 60","cardo"],
+    ["20/11","sex","Consciência Negra","Feriado — reforço de fim de semana","Sem peça nova","—","18/11","R$ 60","cardo"],
+    ["01→20/12","—","Temporada de confraternização","Combo para grupo e reserva de mesa","1 vídeo de mesa cheia + 1 estático de reserva","24/11","28/11","R$ 250","amb"],
+    ["25/12","sex","Natal","Confirmar antes se a loja abre","Story de horário — sem campanha","18/12","22/12","R$ 40","cli"],
+    ["31/12","qui","Réveillon","Confirmar antes se a loja abre","Story de horário","24/12","29/12","R$ 0","cli"]
+  ];
+  var NOME={cardo:"Cardô",cli:"Cliente",amb:"Ambos"};
+  /* ---- sugestões por data ---- */
+  var S=[
+    {n:"Dia do Cliente", w:"15/09 · terça", e:5,
+     por:"É a única data do ano em que falar com quem já comprou rende mais que buscar cliente novo. Com apenas 27,9% de visitantes recorrentes, o Goodii precisa exatamente disso.",
+     faz:"Cupom nominal, enviado por WhatsApp e e-mail só para a base do Cardápio Web. Encaixa dentro do Dia do Cheddar, que já cai na terça.",
+     nao:"Virar mais uma promoção pública. Se qualquer um pega, deixou de ser Dia do Cliente e virou desconto comum.",
+     al:"Depende do export da base de contatos. <b>Sem ela, essa data não acontece</b> — é o item mais urgente da lista de ações."},
+
+
+    {n:"Halloween", w:"31/10 · sábado", e:4,
+     por:"A melhor data de conteúdo do ano para hamburgueria. Lanche temático rende alcance orgânico sozinho — e existem 20,4 mil seguidores esperando algo assim.",
+     faz:"Lanche de edição limitada, com nome e visual próprios. Aqui uma foto boa vale mais que verba de mídia.",
+     nao:"Só trocar a arte do anúncio. Sem produto novo não gera conversa nem compartilhamento.",
+     al:"Também cai em <b>sábado, o dia mais forte</b>. Vale pelo conteúdo e pela marca mais do que pelo incremento de faturamento no dia."},
+
+    {n:"Dia das Crianças", w:"12/10 · segunda", e:4,
+     por:"Feriado caindo numa segunda-feira — o pior dia da semana virando dia cheio. É o melhor presente de calendário do semestre.",
+     faz:"Combo família com foco em salão. Criança não vem sozinha: traz a mesa inteira, e o ticket de salão já é R$96,76 contra R$85,45 do delivery.",
+     nao:"Tratar como data de delivery. É dia de mesa ocupada, não de entrega.",
+     al:"Precisa de decisão de cardápio até <b>30/09</b>. Combo família não se improvisa na véspera."},
+
+    {n:"Confraternizações", w:"01→20/12", e:4,
+     por:"Pedido de grupo tem o maior ticket do ano. Se a mesa média de salão já faz R$96,76, uma confraternização passa de R$300 sem esforço.",
+     faz:"Combo para 4, 6 e 8 pessoas com reserva de mesa. Comunicar já em novembro.",
+     nao:"Esperar dezembro para começar a falar. Quem organiza confraternização de empresa fecha o local em novembro.",
+     al:"É a data com <b>maior potencial de ticket</b> do calendário e a que mais depende de operação: mesa, reserva e escala de equipe."},
+
+    {n:"Independência", w:"07/09 · segunda", e:3,
+     por:"Outro feriado em segunda-feira. Mesmo efeito do Dia das Crianças, em escala menor.",
+     faz:"Reforçar o Combo Dupla, que já é a oferta fixa de segunda. Só sobe a verba e adapta a peça.",
+     nao:"Criar campanha nova. Aproveita a estrutura que já roda e economiza produção.",
+     al:"Data de baixo esforço e retorno decente. <b>Não merece peça exclusiva.</b>"},
+
+    {n:"Dia do Professor", w:"15/10 · quinta", e:2,
+     por:"Alcance pequeno, mas Atibaia tem escolas dentro do raio de entrega e é gesto de vizinhança.",
+     faz:"Desconto mediante identificação, divulgado no orgânico e com cartaz na loja.",
+     nao:"Colocar verba de mídia. Não se paga.",
+     al:"Custo zero, retorno pequeno e previsível. Entra por relacionamento com o bairro."},
+
+    {n:"Natal e Réveillon", w:"25/12 e 31/12", e:2,
+     por:"Baixa temporada para hamburgueria — as pessoas comem em casa, em família.",
+     faz:"Apenas comunicar horário de funcionamento. O pouco que vier chega com margem cheia e sem custo de mídia.",
+     nao:"Gastar verba tentando forçar demanda que não existe nessas noites.",
+     al:"<b>Confirmar até 30/11 se a loja abre.</b> Se não abrir, a verba dessas datas é remanejada em vez de queimada."}
+  ];
+  document.getElementById("sugs").innerHTML=S.map(function(x){
+    var st=""; for(var i=1;i<=5;i++) st += i<=x.e ? "★" : "<s>★</s>";
+    return '<div class="sug">'+
+      '<div class="sug-h"><h3>'+x.n+'</h3><span class="when">'+x.w+'</span></div>'+
+      '<span class="stars">'+st+'</span>'+
+      '<dl>'+
+        '<div class="por"><dt>Por que importa</dt><dd>'+x.por+'</dd></div>'+
+        '<div class="faz"><dt>Fazer</dt><dd>'+x.faz+'</dd></div>'+
+        '<div class="nao"><dt>Não fazer</dt><dd>'+x.nao+'</dd></div>'+
+      '</dl>'+
+      '<p class="alerta">'+x.al+'</p>'+
+    '</div>';
+  }).join("");
+
+  document.getElementById("prod").innerHTML=P.map(function(r){
+    return '<tr>'+
+      '<td class="dt">'+r[0]+(r[1]!=="—"?'<small>'+r[1]+'</small>':'')+'</td>'+
+      '<td class="k">'+r[2]+'</td>'+
+      '<td>'+r[3]+'</td>'+
+      '<td>'+r[4]+'</td>'+
+      '<td class="num">'+r[5]+'</td>'+
+      '<td class="num">'+r[6]+'</td>'+
+      '<td class="num">'+r[7]+'</td>'+
+      '<td><span class="chip '+r[8]+'">'+NOME[r[8]]+'</span></td>'+
+    '</tr>';
+  }).join("");
+})();
+</script>
