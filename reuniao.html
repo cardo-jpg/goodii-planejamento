@@ -1,0 +1,283 @@
+<title>Pauta da Reunião Goodii</title>
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#FFFFFF; --panel-2:#F7F7F8;
+    --line:#E4E4E7; --hair:#EFEFF1;
+    --ink:#15151A; --ink-2:#4A4A54; --muted:#76767F; --faint:#A2A2AC;
+    --accent:#2E4A63; --accent-soft:#EDF1F5;
+    --up:#1E6B45; --up-soft:#E9F3ED;
+    --down:#A32A1E; --down-soft:#F9EDEB;
+    --warn:#8A6410; --warn-soft:#FAF3E0;
+    --sans:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#101013; --panel:#17171B; --panel-2:#1E1E23;
+      --line:#2C2C33; --hair:#232329;
+      --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+      --accent:#7FA8CC; --accent-soft:#1A222B;
+      --up:#5CB489; --up-soft:#152521;
+      --down:#E07A6C; --down-soft:#2A1917;
+      --warn:#D0A340; --warn-soft:#2A2415;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101013; --panel:#17171B; --panel-2:#1E1E23;
+    --line:#2C2C33; --hair:#232329;
+    --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+    --accent:#7FA8CC; --accent-soft:#1A222B;
+    --up:#5CB489; --up-soft:#152521;
+    --down:#E07A6C; --down-soft:#2A1917;
+    --warn:#D0A340; --warn-soft:#2A2415;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; font-size:130%; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+    font-size:0.9375rem; line-height:1.6; padding:0 24px 90px; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1040px; margin:0 auto; }
+
+  header{ display:flex; flex-wrap:wrap; gap:14px 24px; align-items:center; justify-content:space-between;
+    padding:40px 0 22px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .tile{ width:42px; height:42px; border-radius:11px; background:var(--accent-soft);
+    border:1px solid var(--line); display:grid; place-items:center; font-size:1.25rem; flex:none; }
+  h1{ font-size:1.28rem; font-weight:650; letter-spacing:-.02em; margin:0; }
+  .brand p{ margin:2px 0 0; font-size:.82rem; color:var(--muted); }
+  .badge{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2); background:var(--panel-2);
+    border:1px solid var(--line); padding:6px 12px; border-radius:999px; white-space:nowrap; }
+
+  .sec-title{ font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--muted); margin:0 0 14px; }
+  section{ margin-bottom:44px; }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 22px; }
+  .card.t{ border-top:2px solid var(--accent); }
+  .card.tw{ border-top:2px solid var(--warn); }
+
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; }
+  .kpi{ background:var(--panel); border:1px solid var(--line); border-top:2px solid var(--accent);
+    border-radius:11px; padding:16px 18px; }
+  .kpi.u{ border-top-color:var(--up); } .kpi.d{ border-top-color:var(--down); }
+  .kpi .k{ font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px;
+    color:var(--muted); display:block; margin-bottom:9px; }
+  .kpi .v{ font-family:var(--mono); font-size:1.42rem; font-weight:600; letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums; display:block; line-height:1.05; }
+  .kpi .n{ font-size:.79rem; color:var(--muted); display:block; margin-top:8px; }
+
+  .flag{ border:1px solid var(--line); border-left:3px solid var(--warn); background:var(--warn-soft);
+    border-radius:11px; padding:18px 22px; margin-bottom:24px; }
+  .flag h2{ font-size:.98rem; font-weight:680; margin:0 0 8px; color:var(--warn); }
+  .flag p{ margin:0 0 9px; font-size:.92rem; color:var(--ink-2); max-width:82ch; }
+  .flag p:last-child{ margin-bottom:0; }
+  .flag b{ color:var(--ink); font-weight:660; }
+
+  .scroll{ overflow-x:auto; }
+  table{ border-collapse:collapse; width:100%; min-width:580px; font-size:.87rem; }
+  thead th{ font-size:0.625rem; font-weight:700; text-transform:uppercase; letter-spacing:1.1px;
+    color:var(--muted); text-align:left; padding:9px 13px; background:var(--panel-2);
+    border-bottom:1px solid var(--line); white-space:nowrap; }
+  thead th.r{ text-align:right; }
+  tbody td{ padding:11px 13px; border-bottom:1px solid var(--hair); color:var(--ink-2); vertical-align:top; }
+  tbody td.r{ text-align:right; }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.k{ color:var(--ink); font-weight:620; white-space:nowrap; }
+  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink); }
+  tr.tot td{ border-top:1px solid var(--line); background:var(--panel-2); font-weight:700; color:var(--ink); }
+  .chip{ display:inline-block; font-family:var(--mono); font-size:.66rem; letter-spacing:.06em;
+    text-transform:uppercase; padding:2px 8px; border-radius:4px; font-weight:700; white-space:nowrap; }
+  .chip.j{ background:var(--accent-soft); color:var(--accent); }
+  .chip.c{ background:var(--up-soft); color:var(--up); }
+  .chip.w{ background:var(--warn-soft); color:var(--warn); }
+
+  ul.p{ margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px; }
+  ul.p li{ font-size:.9rem; color:var(--ink-2); max-width:80ch; }
+  ul.p li b{ color:var(--ink); font-weight:640; }
+  ul.p li::marker{ color:var(--faint); }
+
+  .grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:13px; }
+  .note{ font-size:.85rem; color:var(--muted); margin:14px 0 0; max-width:84ch; }
+  .note b{ color:var(--ink-2); font-weight:620; }
+
+  ol.todo{ list-style:none; counter-reset:t; margin:0; padding:0; }
+  ol.todo li{ counter-increment:t; padding:14px 0 14px 40px; position:relative;
+    border-bottom:1px solid var(--hair); display:grid; grid-template-columns:1fr auto; gap:8px 14px; align-items:baseline; }
+  ol.todo li:last-child{ border-bottom:none; }
+  ol.todo li::before{ content:counter(t,decimal-leading-zero); position:absolute; left:0; top:15px;
+    font-family:var(--mono); font-size:.75rem; color:var(--faint); }
+  ol.todo .t{ font-size:.92rem; color:var(--ink); }
+  ol.todo .t em{ display:block; font-style:normal; font-size:.83rem; color:var(--muted); margin-top:3px; }
+
+  footer{ margin-top:52px; padding-top:18px; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); }
+  footer p{ margin:0 0 7px; max-width:88ch; }
+  footer b{ color:var(--ink-2); font-weight:620; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media (max-width:640px){ body{ padding:0 16px 60px; } ol.todo li{ grid-template-columns:1fr; } }
+
+  .topnav{ display:flex; flex-wrap:wrap; gap:8px; padding:18px 0 0; }
+  .topnav a{ font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); border:1px solid var(--line); background:var(--panel);
+    padding:8px 15px; border-radius:20px; transition:.15s; }
+  .topnav a:hover{ border-color:var(--accent); color:var(--ink); }
+  .topnav a.on{ background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700; }
+</style>
+
+<div class="wrap">
+
+<nav class="topnav"><a href="index.html">Plano de Campanhas</a><a href="calendario.html">Calendário</a><a href="diagnostico.html">Diagnóstico</a><a href="reuniao.html" class="on">Pauta da Reunião</a></nav>
+
+<header>
+  <div class="brand">
+    <div class="tile">📋</div>
+    <div>
+      <h1>Pauta da Reunião — Goodii Burger</h1>
+      <p>Decisões, números acordados e responsáveis</p>
+    </div>
+  </div>
+  <span class="badge">Agosto 2026</span>
+</header>
+
+<!-- DECISÕES -->
+<section>
+  <p class="sec-title">O que ficou decidido</p>
+  <div class="kpis" style="margin-bottom:20px">
+    <div class="kpi u"><span class="k">Verba aprovada</span><span class="v">R$ 2.100</span><span class="n">R$1.500 venda + R$600 reconhecimento</span></div>
+    <div class="kpi u"><span class="k">CPA real histórico</span><span class="v">R$ 9,88</span><span class="n">sobre 500 compras · teto R$12</span></div>
+    <div class="kpi"><span class="k">Meta de incremento</span><span class="v">R$ 20.000</span><span class="n">200 a 250 pedidos/mês · ~10/dia</span></div>
+    <div class="kpi d"><span class="k">Queda no presencial</span><span class="v">−30,8%</span><span class="n">até 12 de agosto</span></div>
+  </div>
+
+  <div class="flag">
+    <h2>Três pontos que superam o plano publicado</h2>
+    <p><b>1 · A verba subiu para R$2.100.</b> O plano no ar assume R$1.500 e tinha cortado a campanha de marca contínua por ser pequena demais. Com R$600 dedicados a reconhecimento, ela volta — e agora tem tamanho para funcionar.</p>
+    <p><b>2 · O CPA real é R$9,88, não R$12.</b> Havia 500 compras de histórico que eu não conhecia. Minha premissa era 21% conservadora: a R$9,88, os mesmos R$1.500 rendem ~152 pedidos em vez de 125.</p>
+    <p><b>3 · Existem 2.000+ clientes da loja antiga no limbo.</b> A carteira ativa hoje é de 217 favoritos e 100 recorrentes; a lista que subimos no Meta tem 1.170 telefones. Recuperar essa base perdida é provavelmente a ação de maior retorno e menor custo do semestre.</p>
+  </div>
+</section>
+
+<!-- ESTRUTURA -->
+<section>
+  <p class="sec-title">Estrutura de campanhas</p>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Frente</th><th>Onde</th><th>Público</th><th>Cupom</th></tr></thead>
+        <tbody>
+          <tr><td class="k">1 · Aquisição</td><td>iFood + canal próprio</td><td>Frio, excluindo compradores</td><td>1ª compra · R$12 (já existe)</td></tr>
+          <tr><td class="k">2 · Frequência da base</td><td>Canal próprio</td><td>Lista de compradores subida no Meta</td><td>Retorno exclusivo · R$5 ou % off</td></tr>
+          <tr><td class="k">3 · Ativação do salão</td><td>Tráfego · Como chegar</td><td>Raio, segunda a quinta</td><td>Presencial · R$10 por senha falada</td></tr>
+          <tr><td class="k">4 · Datas comemorativas</td><td>Alcance</td><td>Base + raio</td><td>Conforme a data</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p class="note"><b>Duas campanhas em paralelo no Meta:</b> uma para o público quente (lista de compradores) e outra para o frio. Ficam separadas justamente para <b>não sobrepor público nem cupom</b> — quem já comprou nunca pode enxergar a oferta de primeira compra.</p>
+  <p class="note"><b>Reconhecimento:</b> link direto para o cardápio próprio, que é o canal de maior margem — não para o iFood.</p>
+</section>
+
+<!-- CUPONS -->
+<section>
+  <p class="sec-title">Regras de cupom</p>
+  <div class="grid2">
+    <div class="card t">
+      <p class="sec-title" style="margin-bottom:10px">Durante a semana · sem cupom</p>
+      <p class="note" style="margin-top:0">Nas campanhas de combo de segunda a quinta <b>não entra cupom</b>. O preço já é agressivo e há frete grátis — somar cupom torna a margem inviável.</p>
+    </div>
+    <div class="card">
+      <p class="sec-title" style="margin-bottom:10px">Fim de semana · cupom liberado</p>
+      <p class="note" style="margin-top:0">Aqui há espaço para cupom em combo, como o combo casal. Ticket maior absorve o desconto.</p>
+    </div>
+    <div class="card">
+      <p class="sec-title" style="margin-bottom:10px">iFood · favoritos</p>
+      <p class="note" style="margin-top:0">Cupom de <b>R$20, exclusivo e nunca usado antes</b>. Pedido mínimo regulado internamente e <b>não divulgado</b> na peça.</p>
+    </div>
+    <div class="card">
+      <p class="sec-title" style="margin-bottom:10px">Salão · senha falada</p>
+      <p class="note" style="margin-top:0">“Se você viu esse anúncio e falar X no salão, ganha R$10.” É o único jeito de medir conversão presencial sem pixel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMBOS -->
+<section>
+  <p class="sec-title">Combos e precificação</p>
+  <div class="card">
+    <ul class="p">
+      <li><b>Segunda a quinta:</b> combos com preço agressivo para atacar os dias fracos.</li>
+      <li><b>Sugestão em avaliação:</b> 2 burgers + 2 batatas + 2 cocas + 2 pudins por cerca de <b>R$60</b>, com custo estimado de <b>R$44 a R$49</b> já com embalagem e sem taxa.</li>
+      <li><b>Preferir cheese e produtos simples</b> — custo menor e precificação mais folgada.</li>
+      <li><b>Produto caro fica fora da semana.</b> O combo casal a R$120 encarece demais no canal próprio por causa de embalagem e entrega.</li>
+      <li><b>Combos 2, 3 e 4 a definir</b> por John e Vitor, com base na operação.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SALÃO -->
+<section>
+  <p class="sec-title">Ativação do salão</p>
+  <div class="card t">
+    <ul class="p">
+      <li><b>Campanha de tráfego com botão Como chegar</b>, concentrada de segunda a quinta.</li>
+      <li><b>Criativo:</b> alguém chegando de carro até a Goodii. <b>Gravação caseira, não produzida</b> — vídeo com cara de edição profissional entrega pior; conteúdo orgânico performa melhor.</li>
+      <li><b>Variações:</b> chegando para o Dia do Cheddar, chegando para o refil de refrigerante.</li>
+      <li><b>Refil de refrigerante (R$12 a R$16,90)</b> é o diferencial competitivo do presencial. Ideia: <em>“se você viu esse anúncio, na terça o refil é por nossa conta.”</em></li>
+      <li><b>Mensuração:</b> salão não tem pixel. A senha falada no balcão é o único número atribuível.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PARCEIROS -->
+<section>
+  <p class="sec-title">Influenciador e Mão de Vaca</p>
+  <div class="grid2">
+    <div class="card">
+      <p class="sec-title" style="margin-bottom:10px">Influenciador</p>
+      <p class="note" style="margin-top:0">O maior influenciador de Atibaia grava na loja hoje. <b>O material deve ser reaproveitado nas campanhas de localização e salão</b> — não fica só no orgânico.</p>
+    </div>
+    <div class="card tw">
+      <p class="sec-title" style="margin-bottom:10px">App Mão de Vaca · em revisão</p>
+      <p class="note" style="margin-top:0">Plataforma de cupons voltada a tráfego presencial, com cerca de 2.000 seguidores no clube. <b>Problemas:</b> bugs no app, cupom que não aplica, atendimento travando em dia cheio e <b>nenhum dashboard para medir uso</b>. Falar com o Pedrinho sobre corrigir ou encerrar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORÇAMENTO -->
+<section>
+  <p class="sec-title">Orçamento e projeção</p>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Frente</th><th class="r">Verba/mês</th><th>Projeção</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Campanhas de venda</td><td class="num r">R$ 1.500</td><td>~120 pedidos a mais · ~R$11.000 · ROAS 7x, a CPA de R$12</td></tr>
+          <tr><td class="k">Campanhas de reconhecimento</td><td class="num r">R$ 600</td><td>Alcance no raio, link para o cardápio próprio</td></tr>
+          <tr class="tot"><td>Total</td><td class="num r">R$ 2.100</td><td>Delivery + salão ≈ R$19.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p class="note"><b>Atenção ao ROAS que vai ser cobrado:</b> os R$19.000 dividem por 13x quando a base é R$1.500, mas por <b>9,0x</b> quando é R$2.100. Como a verba aprovada foi R$2.100, o número a acompanhar é <b>9x</b> — vale combinar isso antes de alguém comparar as duas contas.</p>
+  <p class="note"><b>A verificar:</b> a campanha de reconhecimento foi citada como R$8 para impactar 5.000 pessoas, o que implica um <b>CPM de R$1,60</b>. É baixo demais para virar premissa de planejamento — conferir no Gerenciador antes de projetar em cima disso.</p>
+  <p class="note"><b>Forma de pagamento:</b> cartão final 459, mantido como padrão. <b>Filosofia acordada:</b> orçamento fixo e controlado, que sobe se o ROAS justificar — nunca deixado em aberto.</p>
+</section>
+
+<!-- AÇÕES -->
+<section>
+  <p class="sec-title">Próximos passos</p>
+  <div class="card">
+    <ol class="todo">
+      <li><span class="t">Definir os 4 combos e enviar a composição de preços<em>Base de tudo: sem combo fechado não há criativo nem campanha</em></span><span><span class="chip j">John · Vitor</span></span></li>
+      <li><span class="t">Definir e enviar os cupons das campanhas de dia de semana<em>Retorno para recorrentes e presencial do salão</em></span><span><span class="chip c">Rômulo</span></span></li>
+      <li><span class="t">Criar os criativos do salão<em>Vídeo “chegando de carro” e a mecânica da senha falada</em></span><span><span class="chip c">Cardô</span></span></li>
+      <li><span class="t">Subir as campanhas de fim de semana<em>Com criativos e cupons já validados</em></span><span><span class="chip c">Cardô</span></span></li>
+      <li><span class="t">Conversar com o Pedrinho sobre os bugs do Mão de Vaca<em>Decidir se corrige ou encerra a parceria</em></span><span><span class="chip w">A definir</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p><b>Registro:</b> pauta da reunião de planejamento de agosto de 2026. Os números de faturamento, ticket e queda do presencial vêm do Cardápio Web; o CPA de R$9,88 e a carteira de 217 favoritos foram informados na reunião.</p>
+  <p><b>Pendente de sincronizar:</b> o Plano de Campanhas publicado ainda assume verba de R$1.500 e CPA de R$12. Precisa ser atualizado para R$2.100 e R$9,88.</p>
+</footer>
+
+</div>
