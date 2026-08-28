@@ -1,0 +1,318 @@
+<title>Fechamento do Mês 1</title>
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#FFFFFF; --panel-2:#F7F7F8;
+    --line:#E4E4E7; --hair:#EFEFF1;
+    --ink:#15151A; --ink-2:#4A4A54; --muted:#76767F; --faint:#A2A2AC;
+    --accent:#2E4A63; --accent-soft:#EDF1F5;
+    --up:#1E6B45; --up-soft:#E9F3ED;
+    --down:#A32A1E; --down-soft:#F9EDEB;
+    --warn:#8A6410; --warn-soft:#FAF3E0;
+    --sans:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#101013; --panel:#17171B; --panel-2:#1E1E23;
+      --line:#2C2C33; --hair:#232329;
+      --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+      --accent:#7FA8CC; --accent-soft:#1A222B;
+      --up:#5CB489; --up-soft:#152521;
+      --down:#E07A6C; --down-soft:#2A1917;
+      --warn:#D0A340; --warn-soft:#2A2415;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101013; --panel:#17171B; --panel-2:#1E1E23;
+    --line:#2C2C33; --hair:#232329;
+    --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+    --accent:#7FA8CC; --accent-soft:#1A222B;
+    --up:#5CB489; --up-soft:#152521;
+    --down:#E07A6C; --down-soft:#2A1917;
+    --warn:#D0A340; --warn-soft:#2A2415;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; font-size:130%; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+    font-size:0.9375rem; line-height:1.6; padding:0 24px 90px; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1040px; margin:0 auto; }
+
+  header{ display:flex; flex-wrap:wrap; gap:14px 24px; align-items:center; justify-content:space-between;
+    padding:40px 0 22px; border-bottom:1px solid var(--line); margin-bottom:28px; }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .tile{ width:42px; height:42px; border-radius:11px; background:var(--accent-soft);
+    border:1px solid var(--line); display:grid; place-items:center; font-size:1.25rem; flex:none; }
+  h1{ font-size:1.28rem; font-weight:650; letter-spacing:-.02em; margin:0; }
+  .brand p{ margin:2px 0 0; font-size:.82rem; color:var(--muted); }
+  .badge{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2); background:var(--panel-2);
+    border:1px solid var(--line); padding:6px 12px; border-radius:999px; white-space:nowrap; }
+
+  .sec-title{ font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--muted); margin:0 0 14px; }
+  section{ margin-bottom:46px; }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 22px; }
+  .card.t{ border-top:2px solid var(--accent); }
+  .card.tw{ border-top:2px solid var(--warn); }
+  .card.tu{ border-top:2px solid var(--up); }
+
+  .lead{ background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--accent);
+    border-radius:11px; padding:22px 26px; margin-bottom:30px; }
+  .lead h2{ font-size:1.05rem; font-weight:690; margin:0 0 10px; letter-spacing:-.015em; }
+  .lead p{ margin:0 0 11px; font-size:.95rem; color:var(--ink-2); max-width:82ch; }
+  .lead p:last-child{ margin-bottom:0; }
+  .lead b{ color:var(--ink); font-weight:660; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; }
+  .kpi{ background:var(--panel); border:1px solid var(--line); border-top:2px solid var(--accent);
+    border-radius:11px; padding:16px 18px; }
+  .kpi.d{ border-top-color:var(--down); } .kpi.u{ border-top-color:var(--up); }
+  .kpi .k{ font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px;
+    color:var(--muted); display:block; margin-bottom:9px; }
+  .kpi .v{ font-family:var(--mono); font-size:1.45rem; font-weight:600; letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums; display:block; line-height:1.05; }
+  .kpi .n{ font-size:.78rem; color:var(--muted); display:block; margin-top:8px; }
+  .down{ color:var(--down); } .up{ color:var(--up); }
+
+  .scroll{ overflow-x:auto; }
+  table{ border-collapse:collapse; width:100%; min-width:640px; font-size:.86rem; }
+  thead th{ font-size:0.625rem; font-weight:700; text-transform:uppercase; letter-spacing:1.1px;
+    color:var(--muted); text-align:left; padding:9px 13px; background:var(--panel-2);
+    border-bottom:1px solid var(--line); white-space:nowrap; }
+  thead th.r{ text-align:right; }
+  tbody td{ padding:11px 13px; border-bottom:1px solid var(--hair); color:var(--ink-2); vertical-align:middle; }
+  tbody td.r{ text-align:right; }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.k{ color:var(--ink); font-weight:620; font-family:var(--mono); font-size:.8rem; white-space:nowrap; }
+  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink); }
+  tr.tot td{ border-top:1px solid var(--line); background:var(--panel-2); font-weight:700; color:var(--ink); }
+  .pill{ font-family:var(--mono); font-size:.72rem; padding:2px 8px; border-radius:4px; white-space:nowrap; }
+  .pill.d{ background:var(--down-soft); color:var(--down); }
+  .pill.u{ background:var(--up-soft); color:var(--up); }
+  .pill.n{ background:var(--panel-2); color:var(--muted); }
+
+  .ev{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:13px; }
+  .evc{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:18px 20px; }
+  .evc .n{ font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); font-weight:700; display:block; margin-bottom:9px; }
+  .evc h3{ font-family:var(--mono); font-size:1.35rem; font-weight:600; margin:0 0 7px; letter-spacing:-.03em; }
+  .evc p{ margin:0; font-size:.87rem; color:var(--ink-2); }
+
+  ul.p{ margin:0; padding-left:20px; display:flex; flex-direction:column; gap:10px; }
+  ul.p li{ font-size:.91rem; color:var(--ink-2); max-width:80ch; }
+  ul.p li b{ color:var(--ink); font-weight:640; }
+  ul.p li::marker{ color:var(--faint); }
+
+  ul.chk{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px; }
+  ul.chk li{ position:relative; padding-left:26px; font-size:.91rem; color:var(--ink-2); max-width:80ch; }
+  ul.chk li::before{ content:"□"; position:absolute; left:0; top:-2px; font-family:var(--mono); color:var(--accent); }
+  ul.chk li b{ color:var(--ink); font-weight:650; }
+
+  .note{ font-size:.85rem; color:var(--muted); margin:14px 0 0; max-width:84ch; }
+  .note b{ color:var(--ink-2); font-weight:620; }
+
+  footer{ margin-top:52px; padding-top:18px; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); }
+  footer p{ margin:0 0 7px; max-width:88ch; }
+  footer b{ color:var(--ink-2); font-weight:620; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media (max-width:640px){ body{ padding:0 16px 60px; } }
+
+  .topnav{ display:flex; flex-wrap:wrap; gap:8px; padding:18px 0 0; }
+  .topnav a{ font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); border:1px solid var(--line); background:var(--panel);
+    padding:8px 15px; border-radius:20px; transition:.15s; }
+  .topnav a:hover{ border-color:var(--accent); color:var(--ink); }
+  .topnav a.on{ background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700; }
+</style>
+
+<div class="wrap">
+
+<nav class="topnav"><a href="index.html">Plano de Campanhas</a><a href="mes1.html" class="on">Fechamento Mês 1</a><a href="diagnostico.html">Diagnóstico</a><a href="calendario.html">Calendário</a><a href="reuniao.html">Pauta da Reunião</a></nav>
+
+<header>
+  <div class="brand">
+    <div class="tile">📊</div>
+    <div>
+      <h1>Fechamento do Mês 1 — Goodii Burger</h1>
+      <p>1 a 28 de agosto de 2026 · o que rodou, o que travou e o que muda</p>
+    </div>
+  </div>
+  <span class="badge">Cardô Marketing</span>
+</header>
+
+<div class="lead">
+  <h2>O diagnóstico em uma frase</h2>
+  <p><b>A entrega está barata e a conversão está cara.</b> O Meta entregou 175.946 impressões por R$1.368 — um CPM de R$7,78, que é bom para Atibaia. O problema não é a mídia chegar às pessoas certas por um preço justo, porque isso está acontecendo. O problema é o que elas veem quando chega.</p>
+  <p>Quando a entrega é barata e a conversão é ruim, a causa quase nunca é segmentação ou orçamento. É <b>criativo e oferta</b>. E foi exatamente aí que o mês travou.</p>
+</div>
+
+<!-- NUMEROS -->
+<section>
+  <p class="sec-title">Os números do mês</p>
+  <div class="kpis" style="margin-bottom:16px">
+    <div class="kpi"><span class="k">Investido</span><span class="v">R$ 1.491</span><span class="n">R$1.369 em vendas · R$122 em alcance</span></div>
+    <div class="kpi d"><span class="k">Custo por compra</span><span class="v">R$ 41,48</span><span class="n">histórico da conta: <b>R$9,88</b></span></div>
+    <div class="kpi"><span class="k">CPM médio</span><span class="v">R$ 7,78</span><span class="n">entrega barata e saudável</span></div>
+    <div class="kpi d"><span class="k">Compras</span><span class="v">33</span><span class="n">deveriam ser 114 a 139</span></div>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr>
+        <th>Campanha</th><th>Status</th><th class="r">Gasto</th><th class="r">Impressões</th>
+        <th class="r">CPM</th><th class="r">Freq.</th><th class="r">Compras</th><th class="r">CPA</th>
+      </tr></thead>
+      <tbody id="camp"></tbody>
+    </table>
+  </div>
+  <p class="note">A campanha de reconhecimento fica fora da conta de CPA porque não otimiza por compra. Ela alcançou <b>48.370 pessoas por R$122,28</b>, ou R$2,53 por mil alcançadas — exatamente o patamar que tinha sido estimado na reunião de planejamento, e o único indicador do mês que veio dentro do previsto.</p>
+</section>
+
+<!-- EVIDENCIAS -->
+<section>
+  <p class="sec-title">As três evidências de que o gargalo é criativo</p>
+  <div class="ev">
+    <div class="evc">
+      <span class="n">Evidência 1</span>
+      <h3>CPM R$ 7,78</h3>
+      <p>A mídia está sendo entregue barato. Se o problema fosse segmentação errada ou leilão caro, o CPM estaria alto. Ele não está — o anúncio chega às pessoas por um custo saudável.</p>
+    </div>
+    <div class="evc">
+      <span class="n">Evidência 2</span>
+      <h3>Frequência 4,27</h3>
+      <p>Na campanha principal, cada pessoa alcançada viu o anúncio <b>mais de quatro vezes</b> no mês. Sem peça nova entrando, a mesma imagem se repete até cansar — e a resposta cai a cada exibição.</p>
+    </div>
+    <div class="evc">
+      <span class="n">Evidência 3</span>
+      <h3>0,019%</h3>
+      <p>É a taxa de compra sobre impressões. Com entrega barata e alcance amplo, uma taxa nesse patamar aponta para a mensagem, não para o público.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTO -->
+<section>
+  <p class="sec-title">Quanto isso custou</p>
+  <div class="card t">
+    <div class="scroll">
+      <table style="min-width:520px">
+        <thead><tr><th>Cenário de custo por compra</th><th class="r">Compras</th><th class="r">Faturamento gerado</th><th class="r">Retorno</th></tr></thead>
+        <tbody>
+          <tr><td class="k" style="font-family:var(--sans);font-size:.86rem">Histórico da conta — R$ 9,88</td><td class="num r">139</td><td class="num r">R$ 12.207</td><td class="num r">8,9x</td></tr>
+          <tr><td class="k" style="font-family:var(--sans);font-size:.86rem">Teto combinado — R$ 12,00</td><td class="num r">114</td><td class="num r">R$ 10.050</td><td class="num r">7,3x</td></tr>
+          <tr class="tot"><td>Real de agosto — R$ 41,48</td><td class="num r">33</td><td class="num r">R$ 2.908</td><td class="num r">2,1x</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Com o mesmo dinheiro e o custo por compra que a conta já provou entregar, agosto teria gerado <b>entre 81 e 106 pedidos a mais</b>. Ticket médio de R$88,11, o real do mês.</p>
+  </div>
+</section>
+
+<!-- O QUE TRAVOU -->
+<section>
+  <p class="sec-title">O que travou</p>
+  <div class="card tw">
+    <p style="margin:0 0 14px;font-size:.94rem;color:var(--ink-2);max-width:82ch">A estratégia foi fechada em 13 de agosto. A primeira edição do Dia do Cheddar estava marcada para <b>18 de agosto</b>. Os materiais necessários não chegaram, e as campanhas novas não subiram — o que rodou no mês foi a estrutura antiga, com as peças que já existiam.</p>
+    <ul class="chk">
+      <li><b>Composição e preço dos 4 combos</b> — prazo combinado: 16/08</li>
+      <li><b>Fotos e vídeos dos combos</b> — prazo combinado: 17/08</li>
+      <li><b>Cupons das campanhas de dia de semana</b></li>
+      <li><b>Acesso ao Business Manager</b> para criar a Página de Localização, pré-requisito da campanha de salão</li>
+      <li><b>Acesso ao módulo de Desempenho</b> no Cardápio Web</li>
+    </ul>
+    <p class="note">Isso não é cobrança, é registro. <b>Sem peça nova, a única alavanca que sobra é aumentar frequência</b> — e foi o que aconteceu: 4,27 exibições por pessoa na campanha principal. O custo por compra subiu porque a mesma mensagem foi repetida até parar de funcionar.</p>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section>
+  <p class="sec-title">Sobre a dashboard</p>
+  <div class="card">
+    <p style="margin:0;font-size:.93rem;color:var(--ink-2);max-width:82ch">A dashboard de acompanhamento depende dos acessos que ainda não temos. <b>Sem o módulo de Desempenho do Cardápio Web e sem o Business Manager</b>, os números precisam ser pedidos por print a cada corte, e não há como automatizar. É por isso que ela ainda não existe — não é escolha de prioridade, é dependência técnica.</p>
+  </div>
+</section>
+
+<!-- MES 2 -->
+<section>
+  <p class="sec-title">O que muda no mês 2</p>
+  <div class="ev">
+    <div class="card tu">
+      <p class="sec-title" style="margin-bottom:10px;color:var(--up)">Cadência de produção</p>
+      <p style="margin:0;font-size:.89rem;color:var(--ink-2)"><b>Peças novas toda semana</b>, não uma vez por mês. De 6 a 10 criativos mensais é o que a verba comporta testar. Sem isso a frequência sobe, o criativo cansa e o custo por compra sobe junto — foi exatamente o que aconteceu em agosto.</p>
+    </div>
+    <div class="card tu">
+      <p class="sec-title" style="margin-bottom:10px;color:var(--up)">Mais campanhas em teste</p>
+      <p style="margin:0;font-size:.89rem;color:var(--ink-2)">A estrutura nova tem <b>5 campanhas com papéis distintos</b>: aquisição, base, salão, ritual semanal e datas. Cada uma com público e oferta próprios, para que uma não canibalize a outra e dê para saber qual está funcionando.</p>
+    </div>
+    <div class="card tu">
+      <p class="sec-title" style="margin-bottom:10px;color:var(--up)">Regra do D−7</p>
+      <p style="margin:0;font-size:.89rem;color:var(--ink-2)">Peça pronta <b>sete dias antes</b> da data, campanha no ar três dias antes. Se a peça não chega no prazo, a data é cancelada e a verba volta para a campanha da base — <b>com registro</b>, para que ninguém descubra no fim do mês.</p>
+    </div>
+    <div class="card tu">
+      <p class="sec-title" style="margin-bottom:10px;color:var(--up)">Acessos liberados</p>
+      <p style="margin:0;font-size:.89rem;color:var(--ink-2)">Business Manager e módulo de Desempenho. Destravam a campanha de salão, a métrica de visita à loja e a dashboard automática.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PEDIDO -->
+<section>
+  <p class="sec-title">O que precisamos para o mês 2 funcionar</p>
+  <div class="card t">
+    <ul class="p">
+      <li><b>Um dia fixo por semana para gravação.</b> Pode ser no celular, com roteiro que a gente entrega pronto. O que não funciona é produzir uma vez e esperar o mês inteiro.</li>
+      <li><b>Composição e preço dos 4 combos</b> — sem isso não existe oferta, e sem oferta o anúncio só mostra comida bonita.</li>
+      <li><b>Os cupons definidos</b> — o de primeira compra, o de retorno e o presencial do salão.</li>
+      <li><b>Business Manager e módulo de Desempenho.</b></li>
+      <li><b>Uma pessoa responsável por entregar isso</b>, com nome. Em agosto os pedidos ficaram no grupo e não tinham dono.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p><b>Fonte:</b> Gerenciador de Anúncios da Meta, conta GB, período de 1 a 28 de agosto de 2026. Faturamento e ticket médio do Cardápio Web, período de 1 a 24 de agosto.</p>
+  <p><b>Método:</b> impressões calculadas como alcance × frequência. CPM e taxa de compra derivados desses valores. O custo por compra considera apenas as campanhas de vendas; a campanha de reconhecimento não otimiza por compra e é avaliada por custo por mil alcançadas.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var BRL=function(n){return "R$ "+n.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});};
+  var N=function(n){return Math.round(n).toLocaleString("pt-BR");};
+
+  var C=[
+    {n:"GB_FB01_Vendas_F",              st:"Ativo",      r:20,    alc:23740, fq:4.27, g:696.59, v:true},
+    {n:"GB_FB04_Vendas_F",              st:"Desativado", r:2,     alc:12003, fq:2.24, g:269.88, v:true},
+    {n:"GB_FB03_Vendas_F",              st:"Desativado", r:7,     alc:9229,  fq:2.92, g:222.60, v:true},
+    {n:"GB_FB05_Vendas_Q",              st:"Desativado", r:2,     alc:2667,  fq:4.27, g:99.59,  v:true},
+    {n:"GB_FB02_Vendas_F",              st:"Desativado", r:2,     alc:6034,  fq:1.55, g:80.10,  v:true},
+    {n:"GB_FB02_Reconhecimento_F_Geral",st:"Ativo",      r:48370, alc:48370, fq:1.84, g:122.28, v:false}
+  ];
+
+  var tg=0, tr=0, ti=0;
+  var linhas = C.map(function(c){
+    var imp=c.alc*c.fq, cpm=c.g/imp*1000;
+    if(c.v){ tg+=c.g; tr+=c.r; ti+=imp; }
+    var cpa = c.v ? BRL(c.g/c.r) : "—";
+    var cls = !c.v ? "n" : (c.g/c.r <= 12 ? "u" : "d");
+    return '<tr>'+
+      '<td class="k">'+c.n+'</td>'+
+      '<td><span class="pill '+(c.st==="Ativo"?"u":"n")+'">'+c.st+'</span></td>'+
+      '<td class="num r">'+BRL(c.g)+'</td>'+
+      '<td class="num r">'+N(imp)+'</td>'+
+      '<td class="num r">'+BRL(cpm)+'</td>'+
+      '<td class="num r">'+c.fq.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})+'</td>'+
+      '<td class="num r">'+(c.v?c.r:"—")+'</td>'+
+      '<td class="r">'+(c.v?'<span class="pill '+cls+'">'+cpa+'</span>':'<span class="pill n">alcance</span>')+'</td>'+
+    '</tr>';
+  }).join("");
+
+  linhas += '<tr class="tot"><td>Total · campanhas de venda</td><td></td>'+
+    '<td class="num r">'+BRL(tg)+'</td><td class="num r">'+N(ti)+'</td>'+
+    '<td class="num r">'+BRL(tg/ti*1000)+'</td><td class="num r">—</td>'+
+    '<td class="num r">'+tr+'</td><td class="r"><span class="pill d">'+BRL(tg/tr)+'</span></td></tr>';
+
+  document.getElementById("camp").innerHTML = linhas;
+})();
+</script>
