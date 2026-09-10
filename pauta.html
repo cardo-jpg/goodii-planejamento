@@ -48,27 +48,29 @@
   .badge{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2); background:var(--panel-2);
     border:1px solid var(--line); padding:6px 12px; border-radius:999px; white-space:nowrap; }
 
+  .num-sec{ font-family:var(--mono); font-size:0.6875rem; letter-spacing:1.6px; color:var(--faint);
+    text-transform:uppercase; display:block; margin-bottom:7px; }
+  h2.sec{ font-size:1.22rem; font-weight:660; letter-spacing:-.02em; margin:0 0 8px; }
+  .sub{ font-size:.92rem; color:var(--muted); margin:0 0 20px; max-width:80ch; }
   .sec-title{ font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
     color:var(--muted); margin:0 0 14px; }
-  section{ margin-bottom:44px; }
+  section{ margin-bottom:52px; }
   .card{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 22px; }
   .card.t{ border-top:2px solid var(--accent); }
   .card.tu{ border-top:2px solid var(--up); }
+  .card.tw{ border-top:2px solid var(--warn); }
 
-  /* alerta do topo */
   .urgente{ background:var(--down-soft); border:1px solid var(--line); border-left:3px solid var(--down);
-    border-radius:11px; padding:20px 24px; margin-bottom:30px; }
+    border-radius:11px; padding:20px 24px; margin-bottom:34px; }
   .urgente h2{ font-size:1.04rem; font-weight:690; margin:0 0 9px; color:var(--down); letter-spacing:-.015em; }
   .urgente p{ margin:0 0 10px; font-size:.94rem; color:var(--ink-2); max-width:82ch; }
   .urgente p:last-child{ margin-bottom:0; }
   .urgente b{ color:var(--ink); font-weight:660; }
-  .relogio{ font-family:var(--mono); font-size:1.9rem; font-weight:600; color:var(--down);
-    letter-spacing:-.03em; display:block; margin:4px 0 10px; }
 
   .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(178px,1fr)); gap:12px; }
   .kpi{ background:var(--panel); border:1px solid var(--line); border-top:2px solid var(--accent);
     border-radius:11px; padding:16px 18px; }
-  .kpi.d{ border-top-color:var(--down); } .kpi.u{ border-top-color:var(--up); }
+  .kpi.d{ border-top-color:var(--down); } .kpi.u{ border-top-color:var(--up); } .kpi.w{ border-top-color:var(--warn); }
   .kpi .k{ font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px;
     color:var(--muted); display:block; margin-bottom:9px; }
   .kpi .v{ font-family:var(--mono); font-size:1.42rem; font-weight:600; letter-spacing:-.03em;
@@ -76,8 +78,18 @@
   .kpi .n{ font-size:.78rem; color:var(--muted); display:block; margin-top:8px; }
   .down{ color:var(--down); } .up{ color:var(--up); }
 
+  /* decomposicao do gap */
+  .gap{ display:flex; height:46px; border-radius:8px; overflow:hidden; border:1px solid var(--line); }
+  .gap div{ display:flex; align-items:center; justify-content:center; font-family:var(--mono);
+    font-size:.8rem; font-weight:600; color:#fff; }
+  .gap .midia{ background:var(--down); }
+  .gap .resto{ background:var(--accent); }
+  .gap-leg{ display:flex; flex-wrap:wrap; gap:10px 24px; margin-top:14px; font-size:.86rem; color:var(--ink-2); }
+  .gap-leg i{ display:inline-flex; align-items:flex-start; gap:9px; font-style:normal; max-width:38ch; }
+  .gap-leg .sw{ width:12px; height:12px; border-radius:3px; flex:none; margin-top:4px; }
+
   .scroll{ overflow-x:auto; }
-  table{ border-collapse:collapse; width:100%; min-width:620px; font-size:.86rem; }
+  table{ border-collapse:collapse; width:100%; min-width:600px; font-size:.86rem; }
   thead th{ font-size:0.625rem; font-weight:700; text-transform:uppercase; letter-spacing:1.1px;
     color:var(--muted); text-align:left; padding:9px 13px; background:var(--panel-2);
     border-bottom:1px solid var(--line); white-space:nowrap; }
@@ -88,17 +100,15 @@
   td.k{ color:var(--ink); font-weight:620; font-family:var(--mono); font-size:.79rem; white-space:nowrap; }
   td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink); }
   tr.tot td{ border-top:1px solid var(--line); background:var(--panel-2); font-weight:700; color:var(--ink); }
-  tr.morta td{ opacity:.55; }
+  tr.dest td{ background:var(--up-soft); }
   .pill{ font-family:var(--mono); font-size:.72rem; padding:2px 8px; border-radius:4px; white-space:nowrap; }
   .pill.d{ background:var(--down-soft); color:var(--down); }
   .pill.u{ background:var(--up-soft); color:var(--up); }
   .pill.n{ background:var(--panel-2); color:var(--muted); }
   .pill.w{ background:var(--warn-soft); color:var(--warn); }
 
-  /* decisoes */
   ol.dec{ list-style:none; counter-reset:d; margin:0; padding:0; }
-  ol.dec li{ counter-increment:d; padding:16px 0 16px 44px; position:relative;
-    border-bottom:1px solid var(--hair); }
+  ol.dec li{ counter-increment:d; padding:16px 0 16px 44px; position:relative; border-bottom:1px solid var(--hair); }
   ol.dec li:last-child{ border-bottom:none; }
   ol.dec li::before{ content:counter(d,decimal-leading-zero); position:absolute; left:0; top:17px;
     font-family:var(--mono); font-size:.78rem; color:var(--faint); }
@@ -138,124 +148,173 @@
 
 <div class="wrap">
 
-<nav class="topnav"><a href="index.html">Plano de Campanhas</a><a href="pauta.html" class="on">Pauta · 10/09</a><a href="mes1.html">Fechamento Mês 1</a><a href="diagnostico.html">Diagnóstico</a><a href="calendario.html">Calendário</a><a href="reuniao.html">Pauta de Agosto</a></nav>
+<nav class="topnav"><a href="index.html">Plano</a><a href="pauta.html" class="on">Pauta · 10/09</a><a href="mes1.html">Fechamento Mês 1</a><a href="diagnostico.html">Diagnóstico</a><a href="calendario.html">Calendário</a><a href="reuniao.html">Pauta de Agosto</a></nav>
 
 <header>
   <div class="brand">
     <div class="tile">🗓️</div>
     <div>
       <h1>Pauta · Goodii Burger</h1>
-      <p>Reunião de 10 de setembro de 2026 · o que decidir hoje</p>
+      <p>Reunião de 10 de setembro de 2026</p>
     </div>
   </div>
   <span class="badge">Cardô Marketing</span>
 </header>
 
-<!-- URGENTE -->
 <div class="urgente">
-  <h2>A campanha que mais vende para amanhã às 17h</h2>
-  <span class="relogio">27 horas</span>
-  <p>O conjunto <b>ADVGT_V2</b>, dentro da <b>GB_FB01_Vendas_F</b>, foi montado com orçamento vitalício de R$1.200 para o período de 14/08 a 11/09. Já gastou <b>R$1.115,23</b> e restam <b>R$84,77</b>. Quando o período fechar, ela para sozinha.</p>
-  <p>É a melhor campanha da conta: <b>CPA de R$26,20</b> e mais da metade das compras dos últimos 7 dias. Sem decisão hoje, amanhã a operação fica sem campanha de venda no ar.</p>
+  <h2>Antes de tudo: a campanha que mais vende para amanhã às 17h</h2>
+  <p>O conjunto <b>ADVGT_V2</b>, dentro da <b>GB_FB01_Vendas_F</b>, foi montado com orçamento vitalício de R$1.200 para o período de 14/08 a 11/09. Já gastou <b>R$1.115,23</b> e restam R$84,77. Quando o período fechar, ela para sozinha.</p>
+  <p>É a melhor campanha da conta — <b>CPA de R$27,69 em agosto</b> e 31 das 46 compras do mês. Sem decisão hoje, amanhã a operação fica sem campanha de venda no ar.</p>
 </div>
 
-<!-- ONDE ESTAMOS -->
+<!-- 01 · POR QUE NAO BATEU -->
 <section>
-  <p class="sec-title">Onde estamos</p>
-  <div class="kpis" style="margin-bottom:16px">
-    <div class="kpi d"><span class="k">Agosto fechado</span><span class="v">R$ 126.747</span><span class="n">79,2% da meta · <b class="down">−10,7%</b> vs. julho</span></div>
-    <div class="kpi u"><span class="k">Ticket médio</span><span class="v">R$ 89,20</span><span class="n">estável · era R$ 89,91</span></div>
-    <div class="kpi"><span class="k">Mídia · 7 dias</span><span class="v">R$ 1.279</span><span class="n">23 compras · CPA médio R$ 55,61</span></div>
-    <div class="kpi u"><span class="k">Melhor campanha</span><span class="v">R$ 26,20</span><span class="n">CPA da FB01_Vendas</span></div>
+  <span class="num-sec">01</span>
+  <h2 class="sec">Por que agosto não bateu a meta</h2>
+  <p class="sub">Agosto fechou em R$126.747 — 79,2% dos R$160 mil. Faltaram R$33.253. Abaixo, de onde vem esse buraco.</p>
+
+  <div class="kpis" style="margin-bottom:26px">
+    <div class="kpi d"><span class="k">Faturamento</span><span class="v">R$ 126.747</span><span class="n"><b class="down">−10,7%</b> vs. julho</span></div>
+    <div class="kpi d"><span class="k">Pedidos</span><span class="v">1.421</span><span class="n"><b class="down">−158</b> contra julho</span></div>
+    <div class="kpi u"><span class="k">Ticket médio</span><span class="v">R$ 89,20</span><span class="n">praticamente igual · −0,8%</span></div>
+    <div class="kpi w"><span class="k">Da meta</span><span class="v">79,2%</span><span class="n">faltaram R$ 33.253</span></div>
   </div>
-  <p class="note"><b>O que agosto ensinou:</b> a operação não perdeu valor por pedido, perdeu volume de gente. O ticket ficou igual e 158 pedidos não aconteceram. E metade da queda veio do presencial, não do delivery.</p>
+
+  <div class="card t" style="margin-bottom:14px">
+    <p class="sec-title" style="margin-bottom:10px">A causa não foi preço, foi volume</p>
+    <p style="margin:0;font-size:.93rem;color:var(--ink-2);max-width:82ch">O ticket médio ficou em R$89,20 contra R$89,91 de julho — variação de 0,8%. <b>Ninguém deixou de gastar; menos gente comprou.</b> Foram <b>158 pedidos que não aconteceram</b>, o que ao ticket do mês vale <b>R$14.094</b>.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <p class="sec-title" style="margin-bottom:14px">De quem é o buraco de R$33.253</p>
+    <div class="gap">
+      <div class="midia" style="width:31%">31%</div>
+      <div class="resto" style="width:69%">69%</div>
+    </div>
+    <div class="gap-leg">
+      <i><span class="sw" style="background:var(--down)"></span><span><b>R$10.199 · mídia.</b> O custo por compra ficou em R$34,44 contra R$9,88 de histórico. No custo histórico, os mesmos R$1.584 teriam gerado 160 compras em vez de 46.</span></i>
+      <i><span class="sw" style="background:var(--accent)"></span><span><b>R$23.054 · fora da mídia.</b> Presencial sem campanha, materiais que não chegaram e o efeito de fim de férias.</span></i>
+    </div>
+    <p class="note"><b>A leitura honesta:</b> mesmo que a mídia tivesse rodado perfeita, no melhor custo que a conta já registrou, <b>ainda faltariam R$23 mil</b>. A meta de R$160 mil era 12,7% acima de julho, que é o melhor mês já registrado na operação. Ela nunca teve base histórica.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card tw">
+      <p class="sec-title" style="margin-bottom:10px">O maior furo: o salão</p>
+      <p style="margin:0;font-size:.89rem;color:var(--ink-2)">O presencial é <b>49,4% do faturamento</b> e tem o melhor ticket da casa, <b>R$98,18</b> contra R$76,56 do iFood. <b>Não houve nenhuma campanha para ele em agosto</b> — e não há até hoje, porque depende da Página de Localização no Business Manager, que foi pedida e não veio.</p>
+    </div>
+    <div class="card tw">
+      <p class="sec-title" style="margin-bottom:10px">Os materiais chegaram em 7 de setembro</p>
+      <p style="margin:0;font-size:.89rem;color:var(--ink-2)">A estratégia foi fechada em 13/08 e a primeira edição do Dia do Cheddar estava marcada para 18/08. Os criativos chegaram no dia <b>7 de setembro</b> — três semanas depois. Agosto inteiro rodou com as peças antigas, e a frequência da campanha principal subiu para <b>4,80</b>.</p>
+    </div>
+  </div>
 </section>
 
-<!-- MIDIA -->
+<!-- 02 · META -->
 <section>
-  <p class="sec-title">A mídia nos últimos 7 dias</p>
-  <div class="card" style="padding:0;overflow:hidden">
+  <span class="num-sec">02</span>
+  <h2 class="sec">Os dados do Meta em agosto</h2>
+  <p class="sub">R$1.734,92 investidos, 46 compras rastreadas. A entrega está barata; a conversão é que está cara.</p>
+
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:14px">
     <div class="scroll">
       <table>
         <thead><tr>
           <th>Campanha</th><th class="r">Gasto</th><th class="r">Alcance</th>
-          <th class="r">Freq.</th><th class="r">CPM</th><th class="r">Compras</th><th class="r">CPA</th><th>Estado</th>
+          <th class="r">Freq.</th><th class="r">Compras</th><th class="r">Custo por compra</th>
         </tr></thead>
         <tbody>
-          <tr><td class="k">GB_FB01_Vendas_F</td><td class="num r">R$ 340,55</td><td class="num r">14.095</td><td class="num r">3,09</td><td class="num r">R$ 7,81</td><td class="num r">13</td><td class="r"><span class="pill u">R$ 26,20</span></td><td><span class="pill w">acaba amanhã</span></td></tr>
-          <tr class="morta"><td class="k">GB_FB06_Vendas_F</td><td class="num r">R$ 803,78</td><td class="num r">22.171</td><td class="num r">3,38</td><td class="num r">R$ 10,71</td><td class="num r">8</td><td class="r"><span class="pill d">R$ 100,47</span></td><td><span class="pill n">pausada</span></td></tr>
-          <tr><td class="k">GB_FB02_Reconhecimento_Geral</td><td class="num r">R$ 53,01</td><td class="num r">23.083</td><td class="num r">1,38</td><td class="num r">R$ 1,66</td><td class="num r">2</td><td class="r"><span class="pill u">R$ 26,50</span></td><td><span class="pill u">no ar</span></td></tr>
-          <tr><td class="k">GB_FB07_Alcance_Cheddar_F</td><td class="num r">R$ 24,98</td><td class="num r">10.477</td><td class="num r">1,14</td><td class="num r">R$ 2,08</td><td class="num r">—</td><td class="r"><span class="pill n">alcance</span></td><td><span class="pill u">no ar</span></td></tr>
-          <tr><td class="k">GB_FB08_Alcance_Refil_F</td><td class="num r">R$ 21,38</td><td class="num r">9.945</td><td class="num r">1,14</td><td class="num r">R$ 1,88</td><td class="num r">—</td><td class="r"><span class="pill n">alcance</span></td><td><span class="pill u">no ar</span></td></tr>
-          <tr class="tot"><td>Total</td><td class="num r">R$ 1.279,05</td><td class="num r">—</td><td class="num r">—</td><td class="num r">—</td><td class="num r">23</td><td class="r">R$ 55,61</td><td></td></tr>
+          <tr class="dest"><td class="k">GB_FB01_Vendas_F</td><td class="num r">R$ 858,24</td><td class="num r">25.672</td><td class="num r">4,80</td><td class="num r">31</td><td class="r"><span class="pill u">R$ 27,69</span></td></tr>
+          <tr><td class="k">GB_FB03_Vendas_F</td><td class="num r">R$ 276,20</td><td class="num r">10.264</td><td class="num r">3,19</td><td class="num r">8</td><td class="r"><span class="pill n">R$ 34,52</span></td></tr>
+          <tr><td class="k">GB_FB05_Vendas_Q</td><td class="num r">R$ 99,59</td><td class="num r">2.667</td><td class="num r">4,27</td><td class="num r">3</td><td class="r"><span class="pill n">R$ 33,20</span></td></tr>
+          <tr><td class="k">GB_FB02_Vendas_F</td><td class="num r">R$ 80,10</td><td class="num r">6.034</td><td class="num r">1,55</td><td class="num r">2</td><td class="r"><span class="pill n">R$ 40,05</span></td></tr>
+          <tr><td class="k">GB_FB04_Vendas_F</td><td class="num r">R$ 270,04</td><td class="num r">12.018</td><td class="num r">2,24</td><td class="num r">2</td><td class="r"><span class="pill d">R$ 135,02</span></td></tr>
+          <tr><td class="k">GB_FB02_Reconhecimento</td><td class="num r">R$ 150,75</td><td class="num r">54.136</td><td class="num r">1,98</td><td class="num r">—</td><td class="r"><span class="pill u">R$ 2,78/mil</span></td></tr>
+          <tr class="tot"><td>Total</td><td class="num r">R$ 1.734,92</td><td class="num r">83.805</td><td class="num r">3,71</td><td class="num r">46</td><td class="r">R$ 34,44</td></tr>
         </tbody>
       </table>
     </div>
   </div>
-  <p class="note"><b>Uma campanha só distorce a semana inteira.</b> A FB06 consumiu <b>63% da verba</b> dos 7 dias — R$803,78 — a um CPA de R$100,47. Já foi pausada. <b>Tirando ela, a semana fecha em R$475,27</b>, o que equivale a R$2.037 no mês: exatamente dentro dos R$2.200 combinados.</p>
-  <p class="note"><b>As duas campanhas novas entraram baratas.</b> Cheddar a R$2,38 por mil pessoas alcançadas e Refil a R$2,15. Elas não aparecem com compra porque são de alcance, não otimizam por compra — a leitura delas é o faturamento da terça e da quarta.</p>
-</section>
 
-<!-- ESTRUTURA -->
-<section>
-  <p class="sec-title">A estrutura ficou como combinamos</p>
-  <div class="grid2">
+  <div class="grid2" style="margin-bottom:14px">
     <div class="card tu">
-      <p class="sec-title" style="margin-bottom:10px;color:var(--up)">Feito desde a última reunião</p>
+      <p class="sec-title" style="margin-bottom:10px;color:var(--up)">O que está funcionando</p>
       <ul class="p">
-        <li><b>10 criativos chegaram</b> e 5 conceitos estão no ar, cada um com feed e story no mesmo anúncio.</li>
-        <li><b>Duas campanhas novas subiram:</b> Cheddar na terça e Refil na quarta.</li>
-        <li><b>As duas de reconhecimento viraram uma.</b> Eram quase gêmeas e disputavam o mesmo público.</li>
-        <li><b>O Pixel está confirmado atribuindo compra</b> — 64 nos últimos 30 dias. Isso estava em aberto desde agosto.</li>
+        <li><b>A FB01 carrega a conta.</b> 31 das 46 compras, com o melhor custo — R$27,69.</li>
+        <li><b>A campanha de marca é baratíssima.</b> R$150,75 alcançaram 54.136 pessoas, a R$2,78 por mil. Atibaia inteira tem cerca de 145 mil habitantes.</li>
+        <li><b>O Pixel está atribuindo compra.</b> Isso estava em aberto desde o início — está confirmado funcionando.</li>
       </ul>
     </div>
-    <div class="card">
-      <p class="sec-title" style="margin-bottom:10px">No ar hoje · 4 campanhas</p>
+    <div class="card tw">
+      <p class="sec-title" style="margin-bottom:10px;color:var(--warn)">O que está travando</p>
       <ul class="p">
-        <li><b>FB01 Vendas</b> — a que converte. Acaba amanhã.</li>
-        <li><b>FB02 Reconhecimento Geral</b> — marca, CPM de R$1,66.</li>
-        <li><b>FB07 Cheddar</b> — terça, R$10/dia.</li>
-        <li><b>FB08 Refil</b> — quarta, R$8,33/dia.</li>
+        <li><b>Frequência 4,80 na FB01.</b> Cada pessoa viu o mesmo anúncio quase cinco vezes no mês. Sem peça nova, a resposta cai a cada exibição e o custo sobe.</li>
+        <li><b>R$270 numa campanha a R$135 por compra.</b> A FB04 consumiu 17% da verba de vendas para trazer 2 pedidos.</li>
+        <li><b>Verba fragmentada em 5 campanhas de venda.</b> Com R$1.584, nenhuma teve volume para aprender direito.</li>
       </ul>
-      <p class="note">Já rodou <b>um ciclo completo</b>: terça 08/09 e quarta 09/09.</p>
     </div>
+  </div>
+
+  <div class="card">
+    <p class="sec-title" style="margin-bottom:10px">O diagnóstico em uma linha</p>
+    <p style="margin:0;font-size:.93rem;color:var(--ink-2);max-width:82ch"><b>A mídia chega barato e converte caro.</b> Alcançar 83.805 pessoas por R$1.734 é entrega saudável. Quando o custo de chegar é baixo e o custo de converter é alto, a causa não é segmentação nem orçamento — <b>é o que a pessoa vê quando o anúncio aparece.</b> É por isso que os criativos novos importam mais que qualquer ajuste de campanha.</p>
   </div>
 </section>
 
-<!-- DECISOES -->
+<!-- 03 · SETEMBRO -->
 <section>
-  <p class="sec-title">O que precisa ser decidido hoje</p>
+  <span class="num-sec">03</span>
+  <h2 class="sec">O que fazer em setembro</h2>
+  <p class="sub">Dez dias já passaram. Restam vinte. Abaixo, a meta que faz sentido e as seis decisões de hoje.</p>
+
+  <div class="card t" style="margin-bottom:20px">
+    <p class="sec-title" style="margin-bottom:14px">Primeiro, uma meta que se sustenta</p>
+    <div class="scroll">
+      <table style="min-width:520px">
+        <thead><tr><th>Cenário</th><th class="r">Mês</th><th class="r">Por dia</th><th class="r">vs. agosto</th></tr></thead>
+        <tbody>
+          <tr><td>Repetir o ritmo de agosto</td><td class="num r">R$ 122.658</td><td class="num r">R$ 4.089</td><td class="r"><span class="pill n">0%</span></td></tr>
+          <tr class="dest"><td><b>Crescer 10%</b> — a meta que proponho</td><td class="num r">R$ 135.000</td><td class="num r">R$ 4.500</td><td class="r"><span class="pill u">+10,1%</span></td></tr>
+          <tr><td>Voltar ao ritmo de julho</td><td class="num r">R$ 137.384</td><td class="num r">R$ 4.579</td><td class="r"><span class="pill w">+12,0%</span></td></tr>
+          <tr><td>A meta antiga</td><td class="num r">R$ 160.000</td><td class="num r">R$ 5.333</td><td class="r"><span class="pill d">+30,4%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Setembro tem 30 dias contra 31 de agosto, o que já tira 3,2% só de calendário. <b>R$135 mil é crescimento real de 10% sobre o ritmo atual</b> e fica logo abaixo de julho, que foi o melhor mês da operação. R$160 mil exigiria crescer 30% — não existe alavanca de mídia que entregue isso.</p>
+  </div>
+
   <div class="card t">
+    <p class="sec-title" style="margin-bottom:6px">As seis decisões de hoje</p>
     <ol class="dec">
       <li>
         <h3>Renovar a campanha de vendas</h3>
-        <p>Ela para amanhã às 17h. Vitalício obriga a recriar a cada ciclo e faz o gasto acelerar no fim do período, o que atrapalha a leitura do CPA.</p>
-        <span class="rec"><b>Recomendação:</b> recriar com <b>orçamento diário</b>, rodando contínuo. Com R$40/dia mantém o ritmo atual sem a corrida de fim de período.</span>
+        <p>Ela para amanhã às 17h. Orçamento vitalício obriga a recriar a cada ciclo e faz o gasto acelerar no fim do período, o que distorce a leitura do custo por compra.</p>
+        <span class="rec"><b>Recomendação:</b> recriar com <b>orçamento diário de R$40</b>, rodando contínuo. Mantém o ritmo atual sem a corrida de fim de período.</span>
+      </li>
+      <li>
+        <h3>Criativo novo dentro da campanha de vendas</h3>
+        <p>A frequência chegou a 4,80 em agosto. É a campanha que melhor converte e a que mais cansa o público — e agora existem 10 peças paradas.</p>
+        <span class="rec"><b>Recomendação:</b> subir uma das peças de cheddar na FB01. Peça nova onde o custo por compra já é bom rende mais que peça nova em campanha de alcance.</span>
       </li>
       <li>
         <h3>Dia do Cliente — 15 de setembro, terça</h3>
-        <p>Faltam 5 dias. A regra do D−7 vencia em 08/09 e não houve peça. É a maior data de relacionamento do ano e cai justamente no Dia do Cheddar.</p>
-        <span class="rec"><b>Recomendação:</b> adaptar a peça de cheddar que já existe com camada de “hoje é o seu dia” e cupom nominal só para a base. É adaptação, não peça nova — dá para sair hoje.</span>
+        <p>Faltam cinco dias. É a maior data de relacionamento do ano e cai justamente no Dia do Cheddar.</p>
+        <span class="rec"><b>Recomendação:</b> adaptar a peça de cheddar que já existe, com camada de “hoje é o seu dia” e cupom nominal só para a base. É adaptação, não peça nova — sai hoje.</span>
       </li>
       <li>
         <h3>A oferta da quarta: refil ou batata?</h3>
-        <p>Foi pedida copy de <b>Quarta Maluca — batata por nossa conta</b>, mas as peças que chegaram e que estão no ar dizem <b>refil grátis acima de R$29</b>. São ofertas diferentes.</p>
-        <span class="rec"><b>Precisa definir:</b> se as duas valem, cada uma precisa de peça própria — senão o cliente chega na loja cobrando a batata.</span>
-      </li>
-      <li>
-        <h3>O cheddar à vontade vale no delivery?</h3>
-        <p>“À vontade” pressupõe pedir mais, o que só acontece na mesa. Hoje o anúncio aponta para o Cardápio Web, o que empurra para fora da loja justamente quem a oferta quer trazer para dentro.</p>
-        <span class="rec"><b>Se for só presencial:</b> trocar o destino do anúncio e ajustar a copy.</span>
+        <p>Foi pedida copy de <b>Quarta Maluca — batata por nossa conta</b>, mas as peças no ar dizem <b>refil grátis acima de R$29</b>. São ofertas diferentes rodando com o mesmo nome de dia.</p>
+        <span class="rec"><b>Precisa definir hoje.</b> Se as duas valem, cada uma precisa de peça própria — senão o cliente chega na loja cobrando a batata.</span>
       </li>
       <li>
         <h3>Página de Localização no Business Manager</h3>
-        <p>É o pré-requisito do botão <b>Como chegar</b>. Sem ela a campanha de salão não existe — e o presencial é <b>49,4% do faturamento</b>, com o melhor ticket da casa, R$98,18.</p>
-        <span class="rec"><b>É configuração, não produção.</b> Com o acesso liberado, a Cardô resolve no mesmo dia.</span>
+        <p>É o pré-requisito do botão <b>Como chegar</b>. Sem ela não existe campanha de salão — e o salão é metade do faturamento, com o melhor ticket.</p>
+        <span class="rec"><b>É configuração, não produção.</b> Com o acesso liberado, resolvemos no mesmo dia.</span>
       </li>
       <li>
-        <h3>Criativo novo para a campanha de vendas</h3>
-        <p>A FB01 está com frequência 3,09 e vinha de 5,33 no mês. É a campanha que converte melhor e a que mais cansa o público.</p>
-        <span class="rec"><b>Recomendação:</b> colocar uma das peças de cheddar dentro dela. Peça nova onde o CPA já é bom rende mais que peça nova em campanha de alcance.</span>
+        <h3>Concentrar a verba, não espalhar</h3>
+        <p>Agosto teve cinco campanhas de venda dividindo R$1.584. A que funcionou levou 54% e entregou 67% das compras; a pior levou 17% e entregou 4%.</p>
+        <span class="rec"><b>Recomendação:</b> uma campanha de venda por vez, com verba suficiente para aprender. Testar criativo dentro dela, não criando campanha nova.</span>
       </li>
     </ol>
   </div>
@@ -263,36 +322,38 @@
 
 <!-- PERGUNTAS -->
 <section>
-  <p class="sec-title">Perguntas para vocês</p>
+  <span class="num-sec">04</span>
+  <h2 class="sec">Perguntas para vocês</h2>
   <div class="card">
     <ul class="q">
-      <li><b>A terça 08/09 e a quarta 09/09 venderam mais que as semanas anteriores?</b> Foi o primeiro ciclo com as campanhas no ar. Esse número só vocês têm, e é o que diz se o ritual está funcionando.</li>
+      <li><b>A terça 08/09 e a quarta 09/09 venderam mais que as semanas anteriores?</b> Foi o primeiro ciclo com as campanhas de ritual no ar. Esse número só vocês têm, e é o que diz se o Dia do Cheddar está pegando.</li>
+      <li><b>O cheddar à vontade vale no delivery ou só no salão?</b> “À vontade” pressupõe pedir mais, o que só acontece na mesa. Hoje o anúncio aponta para o Cardápio Web — pode estar empurrando para fora da loja quem a oferta quer trazer para dentro.</li>
       <li><b>Qual o percentual de comissão do iFood?</b> São 39% do faturamento passando por lá e a margem real segue incalculável sem esse número.</li>
       <li><b>Composição e preço dos 4 combos.</b> Sem oferta fechada não sobe campanha de aquisição — está parado desde 16/08.</li>
-      <li><b>Os cupons:</b> o de primeira compra, o de retorno da base e a palavra do cupom presencial do salão.</li>
-      <li><b>Em que mês o Goodii abriu?</b> Aniversário de casa é a melhor data do calendário: não disputa leilão com ninguém.</li>
+      <li><b>Em que mês o Goodii abriu?</b> Aniversário de casa é a melhor data possível do calendário: não disputa leilão com ninguém.</li>
     </ul>
   </div>
 </section>
 
 <!-- VERBA -->
 <section>
-  <p class="sec-title">A conversa de verba</p>
+  <span class="num-sec">05</span>
+  <h2 class="sec">A conversa de verba</h2>
   <div class="card t">
     <div class="kpis" style="margin-bottom:16px">
       <div class="kpi d"><span class="k">Descontos em agosto</span><span class="v">R$ 9.944</span><span class="n">7,4% do total de produtos</span></div>
-      <div class="kpi"><span class="k">Mídia em agosto</span><span class="v">R$ 1.491</span><span class="n">1,18% do faturamento</span></div>
-      <div class="kpi w"><span class="k">Proporção</span><span class="v">6,7x</span><span class="n">mais desconto que anúncio</span></div>
-      <div class="kpi"><span class="k">Referência do setor</span><span class="v">3% a 6%</span><span class="n">R$ 4.800 a R$ 9.600</span></div>
+      <div class="kpi"><span class="k">Mídia em agosto</span><span class="v">R$ 1.735</span><span class="n">1,37% do faturamento</span></div>
+      <div class="kpi w"><span class="k">Proporção</span><span class="v">5,7x</span><span class="n">mais desconto que anúncio</span></div>
+      <div class="kpi"><span class="k">Referência do setor</span><span class="v">3% a 6%</span><span class="n">R$ 4.000 a R$ 8.100</span></div>
     </div>
-    <p class="note">Não é proposta de cortar desconto — é mostrar que <b>já existe dinheiro de marketing sendo gasto sem ninguém chamar de marketing</b>. Desconto reduz a margem de quem já ia comprar; mídia traz quem não viria. Se um quarto do desconto virasse verba, seriam R$2.486 a mais por mês, o que a um CPA de R$26 significa cerca de <b>95 pedidos</b>.</p>
-    <p class="note"><b>Sobre a meta:</b> o gap de agosto para os R$160 mil é de R$33.253, ou 26% de crescimento. Mesmo dobrando a verba, a mídia não cobre isso sozinha. Vale alinhar a expectativa de setembro antes que o mês termine.</p>
+    <p class="note">Não é proposta de cortar desconto — é mostrar que <b>já existe dinheiro de marketing sendo gasto sem ninguém chamar de marketing</b>. Desconto reduz a margem de quem já ia comprar; mídia traz quem não viria. Se um quarto do desconto virasse verba, seriam R$2.486 a mais por mês — que ao custo da melhor campanha significa cerca de <b>90 pedidos</b>, ou R$8 mil.</p>
+    <p class="note"><b>Mas a ordem importa:</b> subir verba antes de resolver o criativo só faz gastar mais caro. Primeiro as peças novas entram e o custo por compra volta para a faixa de R$12 a R$15. <b>Depois</b> se discute quanto colocar.</p>
   </div>
 </section>
 
 <footer>
-  <p><b>Fontes:</b> Gerenciador de Anúncios da Meta, conta CA - Goodii Burger, dados de 03 a 10/09/2026. Faturamento, ticket e descontos do Cardápio Web, agosto fechado e reconciliado em 01/09.</p>
-  <p><b>Nota de método:</b> durante agosto os relatórios parciais compararam agosto contra o recorte de 1 a 12 de julho, que foi o pico do período. Mês contra mês, a queda real é de 10,7% — não os 22,7% que chegaram a ser reportados.</p>
+  <p><b>Fontes:</b> Cardápio Web — Análise das Vendas, agosto fechado e reconciliado. Gerenciador de Anúncios da Meta, conta CA - Goodii Burger, período de 1 a 31 de agosto de 2026.</p>
+  <p><b>Nota de método:</b> durante agosto os relatórios parciais compararam agosto contra o recorte de 1 a 12 de julho, que foi o pico do período. Mês contra mês, a queda real é de 10,7% — não os 22,7% que chegaram a ser reportados. O custo por compra considera apenas as campanhas de vendas; a de reconhecimento não otimiza por compra e é medida por custo por mil pessoas alcançadas.</p>
 </footer>
 
 </div>
