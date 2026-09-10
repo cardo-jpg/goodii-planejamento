@@ -1,0 +1,298 @@
+<title>Pauta · 10 de Setembro</title>
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#FFFFFF; --panel-2:#F7F7F8;
+    --line:#E4E4E7; --hair:#EFEFF1;
+    --ink:#15151A; --ink-2:#4A4A54; --muted:#76767F; --faint:#A2A2AC;
+    --accent:#2E4A63; --accent-soft:#EDF1F5;
+    --up:#1E6B45; --up-soft:#E9F3ED;
+    --down:#A32A1E; --down-soft:#F9EDEB;
+    --warn:#8A6410; --warn-soft:#FAF3E0;
+    --sans:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#101013; --panel:#17171B; --panel-2:#1E1E23;
+      --line:#2C2C33; --hair:#232329;
+      --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+      --accent:#7FA8CC; --accent-soft:#1A222B;
+      --up:#5CB489; --up-soft:#152521;
+      --down:#E07A6C; --down-soft:#2A1917;
+      --warn:#D0A340; --warn-soft:#2A2415;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101013; --panel:#17171B; --panel-2:#1E1E23;
+    --line:#2C2C33; --hair:#232329;
+    --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+    --accent:#7FA8CC; --accent-soft:#1A222B;
+    --up:#5CB489; --up-soft:#152521;
+    --down:#E07A6C; --down-soft:#2A1917;
+    --warn:#D0A340; --warn-soft:#2A2415;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; font-size:130%; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+    font-size:0.9375rem; line-height:1.6; padding:0 24px 90px; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1040px; margin:0 auto; }
+
+  header{ display:flex; flex-wrap:wrap; gap:14px 24px; align-items:center; justify-content:space-between;
+    padding:40px 0 22px; border-bottom:1px solid var(--line); margin-bottom:26px; }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .tile{ width:42px; height:42px; border-radius:11px; background:var(--accent-soft);
+    border:1px solid var(--line); display:grid; place-items:center; font-size:1.25rem; flex:none; }
+  h1{ font-size:1.28rem; font-weight:650; letter-spacing:-.02em; margin:0; }
+  .brand p{ margin:2px 0 0; font-size:.82rem; color:var(--muted); }
+  .badge{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2); background:var(--panel-2);
+    border:1px solid var(--line); padding:6px 12px; border-radius:999px; white-space:nowrap; }
+
+  .sec-title{ font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--muted); margin:0 0 14px; }
+  section{ margin-bottom:44px; }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 22px; }
+  .card.t{ border-top:2px solid var(--accent); }
+  .card.tu{ border-top:2px solid var(--up); }
+
+  /* alerta do topo */
+  .urgente{ background:var(--down-soft); border:1px solid var(--line); border-left:3px solid var(--down);
+    border-radius:11px; padding:20px 24px; margin-bottom:30px; }
+  .urgente h2{ font-size:1.04rem; font-weight:690; margin:0 0 9px; color:var(--down); letter-spacing:-.015em; }
+  .urgente p{ margin:0 0 10px; font-size:.94rem; color:var(--ink-2); max-width:82ch; }
+  .urgente p:last-child{ margin-bottom:0; }
+  .urgente b{ color:var(--ink); font-weight:660; }
+  .relogio{ font-family:var(--mono); font-size:1.9rem; font-weight:600; color:var(--down);
+    letter-spacing:-.03em; display:block; margin:4px 0 10px; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(178px,1fr)); gap:12px; }
+  .kpi{ background:var(--panel); border:1px solid var(--line); border-top:2px solid var(--accent);
+    border-radius:11px; padding:16px 18px; }
+  .kpi.d{ border-top-color:var(--down); } .kpi.u{ border-top-color:var(--up); }
+  .kpi .k{ font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px;
+    color:var(--muted); display:block; margin-bottom:9px; }
+  .kpi .v{ font-family:var(--mono); font-size:1.42rem; font-weight:600; letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums; display:block; line-height:1.05; }
+  .kpi .n{ font-size:.78rem; color:var(--muted); display:block; margin-top:8px; }
+  .down{ color:var(--down); } .up{ color:var(--up); }
+
+  .scroll{ overflow-x:auto; }
+  table{ border-collapse:collapse; width:100%; min-width:620px; font-size:.86rem; }
+  thead th{ font-size:0.625rem; font-weight:700; text-transform:uppercase; letter-spacing:1.1px;
+    color:var(--muted); text-align:left; padding:9px 13px; background:var(--panel-2);
+    border-bottom:1px solid var(--line); white-space:nowrap; }
+  thead th.r{ text-align:right; }
+  tbody td{ padding:11px 13px; border-bottom:1px solid var(--hair); color:var(--ink-2); vertical-align:middle; }
+  tbody td.r{ text-align:right; }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.k{ color:var(--ink); font-weight:620; font-family:var(--mono); font-size:.79rem; white-space:nowrap; }
+  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink); }
+  tr.tot td{ border-top:1px solid var(--line); background:var(--panel-2); font-weight:700; color:var(--ink); }
+  tr.morta td{ opacity:.55; }
+  .pill{ font-family:var(--mono); font-size:.72rem; padding:2px 8px; border-radius:4px; white-space:nowrap; }
+  .pill.d{ background:var(--down-soft); color:var(--down); }
+  .pill.u{ background:var(--up-soft); color:var(--up); }
+  .pill.n{ background:var(--panel-2); color:var(--muted); }
+  .pill.w{ background:var(--warn-soft); color:var(--warn); }
+
+  /* decisoes */
+  ol.dec{ list-style:none; counter-reset:d; margin:0; padding:0; }
+  ol.dec li{ counter-increment:d; padding:16px 0 16px 44px; position:relative;
+    border-bottom:1px solid var(--hair); }
+  ol.dec li:last-child{ border-bottom:none; }
+  ol.dec li::before{ content:counter(d,decimal-leading-zero); position:absolute; left:0; top:17px;
+    font-family:var(--mono); font-size:.78rem; color:var(--faint); }
+  ol.dec h3{ margin:0 0 5px; font-size:.99rem; font-weight:660; letter-spacing:-.01em; }
+  ol.dec p{ margin:0; font-size:.89rem; color:var(--ink-2); max-width:80ch; }
+  ol.dec .rec{ display:block; margin-top:8px; padding-top:8px; border-top:1px dashed var(--line);
+    font-size:.86rem; color:var(--ink-2); }
+  ol.dec .rec b{ color:var(--up); font-weight:660; }
+
+  ul.q{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  ul.q li{ position:relative; padding-left:26px; font-size:.91rem; color:var(--ink-2); max-width:82ch; }
+  ul.q li::before{ content:"?"; position:absolute; left:2px; top:-1px; font-family:var(--mono);
+    color:var(--accent); font-weight:700; }
+  ul.q li b{ color:var(--ink); font-weight:650; }
+
+  ul.p{ margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px; }
+  ul.p li{ font-size:.9rem; color:var(--ink-2); max-width:80ch; }
+  ul.p li b{ color:var(--ink); font-weight:640; }
+
+  .grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:13px; }
+  .note{ font-size:.85rem; color:var(--muted); margin:14px 0 0; max-width:84ch; }
+  .note b{ color:var(--ink-2); font-weight:620; }
+
+  footer{ margin-top:50px; padding-top:18px; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); }
+  footer p{ margin:0 0 7px; max-width:88ch; }
+  footer b{ color:var(--ink-2); font-weight:620; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media (max-width:640px){ body{ padding:0 16px 60px; } }
+
+  .topnav{ display:flex; flex-wrap:wrap; gap:8px; padding:18px 0 0; }
+  .topnav a{ font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); border:1px solid var(--line); background:var(--panel);
+    padding:8px 15px; border-radius:20px; transition:.15s; }
+  .topnav a:hover{ border-color:var(--accent); color:var(--ink); }
+  .topnav a.on{ background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700; }
+</style>
+
+<div class="wrap">
+
+<nav class="topnav"><a href="index.html">Plano de Campanhas</a><a href="pauta.html" class="on">Pauta · 10/09</a><a href="mes1.html">Fechamento Mês 1</a><a href="diagnostico.html">Diagnóstico</a><a href="calendario.html">Calendário</a><a href="reuniao.html">Pauta de Agosto</a></nav>
+
+<header>
+  <div class="brand">
+    <div class="tile">🗓️</div>
+    <div>
+      <h1>Pauta · Goodii Burger</h1>
+      <p>Reunião de 10 de setembro de 2026 · o que decidir hoje</p>
+    </div>
+  </div>
+  <span class="badge">Cardô Marketing</span>
+</header>
+
+<!-- URGENTE -->
+<div class="urgente">
+  <h2>A campanha que mais vende para amanhã às 17h</h2>
+  <span class="relogio">27 horas</span>
+  <p>O conjunto <b>ADVGT_V2</b>, dentro da <b>GB_FB01_Vendas_F</b>, foi montado com orçamento vitalício de R$1.200 para o período de 14/08 a 11/09. Já gastou <b>R$1.115,23</b> e restam <b>R$84,77</b>. Quando o período fechar, ela para sozinha.</p>
+  <p>É a melhor campanha da conta: <b>CPA de R$26,20</b> e mais da metade das compras dos últimos 7 dias. Sem decisão hoje, amanhã a operação fica sem campanha de venda no ar.</p>
+</div>
+
+<!-- ONDE ESTAMOS -->
+<section>
+  <p class="sec-title">Onde estamos</p>
+  <div class="kpis" style="margin-bottom:16px">
+    <div class="kpi d"><span class="k">Agosto fechado</span><span class="v">R$ 126.747</span><span class="n">79,2% da meta · <b class="down">−10,7%</b> vs. julho</span></div>
+    <div class="kpi u"><span class="k">Ticket médio</span><span class="v">R$ 89,20</span><span class="n">estável · era R$ 89,91</span></div>
+    <div class="kpi"><span class="k">Mídia · 7 dias</span><span class="v">R$ 1.279</span><span class="n">23 compras · CPA médio R$ 55,61</span></div>
+    <div class="kpi u"><span class="k">Melhor campanha</span><span class="v">R$ 26,20</span><span class="n">CPA da FB01_Vendas</span></div>
+  </div>
+  <p class="note"><b>O que agosto ensinou:</b> a operação não perdeu valor por pedido, perdeu volume de gente. O ticket ficou igual e 158 pedidos não aconteceram. E metade da queda veio do presencial, não do delivery.</p>
+</section>
+
+<!-- MIDIA -->
+<section>
+  <p class="sec-title">A mídia nos últimos 7 dias</p>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="scroll">
+      <table>
+        <thead><tr>
+          <th>Campanha</th><th class="r">Gasto</th><th class="r">Alcance</th>
+          <th class="r">Freq.</th><th class="r">CPM</th><th class="r">Compras</th><th class="r">CPA</th><th>Estado</th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="k">GB_FB01_Vendas_F</td><td class="num r">R$ 340,55</td><td class="num r">14.095</td><td class="num r">3,09</td><td class="num r">R$ 7,81</td><td class="num r">13</td><td class="r"><span class="pill u">R$ 26,20</span></td><td><span class="pill w">acaba amanhã</span></td></tr>
+          <tr class="morta"><td class="k">GB_FB06_Vendas_F</td><td class="num r">R$ 803,78</td><td class="num r">22.171</td><td class="num r">3,38</td><td class="num r">R$ 10,71</td><td class="num r">8</td><td class="r"><span class="pill d">R$ 100,47</span></td><td><span class="pill n">pausada</span></td></tr>
+          <tr><td class="k">GB_FB02_Reconhecimento_Geral</td><td class="num r">R$ 53,01</td><td class="num r">23.083</td><td class="num r">1,38</td><td class="num r">R$ 1,66</td><td class="num r">2</td><td class="r"><span class="pill u">R$ 26,50</span></td><td><span class="pill u">no ar</span></td></tr>
+          <tr><td class="k">GB_FB07_Alcance_Cheddar_F</td><td class="num r">R$ 24,98</td><td class="num r">10.477</td><td class="num r">1,14</td><td class="num r">R$ 2,08</td><td class="num r">—</td><td class="r"><span class="pill n">alcance</span></td><td><span class="pill u">no ar</span></td></tr>
+          <tr><td class="k">GB_FB08_Alcance_Refil_F</td><td class="num r">R$ 21,38</td><td class="num r">9.945</td><td class="num r">1,14</td><td class="num r">R$ 1,88</td><td class="num r">—</td><td class="r"><span class="pill n">alcance</span></td><td><span class="pill u">no ar</span></td></tr>
+          <tr class="tot"><td>Total</td><td class="num r">R$ 1.279,05</td><td class="num r">—</td><td class="num r">—</td><td class="num r">—</td><td class="num r">23</td><td class="r">R$ 55,61</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p class="note"><b>Uma campanha só distorce a semana inteira.</b> A FB06 consumiu <b>63% da verba</b> dos 7 dias — R$803,78 — a um CPA de R$100,47. Já foi pausada. <b>Tirando ela, a semana fecha em R$475,27</b>, o que equivale a R$2.037 no mês: exatamente dentro dos R$2.200 combinados.</p>
+  <p class="note"><b>As duas campanhas novas entraram baratas.</b> Cheddar a R$2,38 por mil pessoas alcançadas e Refil a R$2,15. Elas não aparecem com compra porque são de alcance, não otimizam por compra — a leitura delas é o faturamento da terça e da quarta.</p>
+</section>
+
+<!-- ESTRUTURA -->
+<section>
+  <p class="sec-title">A estrutura ficou como combinamos</p>
+  <div class="grid2">
+    <div class="card tu">
+      <p class="sec-title" style="margin-bottom:10px;color:var(--up)">Feito desde a última reunião</p>
+      <ul class="p">
+        <li><b>10 criativos chegaram</b> e 5 conceitos estão no ar, cada um com feed e story no mesmo anúncio.</li>
+        <li><b>Duas campanhas novas subiram:</b> Cheddar na terça e Refil na quarta.</li>
+        <li><b>As duas de reconhecimento viraram uma.</b> Eram quase gêmeas e disputavam o mesmo público.</li>
+        <li><b>O Pixel está confirmado atribuindo compra</b> — 64 nos últimos 30 dias. Isso estava em aberto desde agosto.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="sec-title" style="margin-bottom:10px">No ar hoje · 4 campanhas</p>
+      <ul class="p">
+        <li><b>FB01 Vendas</b> — a que converte. Acaba amanhã.</li>
+        <li><b>FB02 Reconhecimento Geral</b> — marca, CPM de R$1,66.</li>
+        <li><b>FB07 Cheddar</b> — terça, R$10/dia.</li>
+        <li><b>FB08 Refil</b> — quarta, R$8,33/dia.</li>
+      </ul>
+      <p class="note">Já rodou <b>um ciclo completo</b>: terça 08/09 e quarta 09/09.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DECISOES -->
+<section>
+  <p class="sec-title">O que precisa ser decidido hoje</p>
+  <div class="card t">
+    <ol class="dec">
+      <li>
+        <h3>Renovar a campanha de vendas</h3>
+        <p>Ela para amanhã às 17h. Vitalício obriga a recriar a cada ciclo e faz o gasto acelerar no fim do período, o que atrapalha a leitura do CPA.</p>
+        <span class="rec"><b>Recomendação:</b> recriar com <b>orçamento diário</b>, rodando contínuo. Com R$40/dia mantém o ritmo atual sem a corrida de fim de período.</span>
+      </li>
+      <li>
+        <h3>Dia do Cliente — 15 de setembro, terça</h3>
+        <p>Faltam 5 dias. A regra do D−7 vencia em 08/09 e não houve peça. É a maior data de relacionamento do ano e cai justamente no Dia do Cheddar.</p>
+        <span class="rec"><b>Recomendação:</b> adaptar a peça de cheddar que já existe com camada de “hoje é o seu dia” e cupom nominal só para a base. É adaptação, não peça nova — dá para sair hoje.</span>
+      </li>
+      <li>
+        <h3>A oferta da quarta: refil ou batata?</h3>
+        <p>Foi pedida copy de <b>Quarta Maluca — batata por nossa conta</b>, mas as peças que chegaram e que estão no ar dizem <b>refil grátis acima de R$29</b>. São ofertas diferentes.</p>
+        <span class="rec"><b>Precisa definir:</b> se as duas valem, cada uma precisa de peça própria — senão o cliente chega na loja cobrando a batata.</span>
+      </li>
+      <li>
+        <h3>O cheddar à vontade vale no delivery?</h3>
+        <p>“À vontade” pressupõe pedir mais, o que só acontece na mesa. Hoje o anúncio aponta para o Cardápio Web, o que empurra para fora da loja justamente quem a oferta quer trazer para dentro.</p>
+        <span class="rec"><b>Se for só presencial:</b> trocar o destino do anúncio e ajustar a copy.</span>
+      </li>
+      <li>
+        <h3>Página de Localização no Business Manager</h3>
+        <p>É o pré-requisito do botão <b>Como chegar</b>. Sem ela a campanha de salão não existe — e o presencial é <b>49,4% do faturamento</b>, com o melhor ticket da casa, R$98,18.</p>
+        <span class="rec"><b>É configuração, não produção.</b> Com o acesso liberado, a Cardô resolve no mesmo dia.</span>
+      </li>
+      <li>
+        <h3>Criativo novo para a campanha de vendas</h3>
+        <p>A FB01 está com frequência 3,09 e vinha de 5,33 no mês. É a campanha que converte melhor e a que mais cansa o público.</p>
+        <span class="rec"><b>Recomendação:</b> colocar uma das peças de cheddar dentro dela. Peça nova onde o CPA já é bom rende mais que peça nova em campanha de alcance.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- PERGUNTAS -->
+<section>
+  <p class="sec-title">Perguntas para vocês</p>
+  <div class="card">
+    <ul class="q">
+      <li><b>A terça 08/09 e a quarta 09/09 venderam mais que as semanas anteriores?</b> Foi o primeiro ciclo com as campanhas no ar. Esse número só vocês têm, e é o que diz se o ritual está funcionando.</li>
+      <li><b>Qual o percentual de comissão do iFood?</b> São 39% do faturamento passando por lá e a margem real segue incalculável sem esse número.</li>
+      <li><b>Composição e preço dos 4 combos.</b> Sem oferta fechada não sobe campanha de aquisição — está parado desde 16/08.</li>
+      <li><b>Os cupons:</b> o de primeira compra, o de retorno da base e a palavra do cupom presencial do salão.</li>
+      <li><b>Em que mês o Goodii abriu?</b> Aniversário de casa é a melhor data do calendário: não disputa leilão com ninguém.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- VERBA -->
+<section>
+  <p class="sec-title">A conversa de verba</p>
+  <div class="card t">
+    <div class="kpis" style="margin-bottom:16px">
+      <div class="kpi d"><span class="k">Descontos em agosto</span><span class="v">R$ 9.944</span><span class="n">7,4% do total de produtos</span></div>
+      <div class="kpi"><span class="k">Mídia em agosto</span><span class="v">R$ 1.491</span><span class="n">1,18% do faturamento</span></div>
+      <div class="kpi w"><span class="k">Proporção</span><span class="v">6,7x</span><span class="n">mais desconto que anúncio</span></div>
+      <div class="kpi"><span class="k">Referência do setor</span><span class="v">3% a 6%</span><span class="n">R$ 4.800 a R$ 9.600</span></div>
+    </div>
+    <p class="note">Não é proposta de cortar desconto — é mostrar que <b>já existe dinheiro de marketing sendo gasto sem ninguém chamar de marketing</b>. Desconto reduz a margem de quem já ia comprar; mídia traz quem não viria. Se um quarto do desconto virasse verba, seriam R$2.486 a mais por mês, o que a um CPA de R$26 significa cerca de <b>95 pedidos</b>.</p>
+    <p class="note"><b>Sobre a meta:</b> o gap de agosto para os R$160 mil é de R$33.253, ou 26% de crescimento. Mesmo dobrando a verba, a mídia não cobre isso sozinha. Vale alinhar a expectativa de setembro antes que o mês termine.</p>
+  </div>
+</section>
+
+<footer>
+  <p><b>Fontes:</b> Gerenciador de Anúncios da Meta, conta CA - Goodii Burger, dados de 03 a 10/09/2026. Faturamento, ticket e descontos do Cardápio Web, agosto fechado e reconciliado em 01/09.</p>
+  <p><b>Nota de método:</b> durante agosto os relatórios parciais compararam agosto contra o recorte de 1 a 12 de julho, que foi o pico do período. Mês contra mês, a queda real é de 10,7% — não os 22,7% que chegaram a ser reportados.</p>
+</footer>
+
+</div>
