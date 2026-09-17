@@ -1,0 +1,155 @@
+<title>Referências de Vídeo Goodii</title>
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#FFFFFF; --panel-2:#F7F7F8; --line:#E4E4E7; --hair:#EFEFF1;
+    --ink:#15151A; --ink-2:#4A4A54; --muted:#76767F; --faint:#A2A2AC;
+    --accent:#2E4A63; --accent-soft:#EDF1F5; --up:#1E6B45; --up-soft:#E9F3ED; --down:#A32A1E; --down-soft:#F9EDEB;
+    --sans:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#101013; --panel:#17171B; --panel-2:#1E1E23; --line:#2C2C33; --hair:#232329;
+    --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+    --accent:#7FA8CC; --accent-soft:#1A222B; --up:#5CB489; --up-soft:#152521; --down:#E07A6C; --down-soft:#2A1917; } }
+  :root[data-theme="dark"]{
+    --bg:#101013; --panel:#17171B; --panel-2:#1E1E23; --line:#2C2C33; --hair:#232329;
+    --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+    --accent:#7FA8CC; --accent-soft:#1A222B; --up:#5CB489; --up-soft:#152521; --down:#E07A6C; --down-soft:#2A1917; }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; font-size:130%; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:.9375rem; line-height:1.6; padding:0 24px 90px; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1080px; margin:0 auto; }
+  header{ display:flex; flex-wrap:wrap; gap:14px 24px; align-items:center; justify-content:space-between; padding:40px 0 22px; border-bottom:1px solid var(--line); margin-bottom:26px; }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .tile{ width:42px; height:42px; border-radius:11px; background:var(--accent-soft); border:1px solid var(--line); display:grid; place-items:center; font-size:1.25rem; flex:none; }
+  h1{ font-size:1.28rem; font-weight:650; letter-spacing:-.02em; margin:0; }
+  .brand p{ margin:2px 0 0; font-size:.82rem; color:var(--muted); }
+  .badge{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2); background:var(--panel-2); border:1px solid var(--line); padding:6px 12px; border-radius:999px; white-space:nowrap; }
+  .sec-title{ font-size:.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin:0 0 12px; }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 22px; margin-bottom:14px; }
+  .lead{ border-left:3px solid var(--accent); }
+  .lead p{ margin:0 0 10px; color:var(--ink-2); max-width:84ch; } .lead p:last-child{ margin:0; } .lead b{ color:var(--ink); }
+  ul.pad{ margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px; }
+  ul.pad li{ color:var(--ink-2); font-size:.9rem; } ul.pad b{ color:var(--ink); }
+  .grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; margin-bottom:40px; }
+  .fmt{ background:var(--panel); border:1px solid var(--line); border-top:2px solid var(--accent); border-radius:11px; padding:22px 24px; margin-bottom:22px; }
+  .fh{ display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 14px; margin-bottom:6px; }
+  .fh h2{ margin:0; font-size:1.15rem; font-weight:670; letter-spacing:-.015em; }
+  .tag{ font-family:var(--mono); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; font-weight:700; background:var(--accent-soft); color:var(--accent); padding:3px 9px; border-radius:4px; }
+  .dur{ font-family:var(--mono); font-size:.74rem; color:var(--muted); }
+  .porque{ margin:0 0 18px; color:var(--ink-2); font-size:.9rem; max-width:84ch; }
+  .cols{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:26px; }
+  ol.rot{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  ol.rot li{ display:grid; grid-template-columns:62px 1fr; gap:10px; font-size:.88rem; color:var(--ink-2); }
+  ol.rot .t{ font-family:var(--mono); font-size:.75rem; color:var(--accent); font-weight:600; padding-top:1px; }
+  ol.rot b{ color:var(--ink); }
+  ul.refs{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  ul.refs li{ border:1px solid var(--hair); background:var(--panel-2); border-radius:9px; padding:11px 14px; }
+  .rh{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 12px; align-items:baseline; }
+  .rh b{ font-size:.88rem; }
+  .meta{ font-family:var(--mono); font-size:.7rem; color:var(--muted); white-space:nowrap; }
+  ul.refs p{ margin:5px 0 7px; font-size:.84rem; color:var(--ink-2); }
+  ul.refs a{ font-size:.8rem; font-weight:600; color:var(--accent); text-decoration:none; }
+  ul.refs a:hover{ text-decoration:underline; }
+  .rotina ol{ margin:0; padding-left:20px; display:flex; flex-direction:column; gap:7px; color:var(--ink-2); font-size:.9rem; }
+  .rotina b{ color:var(--ink); }
+  .evitar{ border-top:2px solid var(--down); } .evitar li{ color:var(--ink-2); font-size:.9rem; }
+  footer{ margin-top:46px; padding-top:18px; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); }
+  footer p{ margin:0 0 7px; max-width:90ch; } footer b{ color:var(--ink-2); }
+  a:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media (max-width:760px){ .cols{ grid-template-columns:1fr; } body{ padding:0 16px 60px; } }
+
+  .topnav{ display:flex; flex-wrap:wrap; gap:8px; padding:18px 0 0; }
+  .topnav a{ font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); border:1px solid var(--line); background:var(--panel);
+    padding:8px 15px; border-radius:20px; transition:.15s; }
+  .topnav a:hover{ border-color:var(--accent); color:var(--ink); }
+  .topnav a.on{ background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700; }
+</style>
+
+<div class="wrap">
+
+<nav class="topnav"><a href="index.html">Plano</a><a href="pauta.html">Pauta · 10/09</a><a href="mes1.html">Fechamento Mês 1</a><a href="diagnostico.html">Diagnóstico</a><a href="calendario.html">Calendário</a><a href="referencias-video.html" class="on">Referências de vídeo</a><a href="reuniao.html">Pauta de Agosto</a></nav>
+<header>
+  <div class="brand"><div class="tile">🎬</div>
+    <div><h1>Referências de Vídeo · Goodii Burger</h1><p>O que hamburguerias estão anunciando agora, e como gravar o nosso</p></div></div>
+  <span class="badge">Biblioteca de Anúncios · 17/09/2026</span>
+</header>
+
+<div class="card lead">
+  <p>Buscamos na Biblioteca de Anúncios da Meta os <b>vídeos de hamburguerias ativos hoje no Brasil</b>: 130 anúncios em 7 buscas. Ordenamos pelo tempo no ar — <b>anúncio que roda há meses é anúncio que se paga</b>, porque ninguém mantém ligado o que não vende. Os mais antigos estão no ar há mais de dois anos.</p>
+  <p>A conclusão mais útil para a Goodii: <b>nenhum dos que duram foi produzido em estúdio.</b> Dá para gravar tudo isso com um celular numa noite de movimento.</p>
+</div>
+
+<div class="grid2">
+  <div class="card"><p class="sec-title">O que os anúncios que duram têm em comum</p><ul class="pad"><li><b>Celular na vertical, sem produção.</b> Nenhum dos anúncios que ficam meses no ar parece gravado em estúdio. É câmera na mão, luz da própria loja.</li><li><b>Comida ou gente no primeiro segundo.</b> Ninguém abre com logo, vinheta ou fachada vazia. Abre no queijo caindo, na mordida ou em alguém falando.</li><li><b>Legenda grande na tela.</b> Amarela ou branca com contorno, uma frase por vez. Quem assiste sem som entende a oferta.</li><li><b>Queijo em movimento.</b> É a imagem que mais se repete: escorrendo, sendo derramado, esticando. A Goodii tem isso de sobra.</li><li><b>Gente real.</b> Dono, funcionário, cliente ou influenciador local. Rosto e reação valem mais que produto parado.</li></ul></div>
+  <div class="card evitar"><p class="sec-title">O que evitar</p><ul class="pad"><li>Câmera na horizontal</li><li>Começar com logo ou vinheta</li><li>Trilha de banco de música alta por cima do som da chapa</li><li>Texto pequeno ou parágrafo inteiro na tela</li><li>Vídeo “institucional” editado demais — o Meta entrega pior e a pessoa pula</li></ul></div>
+</div>
+
+
+<section class="fmt">
+  <div class="fh"><span class="tag">Terça</span><h2>Piscinão de Cheddar</h2><span class="dur">10 a 15 segundos</span></div>
+  <p class="porque">É o ritual da casa e a imagem que mais se repete nos anúncios que duram: queijo em movimento. A Goodii já tem a máquina de cheddar — ela é o cenário.</p>
+  <div class="cols">
+    <div class="col"><p class="sec-title">Como gravar</p><ol class="rot"><li><span class="t">0–2s</span><span>Close do cheddar saindo da máquina e caindo sobre o burger. Sem logo, sem vinheta. Legenda grande: <b>TODA TERÇA</b>.</span></li><li><span class="t">2–6s</span><span>Mão pega o burger e o cheddar escorre pela lateral. Câmera parada, bem perto.</span></li><li><span class="t">6–10s</span><span>Mordida. Som real, sem música alta por cima.</span></li><li><span class="t">10–15s</span><span>Texto na tela: <b>Na compra de qualquer combo, cheddar à vontade · a partir das 18h</b>.</span></li></ol></div>
+    <div class="col"><p class="sec-title">Referências rodando agora</p><ul class="refs"><li><div class="rh"><b>Old Is Cool Burger Maringa</b><span class="meta">no ar há 182 dias · 0:20</span></div><p>O mais parecido com a Goodii: “Cheddar Pool”, mão com luva levantando o burger coberto de cheddar. Mesmo horário de abertura, 18h.</p><a href="https://www.facebook.com/ads/library/?id=924701790277038" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Instinto Burger &amp; Steaks</b><span class="meta">no ar há 701 dias · 0:13</span></div><p>“Piscininha do Caçador”, há quase dois anos no ar. Mão mergulhando o lanche na panela de cheddar, legenda amarela em uma frase só.</p><a href="https://www.facebook.com/ads/library/?id=537449235545693" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Good Burger Hamburgueria</b><span class="meta">no ar há 424 dias · 0:33</span></div><p>Concha derramando cheddar sobre o burger montado, com uma palavra grande na tela: “PERFEITA”.</p><a href="https://www.facebook.com/ads/library/?id=1980728295793879" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Sant Burger’s</b><span class="meta">no ar há 201 dias · 0:20</span></div><p>Dedos puxando o burger de dentro do cheddar. Abre com “Esse vídeo pode causar fome imediata”.</p><a href="https://www.facebook.com/ads/library/?id=932223272626274" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li></ul></div>
+  </div>
+</section>
+<section class="fmt">
+  <div class="fh"><span class="tag">Quarta</span><h2>Refil à vontade</h2><span class="dur">8 a 12 segundos</span></div>
+  <p class="porque">Refil só existe dentro da loja — é o vídeo que traz gente para o salão, não para o delivery.</p>
+  <div class="cols">
+    <div class="col"><p class="sec-title">Como gravar</p><ol class="rot"><li><span class="t">0–2s</span><span>Copo com gelo embaixo da máquina, refrigerante caindo em close. Som do gás e do gelo.</span></li><li><span class="t">2–6s</span><span>A mesma pessoa volta com o copo vazio e enche de novo. É isso que explica o “à vontade” sem precisar de texto longo.</span></li><li><span class="t">6–12s</span><span>Legenda: <b>QUARTA É DIA DE REFIL · acima de R$29 · só no salão</b>.</span></li></ol></div>
+    <div class="col"><p class="sec-title">Referências rodando agora</p><ul class="refs"><li><div class="rh"><b>255burger</b><span class="meta">no ar há 1 dias · 0:25</span></div><p>Close do copo enchendo, gelo e líquido caindo. A legenda inteira é: “No salão, o chá é free refill. Pode repetir quantas vezes quiser.”</p><a href="https://www.facebook.com/ads/library/?id=1402536775302805" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Dúh Burgers</b><span class="meta">no ar há 1 dias · 0:40</span></div><p>Oferta fixa por dia da semana — “Terça e quinta é dia de Dúh Burger’s” — com refil grátis como gancho.</p><a href="https://www.facebook.com/ads/library/?id=4603295393325814" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>El Bigodon Burger</b><span class="meta">no ar há 155 dias · 0:37</span></div><p>Dia da semana como anúncio: “Hoje é dia de carne em dobro”. Cliente mordendo o burger na frente da loja.</p><a href="https://www.facebook.com/ads/library/?id=3620407988099418" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li></ul></div>
+  </div>
+</section>
+<section class="fmt">
+  <div class="fh"><span class="tag">Salão</span><h2>Alguém da casa falando com a câmera</h2><span class="dur">15 a 20 segundos</span></div>
+  <p class="porque">É o formato dos anúncios de loja física que mais duram. Não precisa ator: dono ou funcionário, celular na mão, fachada atrás.</p>
+  <div class="cols">
+    <div class="col"><p class="sec-title">Como gravar</p><ol class="rot"><li><span class="t">0–3s</span><span>Na calçada, com a fachada atrás: <b>“Fala, Atibaia!”</b>. Figurinha de localização na tela: <b>Alvinópolis · Atibaia</b>.</span></li><li><span class="t">3–10s</span><span>Uma frase só sobre o dia: “terça aqui é dia de piscinão de cheddar”.</span></li><li><span class="t">10–20s</span><span>Vira e entra na loja, a câmera acompanha até a mesa. Termina com o burger no prato.</span></li></ol></div>
+    <div class="col"><p class="sec-title">Referências rodando agora</p><ul class="refs"><li><div class="rh"><b>Borges Burguer / Açaí Burguer</b><span class="meta">no ar há 665 dias · 0:13</span></div><p>Menino da equipe na frente da loja: “Fala pessoal”, com a figurinha de localização “Paulista-PE”. 13 segundos, no ar há quase dois anos.</p><a href="https://www.facebook.com/ads/library/?id=578185248029078" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Cristiano Miguel</b><span class="meta">no ar há 400 dias · 1:30</span></div><p>Dono na calçada à noite, de braços abertos, com o letreiro aceso atrás.</p><a href="https://www.facebook.com/ads/library/?id=729210246769860" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Star Burger</b><span class="meta">no ar há 58 dias · 0:28</span></div><p>Dono falando direto para a câmera dentro da loja, sem roteiro decorado.</p><a href="https://www.facebook.com/ads/library/?id=1345285614464705" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li></ul></div>
+  </div>
+</section>
+<section class="fmt">
+  <div class="fh"><span class="tag">Salão</span><h2>Cliente real na mesa</h2><span class="dur">20 a 30 segundos</span></div>
+  <p class="porque">Gente de verdade comendo convence mais que qualquer foto de produto. Pedir autorização antes e gravar a reação, não uma fala ensaiada.</p>
+  <div class="cols">
+    <div class="col"><p class="sec-title">Como gravar</p><ol class="rot"><li><span class="t">0–5s</span><span>Câmera na mão de quem leva a bandeja até a mesa.</span></li><li><span class="t">5–20s</span><span>Serve, pergunta “e aí, o que acharam?” e grava a reação como vier.</span></li><li><span class="t">20–30s</span><span>Close do prato e a legenda com o combo e o dia.</span></li></ol></div>
+    <div class="col"><p class="sec-title">Referências rodando agora</p><ul class="refs"><li><div class="rh"><b>Instinto Burger &amp; Steaks</b><span class="meta">no ar há 96 dias · 0:28</span></div><p>“Levei o combo na mesa e já aproveitei pra ouvir o feedback deles.” Câmera de quem serve, clientes reais reagindo.</p><a href="https://www.facebook.com/ads/library/?id=2068376974027440" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Nelsao Burger</b><span class="meta">no ar há 91 dias · 0:57</span></div><p>Cliente sorrindo com o burger na mão e a frase na tela: “Uma das hamburguerias mais famosas de Jundiaí” — cidade vizinha de Atibaia.</p><a href="https://www.facebook.com/ads/library/?id=1512926153546512" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Tarjapretaburguer</b><span class="meta">no ar há 224 dias · 0:44</span></div><p>Duas amigas numa selfie no salão com a legenda “Ontem foi dia de…”.</p><a href="https://www.facebook.com/ads/library/?id=1449783276706736" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Tatu Burguer</b><span class="meta">no ar há 159 dias · 1:04</span></div><p>Formato de influenciador local: “Dica de hamburgueria Zona Sul de Teresina”, mesa cheia na frente.</p><a href="https://www.facebook.com/ads/library/?id=1436060084988171" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li></ul></div>
+  </div>
+</section>
+<section class="fmt">
+  <div class="fh"><span class="tag">Combo</span><h2>Preço grande na tela</h2><span class="dur">10 a 15 segundos</span></div>
+  <p class="porque">Quando a oferta é o assunto, o preço precisa aparecer antes do terceiro segundo.</p>
+  <div class="cols">
+    <div class="col"><p class="sec-title">Como gravar</p><ol class="rot"><li><span class="t">0–3s</span><span>Mesa vista de cima com o combo montado e o preço já na tela, em letra grande.</span></li><li><span class="t">3–10s</span><span>Mão puxando o queijo ou pegando a batata — movimento, não foto parada.</span></li><li><span class="t">10–15s</span><span>Repete o preço e diz como pedir.</span></li></ol></div>
+    <div class="col"><p class="sec-title">Referências rodando agora</p><ul class="refs"><li><div class="rh"><b>jotasburgers</b><span class="meta">no ar há 198 dias · 0:54</span></div><p>Queijo esticando entre as mãos com três linhas de preço por cima: combo pra 3, combo pra 2 e “menos de R$45 por pessoa”.</p><a href="https://www.facebook.com/ads/library/?id=785700897926351" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Daniel&#x27;s Burger</b><span class="meta">no ar há 246 dias · 0:20</span></div><p>Dono atrás da bandeja do combo família com uma Coca 2L, anunciando a novidade com a mão.</p><a href="https://www.facebook.com/ads/library/?id=1199975355071727" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Instinto Burger &amp; Steaks</b><span class="meta">no ar há 635 dias · 0:33</span></div><p>Mesa cheia vista de cima e o texto “Combos p/ casal a partir de R$69,90”.</p><a href="https://www.facebook.com/ads/library/?id=1594312858140343" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li></ul></div>
+  </div>
+</section>
+<section class="fmt">
+  <div class="fh"><span class="tag">Bastidor</span><h2>A chapa trabalhando</h2><span class="dur">8 a 12 segundos</span></div>
+  <p class="porque">O mais fácil de gravar e o que mais rende clipes: dá para fazer seis numa noite comum.</p>
+  <div class="cols">
+    <div class="col"><p class="sec-title">Como gravar</p><ol class="rot"><li><span class="t">0–4s</span><span>Smash na chapa, com o som alto do chiado.</span></li><li><span class="t">4–8s</span><span>Fatia de cheddar derretendo em cima da carne.</span></li><li><span class="t">8–12s</span><span>Montagem rápida e o lanche fechado na embalagem.</span></li></ol></div>
+    <div class="col"><p class="sec-title">Referências rodando agora</p><ul class="refs"><li><div class="rh"><b>smasherburger</b><span class="meta">no ar há 727 dias · 0:19</span></div><p>Pão tostando na chapa, câmera na mão. 19 segundos, há dois anos no ar.</p><a href="https://www.facebook.com/ads/library/?id=1172801883788033" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Braseirao hamburgueria</b><span class="meta">no ar há 213 dias · 0:33</span></div><p>Smash duplo com cheddar americano derretendo na chapa, luz da própria cozinha.</p><a href="https://www.facebook.com/ads/library/?id=1807449153252341" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li><li><div class="rh"><b>Caus Burger</b><span class="meta">no ar há 588 dias · 1:18</span></div><p>Espátula levantando a carne com o queijo derretido por cima, fogo ao fundo.</p><a href="https://www.facebook.com/ads/library/?id=1997186297359570" target="_blank" rel="noopener">Ver o anúncio na Biblioteca ↗</a></li></ul></div>
+  </div>
+</section>
+
+<div class="card rotina">
+  <p class="sec-title">A rotina que resolve</p>
+  <ol>
+    <li><b>Um dia fixo por semana para gravar</b>, de preferência numa noite cheia — terça, com o Dia do Cheddar rodando, já dá cenário, gente e movimento.</li>
+    <li><b>Seis clipes curtos de 5 a 10 segundos</b>, um de cada formato acima. Não precisa gravar o vídeo inteiro de uma vez.</li>
+    <li><b>Celular na vertical, parado ou bem firme</b>, perto da luz da cozinha ou do balcão.</li>
+    <li><b>Legenda automática do CapCut</b>, em amarelo ou branco com contorno. Deixa o som da chapa.</li>
+    <li><b>Mandar os clipes brutos para a Cardô</b> no mesmo dia. A gente escolhe, corta e sobe — a edição não precisa ser de vocês.</li>
+  </ol>
+</div>
+
+<footer>
+  <p><b>Fonte:</b> Biblioteca de Anúncios da Meta, anúncios em vídeo ativos no Brasil em 17/09/2026. Buscas: smash burger, hamburgueria, hamburguer artesanal, cheddar burger, burger delivery, combo burger e refil burger. Foram retirados anunciantes que não são hamburguerias vendendo a própria loja (marcas de bebida, apps de entrega, cursos).</p>
+  <p><b>Tempo no ar como sinal:</b> a Biblioteca não mostra resultado de vendas. Tempo de veiculação é um indício de que o anúncio funciona, não uma prova. Os links abrem o anúncio enquanto ele estiver ativo.</p>
+  <p><b>Uso:</b> referência de formato e linguagem. Não é para copiar o vídeo de ninguém — é para gravar do nosso jeito, com o nosso produto.</p>
+</footer>
+</div>
