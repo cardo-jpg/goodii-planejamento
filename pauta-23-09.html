@@ -1,0 +1,326 @@
+<title>Pauta · 23 de Setembro</title>
+<style>
+  :root{
+    --bg:#FFFFFF; --panel:#FFFFFF; --panel-2:#F7F7F8; --line:#E4E4E7; --hair:#EFEFF1;
+    --ink:#15151A; --ink-2:#4A4A54; --muted:#76767F; --faint:#A2A2AC;
+    --accent:#2E4A63; --accent-soft:#EDF1F5;
+    --up:#1E6B45; --up-soft:#E9F3ED; --down:#A32A1E; --down-soft:#F9EDEB;
+    --warn:#8A6410; --warn-soft:#FAF3E0;
+    --sans:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'Cascadia Mono','SF Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#101013; --panel:#17171B; --panel-2:#1E1E23; --line:#2C2C33; --hair:#232329;
+    --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+    --accent:#7FA8CC; --accent-soft:#1A222B;
+    --up:#5CB489; --up-soft:#152521; --down:#E07A6C; --down-soft:#2A1917;
+    --warn:#D0A340; --warn-soft:#2A2415; } }
+  :root[data-theme="dark"]{
+    --bg:#101013; --panel:#17171B; --panel-2:#1E1E23; --line:#2C2C33; --hair:#232329;
+    --ink:#F2F2F5; --ink-2:#C7C7D0; --muted:#8E8E99; --faint:#63636D;
+    --accent:#7FA8CC; --accent-soft:#1A222B;
+    --up:#5CB489; --up-soft:#152521; --down:#E07A6C; --down-soft:#2A1917;
+    --warn:#D0A340; --warn-soft:#2A2415; }
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; font-size:130%; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+    font-size:.9375rem; line-height:1.6; padding:0 24px 90px; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1040px; margin:0 auto; }
+  header{ display:flex; flex-wrap:wrap; gap:14px 24px; align-items:center; justify-content:space-between;
+    padding:40px 0 22px; border-bottom:1px solid var(--line); margin-bottom:26px; }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .tile{ width:42px; height:42px; border-radius:11px; background:var(--accent-soft); border:1px solid var(--line);
+    display:grid; place-items:center; font-size:1.25rem; flex:none; }
+  h1{ font-size:1.28rem; font-weight:650; letter-spacing:-.02em; margin:0; }
+  .brand p{ margin:2px 0 0; font-size:.82rem; color:var(--muted); }
+  .badge{ font-family:var(--mono); font-size:.72rem; color:var(--ink-2); background:var(--panel-2);
+    border:1px solid var(--line); padding:6px 12px; border-radius:999px; white-space:nowrap; }
+
+  .num-sec{ font-family:var(--mono); font-size:.6875rem; letter-spacing:1.6px; color:var(--faint);
+    text-transform:uppercase; display:block; margin-bottom:7px; }
+  h2.sec{ font-size:1.22rem; font-weight:660; letter-spacing:-.02em; margin:0 0 8px; }
+  .sub{ font-size:.92rem; color:var(--muted); margin:0 0 20px; max-width:80ch; }
+  .sec-title{ font-size:.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;
+    color:var(--muted); margin:0 0 14px; }
+  section{ margin-bottom:50px; }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 22px; }
+  .card.t{ border-top:2px solid var(--accent); } .card.tu{ border-top:2px solid var(--up); }
+  .card.tw{ border-top:2px solid var(--warn); } .card.td{ border-top:2px solid var(--down); }
+
+  .alerta{ background:var(--down-soft); border:1px solid var(--line); border-left:3px solid var(--down);
+    border-radius:11px; padding:20px 24px; margin-bottom:30px; }
+  .alerta h2{ font-size:1.05rem; font-weight:690; margin:0 0 9px; color:var(--down); letter-spacing:-.015em; }
+  .alerta p{ margin:0 0 10px; font-size:.94rem; color:var(--ink-2); max-width:82ch; }
+  .alerta p:last-child{ margin-bottom:0; } .alerta b{ color:var(--ink); font-weight:660; }
+
+  .dias{ display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:8px; margin:14px 0 4px; }
+  .dia{ background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:10px 12px; text-align:center; }
+  .dia.off{ border-color:var(--down); background:var(--down-soft); }
+  .dia .d{ font-family:var(--mono); font-size:.7rem; color:var(--muted); display:block; }
+  .dia .v{ font-family:var(--mono); font-size:.95rem; font-weight:600; display:block; margin-top:4px; }
+  .dia.off .v{ color:var(--down); }
+  .dia .w{ font-size:.68rem; color:var(--muted); display:block; margin-top:2px; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(auto-fit,minmax(178px,1fr)); gap:12px; }
+  .kpi{ background:var(--panel); border:1px solid var(--line); border-top:2px solid var(--accent);
+    border-radius:11px; padding:16px 18px; }
+  .kpi.d{ border-top-color:var(--down); } .kpi.u{ border-top-color:var(--up); } .kpi.w{ border-top-color:var(--warn); }
+  .kpi .k{ font-size:.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--muted); display:block; margin-bottom:9px; }
+  .kpi .v{ font-family:var(--mono); font-size:1.42rem; font-weight:600; letter-spacing:-.03em; font-variant-numeric:tabular-nums; display:block; line-height:1.05; }
+  .kpi .n{ font-size:.78rem; color:var(--muted); display:block; margin-top:8px; }
+  .down{ color:var(--down); } .up{ color:var(--up); }
+
+  .scroll{ overflow-x:auto; }
+  table{ border-collapse:collapse; width:100%; min-width:600px; font-size:.86rem; }
+  thead th{ font-size:.625rem; font-weight:700; text-transform:uppercase; letter-spacing:1.1px; color:var(--muted);
+    text-align:left; padding:9px 13px; background:var(--panel-2); border-bottom:1px solid var(--line); white-space:nowrap; }
+  thead th.r{ text-align:right; }
+  tbody td{ padding:11px 13px; border-bottom:1px solid var(--hair); color:var(--ink-2); vertical-align:middle; }
+  tbody td.r{ text-align:right; } tbody tr:last-child td{ border-bottom:none; }
+  td.k{ color:var(--ink); font-weight:620; font-family:var(--mono); font-size:.78rem; white-space:nowrap; }
+  td.num{ font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink); }
+  tr.tot td{ border-top:1px solid var(--line); background:var(--panel-2); font-weight:700; color:var(--ink); }
+  tr.dest td{ background:var(--up-soft); }
+  .pill{ font-family:var(--mono); font-size:.72rem; padding:2px 8px; border-radius:4px; white-space:nowrap; }
+  .pill.d{ background:var(--down-soft); color:var(--down); } .pill.u{ background:var(--up-soft); color:var(--up); }
+  .pill.n{ background:var(--panel-2); color:var(--muted); } .pill.w{ background:var(--warn-soft); color:var(--warn); }
+
+  ol.dec{ list-style:none; counter-reset:d; margin:0; padding:0; }
+  ol.dec li{ counter-increment:d; padding:16px 0 16px 44px; position:relative; border-bottom:1px solid var(--hair); }
+  ol.dec li:last-child{ border-bottom:none; }
+  ol.dec li::before{ content:counter(d,decimal-leading-zero); position:absolute; left:0; top:17px;
+    font-family:var(--mono); font-size:.78rem; color:var(--faint); }
+  ol.dec h3{ margin:0 0 5px; font-size:.99rem; font-weight:660; letter-spacing:-.01em; }
+  ol.dec p{ margin:0; font-size:.89rem; color:var(--ink-2); max-width:80ch; }
+  ol.dec .rec{ display:block; margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); font-size:.86rem; color:var(--ink-2); }
+  ol.dec .rec b{ color:var(--up); font-weight:660; }
+  ol.dec .quem{ display:inline-block; font-family:var(--mono); font-size:.66rem; letter-spacing:.08em;
+    text-transform:uppercase; font-weight:700; padding:2px 8px; border-radius:4px; margin-left:8px; vertical-align:2px; }
+  .q-cardo{ background:var(--accent-soft); color:var(--accent); } .q-cli{ background:var(--up-soft); color:var(--up); }
+  .q-amb{ background:var(--warn-soft); color:var(--warn); }
+
+  ul.p{ margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px; }
+  ul.p li{ font-size:.9rem; color:var(--ink-2); max-width:80ch; } ul.p li b{ color:var(--ink); font-weight:640; }
+  .grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(285px,1fr)); gap:13px; }
+  .note{ font-size:.85rem; color:var(--muted); margin:14px 0 0; max-width:84ch; }
+  .note b{ color:var(--ink-2); font-weight:620; }
+  .conta{ display:flex; flex-wrap:wrap; gap:10px 30px; margin-top:6px; }
+  .conta div{ min-width:150px; }
+  .conta .l{ font-family:var(--mono); font-size:.64rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:5px; }
+  .conta .v{ font-family:var(--mono); font-size:1.15rem; font-weight:600; display:block; }
+  footer{ margin-top:48px; padding-top:18px; border-top:1px solid var(--line); font-size:.8rem; color:var(--muted); }
+  footer p{ margin:0 0 7px; max-width:90ch; } footer b{ color:var(--ink-2); font-weight:620; }
+  a{ color:var(--accent); }
+  @media (max-width:640px){ body{ padding:0 16px 60px; } }
+
+  .topnav{ display:flex; flex-wrap:wrap; gap:8px; padding:18px 0 0; }
+  .topnav a{ font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted); border:1px solid var(--line); background:var(--panel);
+    padding:8px 15px; border-radius:20px; transition:.15s; }
+  .topnav a:hover{ border-color:var(--accent); color:var(--ink); }
+  .topnav a.on{ background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700; }
+</style>
+
+<div class="wrap">
+
+<nav class="topnav"><a href="index.html">Plano</a><a href="pauta-23-09.html" class="on">Pauta · 23/09</a><a href="diagnostico.html">Diagnóstico</a><a href="referencias-video.html">Referências de vídeo</a><a href="calendario.html">Calendário</a><a href="pauta.html">Pauta · 10/09</a><a href="mes1.html">Fechamento Mês 1</a><a href="reuniao.html">Pauta de Agosto</a></nav>
+
+<header>
+  <div class="brand"><div class="tile">🚨</div>
+    <div><h1>Pauta · Goodii Burger</h1><p>Reunião de 23 de setembro de 2026 · destravar volume de criativo</p></div></div>
+  <span class="badge">Cardô Marketing</span>
+</header>
+
+<div class="alerta">
+  <h2>A conta ficou quatro dias sem investir um real</h2>
+  <p>De <b>19 a 22 de setembro</b> o investimento foi <b>R$0,00</b>. Voltou hoje, dia 23, com R$21,51. Foram <b>sábado, domingo, segunda e terça</b> — o melhor fim de semana do mês e o Dia do Cheddar, fora do ar.</p>
+  <p><b>E não foi falta de criativo.</b> A conta está ativa, sem limite de gastos, sem nenhum anúncio reprovado, com pagamento em dia e 14 anúncios ligados. O que parou foi a <b>estrutura de orçamento</b>: dois conjuntos com orçamento vitalício de R$2.000 cada, programados para terminar em 22/09, pararam de entregar antes do fim e encerraram com <b>R$2.094,70 sem gastar</b>.</p>
+  <p>Esse é o mesmo problema que derrubou a campanha em 11/09 e que está escrito na pauta do dia 10 como decisão número 1: trocar orçamento vitalício por diário. <b>Isso é nosso para resolver, e resolvemos hoje.</b></p>
+</div>
+
+<!-- 01 -->
+<section>
+  <span class="num-sec">01</span>
+  <h2 class="sec">O que aconteceu, dia a dia</h2>
+  <p class="sub">Investimento diário na conta, dos últimos dias de entrega até hoje.</p>
+  <div class="dias">
+    <div class="dia"><span class="d">16/09 qua</span><span class="v">R$ 326</span><span class="w">disparou</span></div>
+    <div class="dia"><span class="d">17/09 qui</span><span class="v">R$ 356</span><span class="w">disparou</span></div>
+    <div class="dia"><span class="d">18/09 sex</span><span class="v">R$ 37</span><span class="w">caiu</span></div>
+    <div class="dia off"><span class="d">19/09 sáb</span><span class="v">R$ 0</span><span class="w">melhor dia da semana</span></div>
+    <div class="dia off"><span class="d">20/09 dom</span><span class="v">R$ 0</span><span class="w">—</span></div>
+    <div class="dia off"><span class="d">21/09 seg</span><span class="v">R$ 0</span><span class="w">—</span></div>
+    <div class="dia off"><span class="d">22/09 ter</span><span class="v">R$ 0</span><span class="w">Dia do Cheddar</span></div>
+    <div class="dia"><span class="d">23/09 qua</span><span class="v">R$ 22</span><span class="w">voltou fraco</span></div>
+  </div>
+  <p class="note"><b>O padrão é típico de orçamento vitalício:</b> gasta demais quando entra, some no fim do período. Nos dois dias 16 e 17 a conta queimou R$682 — quase um terço de tudo que gastou no mês — e depois apagou. <b>Com orçamento diário isso não acontece</b>, porque o teto é por dia e a entrega é contínua.</p>
+  <div class="card td" style="margin-top:14px">
+    <p class="sec-title" style="margin-bottom:10px;color:var(--down)">O que os quatro dias custaram</p>
+    <div class="conta">
+      <div><span class="l">Não investido</span><span class="v">R$ 462</span></div>
+      <div><span class="l">Compras perdidas</span><span class="v">≈ 8</span></div>
+      <div><span class="l">Faturamento</span><span class="v">≈ R$ 700</span></div>
+      <div><span class="l">Sobrou nos conjuntos</span><span class="v" style="color:var(--down)">R$ 2.094</span></div>
+    </div>
+    <p class="note">Estimativa pela média dos 11 dias anteriores (R$115,53 por dia) e pelo custo por compra de setembro. <b>O prejuízo maior não é o dinheiro não gasto — é a verba que já estava reservada e não virou venda</b>, num fim de semana que costuma faturar R$8 a R$9 mil por dia.</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section>
+  <span class="num-sec">02</span>
+  <h2 class="sec">O problema de fundo: falta volume de criativo</h2>
+  <p class="sub">A estrutura a gente conserta hoje. O que não se conserta sozinho é a falta de peça nova entrando toda semana.</p>
+
+  <div class="kpis" style="margin-bottom:18px">
+    <div class="kpi d"><span class="k">Custo por compra · setembro</span><span class="v">R$ 58,75</span><span class="n">era R$34,44 em agosto</span></div>
+    <div class="kpi"><span class="k">Investido no mês</span><span class="v">R$ 2.467</span><span class="n">42 compras</span></div>
+    <div class="kpi w"><span class="k">Último criativo novo</span><span class="v">16/09</span><span class="n">há 7 dias</span></div>
+    <div class="kpi"><span class="k">Peças novas no mês</span><span class="v">7</span><span class="n">precisaria de 8 a 12</span></div>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:14px">
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Campanha</th><th class="r">Gasto</th><th class="r">Freq.</th><th class="r">Compras</th><th class="r">Custo por compra</th></tr></thead>
+        <tbody>
+          <tr class="dest"><td class="k">GB_FB01_Vendas_F</td><td class="num r">R$ 539,39</td><td class="num r">3,54</td><td class="num r">23</td><td class="r"><span class="pill u">R$ 23,45</span></td></tr>
+          <tr><td class="k">GB_FB02_Vendas_F_V2</td><td class="num r">R$ 626,46</td><td class="num r">2,04</td><td class="num r">8</td><td class="r"><span class="pill w">R$ 78,31</span></td></tr>
+          <tr><td class="k">GB_FB02_Reconhecimento</td><td class="num r">R$ 246,82</td><td class="num r">2,06</td><td class="num r">3</td><td class="r"><span class="pill w">R$ 82,27</span></td></tr>
+          <tr><td class="k">GB_FB06_Vendas_F</td><td class="num r">R$ 803,78</td><td class="num r">3,38</td><td class="num r">8</td><td class="r"><span class="pill d">R$ 100,47</span></td></tr>
+          <tr><td class="k">Cheddar + Refil · alcance</td><td class="num r">R$ 215,55</td><td class="num r">1,85</td><td class="num r">—</td><td class="r"><span class="pill n">não é de compra</span></td></tr>
+          <tr class="tot"><td>Setembro · 1 a 23</td><td class="num r">R$ 2.467,35</td><td class="num r">—</td><td class="num r">42</td><td class="r">R$ 58,75</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card tu">
+      <p class="sec-title" style="margin-bottom:10px;color:var(--up)">Uma campanha ainda entrega bem</p>
+      <p style="margin:0;font-size:.89rem;color:var(--ink-2)">A <b>FB01 faz 23 das 42 compras a R$23,45</b> — metade do custo médio da conta. Ela roda com o criativo mais antigo do ar, de 19/08. <b>Já está em frequência 3,54:</b> é a que mais converte e a que mais desgasta o público. Sem peça nova, ela cansa e o custo sobe.</p>
+    </div>
+    <div class="card tw">
+      <p class="sec-title" style="margin-bottom:10px;color:var(--warn)">O custo por compra dobrou</p>
+      <p style="margin:0;font-size:.89rem;color:var(--ink-2)">R$34,44 em agosto, <b>R$58,75 em setembro</b>, contra R$9,88 de histórico da conta. Quando a entrega é barata e a conversão é cara, a causa é o que a pessoa vê. <b>Setembro inteiro rodou com o material que chegou em 7 de setembro.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section>
+  <span class="num-sec">03</span>
+  <h2 class="sec">Quanto volume a gente precisa</h2>
+  <p class="sub">Não é opinião: é a conta de quanto o Meta precisa entregar para saber se um criativo presta.</p>
+  <div class="card t">
+    <ul class="p">
+      <li><b>Cada peça precisa de R$50 a R$80 de entrega</b> para dar sinal confiável. Abaixo disso, o Meta não aprende e a gente não sabe se o criativo é bom ou se foi pouca amostra.</li>
+      <li>Com <b>R$2.100 por mês</b>, cabem de <b>8 a 12 peças novas</b> — ou seja, <b>2 a 3 por semana</b>, não 10 de uma vez a cada três semanas.</li>
+      <li>Setembro teve <b>7 peças novas em 23 dias</b>: dez chegaram juntas em 07/09, dois vídeos em 14/09 e duas imagens em 16/09. Depois, nada.</li>
+      <li><b>Volume não é sobre a peça ser bonita.</b> É sobre ter variação suficiente para o Meta escolher e para o público não ver o mesmo anúncio cinco vezes.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 04 -->
+<section>
+  <span class="num-sec">04</span>
+  <h2 class="sec">Seis formas de ter volume sem virar uma produtora</h2>
+  <p class="sub">Da mais fácil para a mais trabalhosa. As três primeiras não exigem nada de novo da cozinha.</p>
+  <div class="card t">
+    <ol class="dec">
+      <li>
+        <h3>Cada clipe vira três anúncios <span class="quem q-cardo">Cardô</span></h3>
+        <p>Do mesmo vídeo saem um corte de 8 segundos, um de 15 e uma versão com legenda e capa diferentes. Seis clipes gravados viram <b>até 18 anúncios</b>.</p>
+        <span class="rec"><b>É o caminho mais rápido para volume:</b> triplica o que já existe sem gravar nada novo.</span>
+      </li>
+      <li>
+        <h3>Reaproveitar o que já está parado <span class="quem q-cardo">Cardô</span></h3>
+        <p>As dez peças que chegaram em 07/09 ainda rendem variações de texto, título e formato. O criativo é o mesmo; o anúncio é outro.</p>
+        <span class="rec"><b>Começamos hoje</b>, junto com a troca do orçamento.</span>
+      </li>
+      <li>
+        <h3>Uma gravação em lote por semana <span class="quem q-cli">Goodii</span></h3>
+        <p>Trinta a quarenta minutos, numa noite de movimento, com o celular. Seis clipes de 5 a 10 segundos, seguindo os roteiros que já estão prontos na <a href="referencias-video.html">página de referências</a>.</p>
+        <span class="rec"><b>A Goodii só grava o bruto.</b> Corte, legenda e edição são nossos — ninguém aí precisa mexer em editor.</span>
+      </li>
+      <li>
+        <h3>Cliente real grava, e ganha por isso <span class="quem q-amb">Ambos</span></h3>
+        <p>Combo ou cupom em troca de um vídeo curto comendo na loja. Três por mês já mudam o banco de criativo, e é o formato que mais converte em hamburgueria.</p>
+        <span class="rec"><b>Custa comida, não dinheiro</b> — e resolve o formato que a gente não consegue gravar de fora.</span>
+      </li>
+      <li>
+        <h3>O influenciador local, agora virando anúncio <span class="quem q-cli">Goodii</span></h3>
+        <p>Já teve gravação com o maior influenciador de Atibaia. Esse material precisa <b>entrar como anúncio</b>, não ficar só no post do perfil.</p>
+        <span class="rec"><b>Um por mês</b>, com autorização de uso em anúncio combinada na hora.</span>
+      </li>
+      <li>
+        <h3>Produtor local por diária <span class="quem q-cli">Goodii</span></h3>
+        <p>Se a rotina semanal não encaixar, uma diária por mês com alguém de Atibaia resolve o mês inteiro de uma vez.</p>
+        <span class="rec"><b>É a saída se as opções 3 e 4 não pegarem</b> — mas aí vira custo fixo novo.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 05 -->
+<section>
+  <span class="num-sec">05</span>
+  <h2 class="sec">O que decidimos hoje</h2>
+  <div class="card t">
+    <ol class="dec">
+      <li>
+        <h3>Trocar todo orçamento vitalício por diário <span class="quem q-cardo">Cardô</span></h3>
+        <p>Acaba com o ciclo de gastar demais e apagar. A conta passa a rodar contínua, sem data de fim.</p>
+        <span class="rec"><b>Hoje, antes da reunião terminar.</b></span>
+      </li>
+      <li>
+        <h3>A verba nunca mais para <span class="quem q-amb">Ambos</span></h3>
+        <p>Regra escrita: se não chegar material novo, a verba não fica parada — ela vai para a campanha que converte melhor, com as peças que já existem.</p>
+        <span class="rec"><b>Nunca mais quatro dias fora do ar.</b> Rodar com peça velha é pior que o ideal; rodar com nada é perder o dia.</span>
+      </li>
+      <li>
+        <h3>Dia fixo de gravação, com nome <span class="quem q-cli">Goodii</span></h3>
+        <p>Qual dia da semana, que horas e quem segura o celular. Sem nome definido, não acontece — foi o que aconteceu em agosto e em setembro.</p>
+        <span class="rec"><b>Sugestão: terça, no Dia do Cheddar</b> — já tem movimento, cheddar escorrendo e gente na loja.</span>
+      </li>
+      <li>
+        <h3>Prazo para aprovar criativo <span class="quem q-cli">Goodii</span></h3>
+        <p>Aprovação parada trava tanto quanto produção parada. Proposta: <b>24 horas</b>; passou disso, sobe do jeito que está.</p>
+        <span class="rec">Quem aprova precisa ter nome também.</span>
+      </li>
+      <li>
+        <h3>Concentrar a verba na campanha que funciona <span class="quem q-cardo">Cardô</span></h3>
+        <p>A FB01 entrega a R$23,45. A FB02_V2 está em R$78,31 e a de reconhecimento em R$82,27.</p>
+        <span class="rec"><b>Reduzir as duas e reforçar a FB01</b>, com peça nova entrando nela primeiro.</span>
+      </li>
+      <li>
+        <h3>O cupom exclusivo de visita à loja <span class="quem q-cli">Goodii</span></h3>
+        <p>Pendente desde 10/09. É o que dá para medir movimento de salão, que é metade do faturamento e o canal que menos cresceu em setembro.</p>
+        <span class="rec">Uma senha falada no balcão já resolve.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 06 -->
+<section>
+  <span class="num-sec">06</span>
+  <h2 class="sec">Onde o mês está</h2>
+  <div class="kpis">
+    <div class="kpi u"><span class="k">Faturamento · 1 a 18</span><span class="v">R$ 88.051</span><span class="n">R$4.892 por dia · <b class="up">+19,6%</b> vs. agosto</span></div>
+    <div class="kpi"><span class="k">Projeção do mês</span><span class="v">R$ 147 mil</span><span class="n">acima de agosto, abaixo de julho</span></div>
+    <div class="kpi u"><span class="k">Meta de R$135 mil</span><span class="v">65%</span><span class="n">praticamente garantida</span></div>
+    <div class="kpi w"><span class="k">Meta de R$160 mil</span><span class="v">55%</span><span class="n">exigiria +23% no que falta</span></div>
+  </div>
+  <p class="note">O mês continua melhor que agosto. <b>Mas os quatro dias sem anúncio caíram justamente no fim de semana</b>, que é quando a casa fatura o dobro de um dia comum — e a projeção de R$147 mil já conta com esse buraco. <a href="diagnostico.html">Os números completos estão no Diagnóstico.</a></p>
+</section>
+
+<footer>
+  <p><b>Fonte:</b> Gerenciador de Anúncios da Meta, conta CA - Goodii Burger, período de 1 a 23 de setembro de 2026, puxado hoje. Faturamento do Cardápio Web, 1 a 18 de setembro.</p>
+  <p><b>Conferência da conta:</b> status ativo, sem motivo de bloqueio, sem limite de gastos, saldo em dia e nenhum anúncio reprovado — 14 anúncios ativos em 11 conceitos. Os quatro dias sem investimento não têm causa de bloqueio: os dois conjuntos de orçamento vitalício encerraram em 22/09 com R$2.094,70 não gastos.</p>
+  <p><b>Estimativas:</b> o custo dos quatro dias usa a média diária dos 11 dias anteriores e o custo por compra do mês. É estimativa, não valor apurado.</p>
+</footer>
+
+</div>
